@@ -67,7 +67,7 @@ export type Project = {
   description: string
   tags: string[]
   video?: string
-  youtubeId?: string
+  youtubeEmbedUrl?: string
   poster?: string
   link?: string
   primaryLinkLabel?: string
@@ -83,7 +83,8 @@ export const projects: Project[] = [
     description:
       "Mobile tycoon simulator work for PC Creator 3, focused on production Unity systems, mobile UI, build stability, analytics, monetization, and release-ready Android/iOS delivery.",
     tags: ["Unity", "C#", "Mobile", "Android/iOS", "Tycoon"],
-    youtubeId: "RmIpoEtc81U",
+    youtubeEmbedUrl:
+      "https://www.youtube.com/embed/RmIpoEtc81U?autoplay=1&mute=1&loop=1&playlist=RmIpoEtc81U&controls=1&playsinline=1",
     poster: "/pc-creator-pro.png",
     link: "https://play.google.com/store/apps/details?id=com.creatyglobal.pccreator3&hl=ru",
     primaryLinkLabel: "Play Market",
@@ -110,7 +111,8 @@ export const projects: Project[] = [
     description:
       "Commercial Unity mobile simulator work connected to CREATY's PC Creator line: gameplay and UI systems, Android/iOS build preparation, Firebase analytics, monetization SDKs, SDK/NDK packages, and release stability.",
     tags: ["Unity", "C#", "Android/iOS", "Firebase", "Ads SDKs"],
-    youtubeId: "ahYLM1eCZ88",
+    youtubeEmbedUrl:
+      "https://www.youtube.com/embed/ahYLM1eCZ88?autoplay=1&mute=1&loop=1&playlist=ahYLM1eCZ88&controls=1&playsinline=1",
     poster: "/pc-creator-2.png",
     link: "https://play.google.com/store/apps/details?id=com.ultraandre.pccreator2",
     primaryLinkLabel: "Play Market",

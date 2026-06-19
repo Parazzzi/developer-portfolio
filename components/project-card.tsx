@@ -30,12 +30,12 @@ export function ProjectCard({ project }: { project: Project }) {
     >
       {/* video preview area */}
       <div className="relative aspect-video overflow-hidden bg-secondary">
-        {project.youtubeId ? (
+        {project.youtubeEmbedUrl ? (
           <iframe
             className="h-full w-full"
-            src={`https://www.youtube-nocookie.com/embed/${project.youtubeId}`}
+            src={project.youtubeEmbedUrl}
             title={`${project.title} gameplay video`}
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allow="autoplay; encrypted-media; picture-in-picture"
             allowFullScreen
           />
         ) : project.video ? (
@@ -62,11 +62,11 @@ export function ProjectCard({ project }: { project: Project }) {
           <div className="flex h-full w-full items-center justify-center text-muted-foreground">No preview</div>
         )}
 
-        {project.youtubeId || (project.video && !project.link) ? null : (
+        {project.youtubeEmbedUrl || (project.video && !project.link) ? null : (
           <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-card/80 via-transparent to-transparent" />
         )}
 
-        {project.youtubeId || (project.video && !project.link) ? null : (
+        {project.youtubeEmbedUrl || (project.video && !project.link) ? null : (
           <div className="pointer-events-none absolute bottom-3 left-3 flex items-center gap-2 rounded-full border border-border bg-background/60 px-3 py-1 text-xs font-medium text-foreground/90 backdrop-blur">
             <Play className="size-3 fill-primary text-primary" />
             Gameplay preview
