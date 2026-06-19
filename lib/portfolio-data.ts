@@ -66,7 +66,8 @@ export type Project = {
   title: string
   description: string
   tags: string[]
-  video: string
+  video?: string
+  youtubeId?: string
   poster?: string
   link?: string
   primaryLinkLabel?: string
@@ -78,50 +79,53 @@ export type Project = {
 
 export const projects: Project[] = [
   {
+    title: "PC Creator 3",
+    description:
+      "Mobile tycoon simulator work for PC Creator 3, focused on production Unity systems, mobile UI, build stability, analytics, monetization, and release-ready Android/iOS delivery.",
+    tags: ["Unity", "C#", "Mobile", "Android/iOS", "Tycoon"],
+    youtubeId: "RmIpoEtc81U",
+    poster: "/pc-creator-pro.png",
+    link: "https://play.google.com/store/apps/details?id=com.creatyglobal.pccreator3&hl=ru",
+    primaryLinkLabel: "Play Market",
+    secondaryLink: {
+      label: "App Store",
+      url: "https://apps.apple.com/ua/app/pc-creator-3-tycoon-sim-game/id6740996086",
+    },
+  },
+  {
+    title: "PC Creator 3 Pro",
+    description:
+      "Premium mobile simulation project in the PC Creator series, with Unity gameplay, UI flow, SDK integration, mobile optimization, and stable store build support.",
+    tags: ["Unity", "C#", "Mobile", "Simulation", "SDKs"],
+    poster: "/pc-creator-pro.png",
+    link: "https://play.google.com/store/apps/details?id=com.creatyglobal.pccreatorthreepro&hl=ru",
+    primaryLinkLabel: "Play Market",
+    secondaryLink: {
+      label: "App Store",
+      url: "https://apps.apple.com/ua/app/pc-creator-3-pro-build-grow/id6740993180",
+    },
+  },
+  {
+    title: "PC Creator 2",
+    description:
+      "Commercial Unity mobile simulator work connected to CREATY's PC Creator line: gameplay and UI systems, Android/iOS build preparation, Firebase analytics, monetization SDKs, SDK/NDK packages, and release stability.",
+    tags: ["Unity", "C#", "Android/iOS", "Firebase", "Ads SDKs"],
+    youtubeId: "ahYLM1eCZ88",
+    poster: "/pc-creator-2.png",
+    link: "https://play.google.com/store/apps/details?id=com.ultraandre.pccreator2",
+    primaryLinkLabel: "Play Market",
+    secondaryLink: {
+      label: "App Store",
+      url: "https://apps.apple.com/ru/app/pc-creator-2-computer-tycoon/id1604170642",
+    },
+  },
+  {
     title: "VR Football Penalty",
     description:
       "Room-scale VR football penalty experience where shot height, direction, and angle are controlled by real body movement. The player steps forward, backward, left, and right around the ball to aim the kick naturally before taking the penalty.",
     tags: ["Unity", "C#", "VR/XR", "Room-Scale", "Gameplay"],
     video: "/vr-football-penalty.mp4",
     poster: "/vr-football-penalty-poster.png",
-  },
-  {
-    title: "PC Creator 2 - Mobile Simulation",
-    description:
-      "Commercial Unity mobile simulator work connected to CREATY's PC Creator line: gameplay and UI systems, Android/iOS build preparation, Firebase analytics, monetization SDKs, SDK/NDK packages, and release stability.",
-    tags: ["Unity", "C#", "Android/iOS", "Firebase", "Ads SDKs"],
-    video: "",
-    poster: "/pc-creator-2.png",
-    link: "https://play.google.com/store/apps/details?id=com.ultraandre.pccreator2",
-    primaryLinkLabel: "Google Play",
-    secondaryLink: {
-      label: "App Store",
-      url: "https://apps.apple.com/us/app/pc-creator-2-computer-tycoon/id1604170642",
-    },
-  },
-  {
-    title: "CREATY Mobile Game Systems",
-    description:
-      "Gameplay, UI, client-server features, backend interaction, analytics, monetization, and production support for mobile Unity projects developed from scratch at CREATY Games.",
-    tags: ["Unity", "C#", "Mobile", "Client-Server", "Analytics"],
-    video: "",
-    poster: "/pc-creator-pro.png",
-    link: "https://creaty.me/",
-    primaryLinkLabel: "CREATY Games",
-    secondaryLink: {
-      label: "LinkedIn",
-      url: "https://www.linkedin.com/company/creaty-games",
-    },
-  },
-  {
-    title: "VR/XR Interaction Work",
-    description:
-      "VR/XR Unity work focused on natural interaction, spatial hints, headset testing, player comfort, object placement, and interaction logic that feels clear in real space.",
-    tags: ["Unity", "C#", "VR/XR", "Spatial UX"],
-    video: "",
-    poster: "/vr-training-meta-quest-immersive-interaction.png",
-    link: "https://www.linkedin.com/posts/dementiy-besarab-6aa77a2a4_vr-in-unity-is-not-just-about-adding-hands-activity-7467200872624783360-TaqP",
-    primaryLinkLabel: "LinkedIn Post",
   },
 ]
 

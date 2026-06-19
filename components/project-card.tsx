@@ -2,7 +2,7 @@
 
 import { useRef } from "react"
 import Image from "next/image"
-import { ArrowUpRight, FileText, Play } from "lucide-react"
+import { ArrowUpRight, Play } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import type { Project } from "@/lib/portfolio-data"
 
@@ -30,7 +30,15 @@ export function ProjectCard({ project }: { project: Project }) {
     >
       {/* video preview area */}
       <div className="relative aspect-video overflow-hidden bg-secondary">
-        {project.video ? (
+        {project.youtubeId ? (
+          <iframe
+            className="h-full w-full"
+            src={`https://www.youtube-nocookie.com/embed/${project.youtubeId}`}
+            title={`${project.title} gameplay video`}
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowFullScreen
+          />
+        ) : project.video ? (
           <video
             ref={videoRef}
             className="h-full w-full object-cover"
@@ -54,10 +62,12 @@ export function ProjectCard({ project }: { project: Project }) {
           <div className="flex h-full w-full items-center justify-center text-muted-foreground">No preview</div>
         )}
 
-        <div className="absolute inset-0 bg-gradient-to-t from-card/80 via-transparent to-transparent" />
+        {project.youtubeId || (project.video && !project.link) ? null : (
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-card/80 via-transparent to-transparent" />
+        )}
 
-        {project.video && !project.link ? null : (
-          <div className="absolute bottom-3 left-3 flex items-center gap-2 rounded-full border border-border bg-background/60 px-3 py-1 text-xs font-medium text-foreground/90 backdrop-blur">
+        {project.youtubeId || (project.video && !project.link) ? null : (
+          <div className="pointer-events-none absolute bottom-3 left-3 flex items-center gap-2 rounded-full border border-border bg-background/60 px-3 py-1 text-xs font-medium text-foreground/90 backdrop-blur">
             <Play className="size-3 fill-primary text-primary" />
             Gameplay preview
           </div>
@@ -100,8 +110,8 @@ export function ProjectCard({ project }: { project: Project }) {
                 variant="outline"
                 className="rounded-full border-border bg-transparent font-medium hover:bg-secondary"
               >
-                <FileText className="size-4" />
                 {project.secondaryLink.label}
+                <ArrowUpRight className="size-4" />
               </Button>
             ) : null}
           </div>
