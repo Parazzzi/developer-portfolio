@@ -8,7 +8,7 @@ export function Skills() {
         <SectionHeading
           eyebrow="Skills"
           title="A focused, production-ready toolkit"
-          description="Grouped by what I actually ship — from engine systems to UI, integrations, and AI-assisted workflows."
+          description="Grouped by what I actually ship - from Unity systems to UI, integrations, optimization, and AI-assisted workflows."
         />
 
         <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">

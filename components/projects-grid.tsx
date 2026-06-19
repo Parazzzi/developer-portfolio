@@ -9,7 +9,7 @@ export function ProjectsGrid() {
         <SectionHeading
           eyebrow="Projects"
           title="Selected work"
-          description="A few experiences I've built across VR, mobile, and arcade gameplay. Hover a card to preview."
+          description="Commercial Unity work across VR football gameplay, mobile simulation games, CREATY production systems, and VR/XR interaction."
         />
 
         <div className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3">

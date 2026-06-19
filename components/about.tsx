@@ -7,17 +7,20 @@ export function About() {
         <div>
           <p className="font-mono text-xs uppercase tracking-[0.2em] text-primary">About</p>
           <h2 className="mt-3 text-balance font-heading text-3xl font-semibold tracking-tight sm:text-4xl">
-            Crafting games that feel as good as they look
+            Unity development from prototype to release
           </h2>
           <div className="mt-6 space-y-4 text-pretty leading-relaxed text-muted-foreground">
             <p>
-              I am a Unity C# Developer with experience in mobile games, VR experiences, gameplay systems, UI,
-              integrations, optimization, and working with AI tools like Codex to improve development speed and code
-              quality.
+              I am a Unity Developer with 3+ years of commercial and freelance experience building mobile games,
+              VR/XR projects, and interactive applications with Unity and C#.
             </p>
             <p>
-              I care about clean architecture and the small details that make a game feel polished — responsive
-              controls, smooth transitions, and performance that holds up on real devices.
+              My work covers gameplay systems, UI implementation, Android/iOS build preparation, optimization, SDK
+              integrations, analytics, monetization, client-server features, and stable production delivery.
+            </p>
+            <p>
+              I use AI tools like Codex, Claude Code, and ChatGPT for analysis, debugging, refactoring, and architecture
+              validation while keeping ownership of technical decisions and final code quality.
             </p>
           </div>
         </div>

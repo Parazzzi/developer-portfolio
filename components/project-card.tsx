@@ -36,6 +36,7 @@ export function ProjectCard({ project }: { project: Project }) {
             className="h-full w-full object-cover"
             src={project.video}
             poster={project.poster}
+            controls={!project.link}
             muted
             loop
             playsInline
@@ -55,10 +56,12 @@ export function ProjectCard({ project }: { project: Project }) {
 
         <div className="absolute inset-0 bg-gradient-to-t from-card/80 via-transparent to-transparent" />
 
-        <div className="absolute bottom-3 left-3 flex items-center gap-2 rounded-full border border-border bg-background/60 px-3 py-1 text-xs font-medium text-foreground/90 backdrop-blur">
-          <Play className="size-3 fill-primary text-primary" />
-          Gameplay preview
-        </div>
+        {project.video && !project.link ? null : (
+          <div className="absolute bottom-3 left-3 flex items-center gap-2 rounded-full border border-border bg-background/60 px-3 py-1 text-xs font-medium text-foreground/90 backdrop-blur">
+            <Play className="size-3 fill-primary text-primary" />
+            Gameplay preview
+          </div>
+        )}
       </div>
 
       <div className="flex flex-1 flex-col p-6">
@@ -76,27 +79,33 @@ export function ProjectCard({ project }: { project: Project }) {
           ))}
         </ul>
 
-        <div className="mt-6 flex items-center gap-2">
-          <Button
-            render={<a href={project.link} target="_blank" rel="noopener noreferrer" />}
-            size="sm"
-            className="rounded-full font-medium"
-          >
-            Open project
-            <ArrowUpRight className="size-4" />
-          </Button>
-          {project.caseStudy ? (
-            <Button
-              render={<a href={project.caseStudy} target="_blank" rel="noopener noreferrer" />}
-              size="sm"
-              variant="outline"
-              className="rounded-full border-border bg-transparent font-medium hover:bg-secondary"
-            >
-              <FileText className="size-4" />
-              Case study
-            </Button>
-          ) : null}
-        </div>
+        {project.link || project.secondaryLink ? (
+          <div className="mt-6 flex items-center gap-2">
+            {project.link ? (
+              <Button
+                render={<a href={project.link} target="_blank" rel="noopener noreferrer" />}
+                nativeButton={false}
+                size="sm"
+                className="rounded-full font-medium"
+              >
+                {project.primaryLinkLabel ?? "Open project"}
+                <ArrowUpRight className="size-4" />
+              </Button>
+            ) : null}
+            {project.secondaryLink ? (
+              <Button
+                render={<a href={project.secondaryLink.url} target="_blank" rel="noopener noreferrer" />}
+                nativeButton={false}
+                size="sm"
+                variant="outline"
+                className="rounded-full border-border bg-transparent font-medium hover:bg-secondary"
+              >
+                <FileText className="size-4" />
+                {project.secondaryLink.label}
+              </Button>
+            ) : null}
+          </div>
+        ) : null}
       </div>
     </article>
   )

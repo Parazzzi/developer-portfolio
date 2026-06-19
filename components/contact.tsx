@@ -1,6 +1,6 @@
 import { Mail } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { GithubIcon, LinkedinIcon } from "@/components/brand-icons"
+import { LinkedinIcon } from "@/components/brand-icons"
 import { profile } from "@/lib/portfolio-data"
 
 export function Contact() {
@@ -14,7 +14,7 @@ export function Contact() {
             Let&apos;s build something playable, polished, and actually fun.
           </h2>
           <p className="relative mx-auto mt-4 max-w-md text-pretty leading-relaxed text-muted-foreground">
-            Have a game idea, a VR concept, or a Unity project that needs a hand? I&apos;d love to hear about it.
+            Have a mobile game, VR/XR concept, or Unity project that needs a reliable developer? I&apos;d love to hear about it.
           </p>
 
           <div className="relative mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
@@ -36,15 +36,6 @@ export function Contact() {
             >
               <LinkedinIcon className="size-4" />
               LinkedIn
-            </Button>
-            <Button
-              render={<a href={profile.links.github} target="_blank" rel="noopener noreferrer" />}
-              size="lg"
-              variant="outline"
-              className="rounded-full border-border bg-transparent px-7 font-medium hover:bg-secondary"
-            >
-              <GithubIcon className="size-4" />
-              GitHub
             </Button>
           </div>
         </div>

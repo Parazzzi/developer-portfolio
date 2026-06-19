@@ -9,7 +9,7 @@ export function Footer() {
           {profile.name}
         </div>
         <p>{profile.role}</p>
-        <p>&copy; {new Date().getFullYear()} — Built with Next.js</p>
+        <p>&copy; {new Date().getFullYear()} - Built with Next.js</p>
       </div>
     </footer>
   )
