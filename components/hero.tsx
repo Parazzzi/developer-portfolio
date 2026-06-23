@@ -1,6 +1,6 @@
-import { ArrowDown, Mail } from "lucide-react"
+import { ArrowDown, Check, Download, Mail } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { profile } from "@/lib/portfolio-data"
+import { availabilityItems, profile } from "@/lib/portfolio-data"
 
 export function Hero() {
   return (
@@ -11,7 +11,7 @@ export function Hero() {
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75" />
             <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
           </span>
-          Available for new projects
+          Currently available
         </div>
 
         <h1 className="text-balance font-heading text-5xl font-semibold tracking-tight sm:text-6xl md:text-7xl">
@@ -23,6 +23,18 @@ export function Hero() {
         <p className="mt-6 max-w-xl text-pretty text-base leading-relaxed text-muted-foreground sm:text-lg">
           {profile.subtitle}
         </p>
+
+        <div className="mt-7 w-full max-w-2xl rounded-3xl border border-border glass px-4 py-4 sm:px-5">
+          <p className="font-mono text-xs uppercase tracking-[0.2em] text-primary">Currently available for:</p>
+          <ul className="mt-3 grid gap-2 text-left text-sm text-muted-foreground sm:grid-cols-2">
+            {availabilityItems.map((item) => (
+              <li key={item} className="flex gap-2.5">
+                <Check className="mt-0.5 size-4 shrink-0 text-primary" />
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
 
         <div className="mt-9 flex flex-col items-center gap-3 sm:flex-row">
           <Button
@@ -43,6 +55,16 @@ export function Hero() {
           >
             <Mail className="size-4" />
             Contact Me
+          </Button>
+          <Button
+            render={<a href={profile.links.cv} download aria-label="Download Dementiy Besarab CV" />}
+            nativeButton={false}
+            size="lg"
+            variant="outline"
+            className="rounded-full border-border bg-card/40 px-7 font-medium backdrop-blur hover:bg-secondary"
+          >
+            <Download className="size-4" />
+            Download CV
           </Button>
         </div>
 

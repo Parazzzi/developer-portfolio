@@ -5,11 +5,23 @@ export const profile = {
     "Unity Developer with 3+ years of commercial and freelance experience building mobile games, VR/XR projects, and interactive Unity applications from prototype to release.",
   badges: ["Unity 2D/3D", "C#", "Android / iOS", "VR / XR", "AI-assisted Development"],
   email: "besarabdementij1@gmail.com",
+  telegramHandle: "@besarabd",
   links: {
     email: "mailto:besarabdementij1@gmail.com",
     linkedin: "https://www.linkedin.com/in/dementiy-besarab-6aa77a2a4/",
+    telegram: "https://t.me/besarabd",
+    cv: "/dementiy-besarab-cv.pdf",
   },
 }
+
+export const availabilityItems = [
+  "Full-time Unity Developer roles",
+  "Part-time / contract Unity work",
+  "Mobile game development",
+  "VR/XR prototypes",
+  "Project stabilization and bug fixing",
+  "Gameplay systems, UI, SDK integrations, optimization, and build preparation",
+]
 
 export const stats = [
   { value: "3+", label: "Years Experience" },
@@ -23,6 +35,44 @@ export type SkillGroup = {
   description: string
   tags: string[]
 }
+
+export type Service = {
+  title: string
+  description: string
+}
+
+export const services: Service[] = [
+  {
+    title: "Gameplay systems",
+    description:
+      "Build and maintain core gameplay mechanics, game states, player interactions, progression systems, and feature logic in Unity/C#.",
+  },
+  {
+    title: "Mobile game development",
+    description:
+      "Work on Android/iOS Unity projects, UI flows, performance, build preparation, testing, and release-focused stability.",
+  },
+  {
+    title: "VR/XR prototypes",
+    description:
+      "Create and polish VR/XR interactions, spatial gameplay, Meta Quest prototypes, and headset-tested gameplay experiences.",
+  },
+  {
+    title: "UI, animation, and game feel",
+    description:
+      "Implement responsive UIs, polished transitions, DOTween animations, clear feedback, and smooth player-facing flows.",
+  },
+  {
+    title: "SDKs, analytics, and monetization",
+    description:
+      "Integrate Firebase, analytics, ads, SDK/NDK packages, monetization tools, and client-server features.",
+  },
+  {
+    title: "Project stabilization and bug fixing",
+    description:
+      "Analyze existing Unity projects, fix bugs, clean up fragile systems, improve structure, optimize performance, and prepare stable builds.",
+  },
+]
 
 export const skillGroups: SkillGroup[] = [
   {

@@ -7,8 +7,10 @@ import { profile } from "@/lib/portfolio-data"
 
 const navItems = [
   { label: "About", href: "#about" },
+  { label: "What I Do", href: "#services" },
   { label: "Skills", href: "#skills" },
   { label: "Projects", href: "#projects" },
+  { label: "Achievements", href: "#achievements" },
   { label: "Workflow", href: "#workflow" },
   { label: "Contact", href: "#contact" },
 ]
@@ -44,7 +46,7 @@ export function Header() {
 
         <nav
           className={cn(
-            "hidden items-center gap-1 rounded-full px-2 py-1.5 text-sm md:flex transition-all",
+            "hidden items-center gap-1 rounded-full px-2 py-1.5 text-sm transition-all lg:flex",
             scrolled ? "glass glow-ring" : "bg-card/40 backdrop-blur",
           )}
         >

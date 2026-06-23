@@ -1,4 +1,4 @@
-import { Mail } from "lucide-react"
+import { Download, Mail, Send } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { LinkedinIcon } from "@/components/brand-icons"
 import { profile } from "@/lib/portfolio-data"
@@ -17,7 +17,7 @@ export function Contact() {
             Have a mobile game, VR/XR concept, or Unity project that needs a reliable developer? I&apos;d love to hear about it.
           </p>
 
-          <div className="relative mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+          <div className="relative mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row sm:flex-wrap">
             <Button
               render={<a href={profile.links.email} />}
               nativeButton={false}
@@ -37,7 +37,39 @@ export function Contact() {
               <LinkedinIcon className="size-4" />
               LinkedIn
             </Button>
+            <Button
+              render={<a href={profile.links.telegram} target="_blank" rel="noopener noreferrer" />}
+              nativeButton={false}
+              size="lg"
+              variant="outline"
+              className="rounded-full border-border bg-transparent px-7 font-medium hover:bg-secondary"
+            >
+              <Send className="size-4" />
+              Telegram
+            </Button>
+            <Button
+              render={<a href={profile.links.cv} download aria-label="Download Dementiy Besarab CV" />}
+              nativeButton={false}
+              size="lg"
+              variant="outline"
+              className="rounded-full border-border bg-transparent px-7 font-medium hover:bg-secondary"
+            >
+              <Download className="size-4" />
+              Download CV
+            </Button>
           </div>
+
+          <p className="relative mt-5 text-sm text-muted-foreground">
+            Telegram:{" "}
+            <a
+              href={profile.links.telegram}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-primary underline-offset-4 hover:underline"
+            >
+              {profile.telegramHandle}
+            </a>
+          </p>
         </div>
       </div>
     </section>
