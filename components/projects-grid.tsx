@@ -1,5 +1,6 @@
 import { SectionHeading } from "@/components/section-heading"
 import { ProjectCard } from "@/components/project-card"
+import { GamesLab } from "@/components/games-lab"
 import { projects } from "@/lib/portfolio-data"
 
 export function ProjectsGrid() {
@@ -17,6 +18,8 @@ export function ProjectsGrid() {
             <ProjectCard key={project.title} project={project} />
           ))}
         </div>
+
+        <GamesLab />
       </div>
     </section>
   )
