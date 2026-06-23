@@ -112,6 +112,80 @@
     box-shadow: 0 0 0 1px color-mix(in oklch, var(--glow) 30%, transparent),
       0 0 40px -8px color-mix(in oklch, var(--glow) 45%, transparent);
   }
+  .games-lab-modal-overlay {
+    animation: games-lab-modal-backdrop-in 220ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+  .games-lab-modal-overlay[data-state="closing"] {
+    animation: games-lab-modal-backdrop-out 180ms ease-in both;
+  }
+  .games-lab-modal-panel {
+    animation: games-lab-modal-panel-in 220ms cubic-bezier(0.16, 1, 0.3, 1) both;
+    transform-origin: center;
+    will-change: transform, opacity;
+  }
+  .games-lab-modal-overlay[data-state="closing"] .games-lab-modal-panel {
+    animation: games-lab-modal-panel-out 180ms cubic-bezier(0.4, 0, 1, 1) both;
+  }
+}
+
+@keyframes games-lab-modal-backdrop-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes games-lab-modal-backdrop-out {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+@keyframes games-lab-modal-panel-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes games-lab-modal-panel-out {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(12px) scale(0.96);
+  }
+}
+
+@keyframes games-lab-modal-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes games-lab-modal-fade-out {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .games-lab-modal-overlay,
+  .games-lab-modal-overlay[data-state="closing"] {
+    animation-duration: 80ms;
+  }
+
+  .games-lab-modal-panel {
+    animation-name: games-lab-modal-fade-in;
+    animation-duration: 80ms;
+    will-change: opacity;
+  }
+
+  .games-lab-modal-overlay[data-state="closing"] .games-lab-modal-panel {
+    animation-name: games-lab-modal-fade-out;
+    animation-duration: 80ms;
+  }
 }
 
 @keyframes float-slow {

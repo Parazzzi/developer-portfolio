@@ -53,6 +53,15 @@ export const gamesLabItems: GamesLabItem[] = [
     orientation: "vertical",
   },
   {
+    title: "FeatherMoon",
+    folderName: "FeatherMoon",
+    shortDescription: "A classic Sudoku mobile puzzle with limited lives and clean number-based gameplay.",
+    fullDescription:
+      "FeatherMoon is a classic Sudoku-style mobile puzzle prototype. The player solves the grid by placing the correct numbers while having only 3 lives to complete the level. The game focuses on logic, careful decision-making, and simple mobile-friendly interaction.",
+    genre: "Sudoku / Logic Puzzle",
+    orientation: "vertical",
+  },
+  {
     title: "Fistcraft",
     folderName: "Fistcraft",
     shortDescription:

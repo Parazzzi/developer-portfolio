@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useRef, useState, type KeyboardEvent, type MouseEvent } from "react"
+import { useCallback, useEffect, useRef, useState, type KeyboardEvent, type MouseEvent } from "react"
 import Image from "next/image"
 import { Eye, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -11,19 +11,64 @@ type Props = {
   items: ResolvedGamesLabItem[]
 }
 
+const modalCloseAnimationMs = 200
+
 export function GamesLabClient({ items }: Props) {
   const [selectedGame, setSelectedGame] = useState<ResolvedGamesLabItem | null>(null)
+  const [isModalClosing, setIsModalClosing] = useState(false)
   const closeButtonRef = useRef<HTMLButtonElement | null>(null)
   const dialogRef = useRef<HTMLDivElement | null>(null)
   const previousFocusRef = useRef<HTMLElement | null>(null)
+  const closeTimerRef = useRef<number | null>(null)
+  const selectedGameRef = useRef<ResolvedGamesLabItem | null>(null)
+  const isModalClosingRef = useRef(false)
   const verticalGames = items.filter((game) => game.orientation === "vertical")
   const horizontalGames = items.filter((game) => game.orientation === "horizontal")
+
+  const openModal = useCallback((game: ResolvedGamesLabItem) => {
+    if (closeTimerRef.current !== null) {
+      window.clearTimeout(closeTimerRef.current)
+      closeTimerRef.current = null
+    }
+
+    selectedGameRef.current = game
+    isModalClosingRef.current = false
+    setIsModalClosing(false)
+    setSelectedGame(game)
+  }, [])
+
+  const closeModal = useCallback(() => {
+    if (!selectedGameRef.current || isModalClosingRef.current) {
+      return
+    }
+
+    isModalClosingRef.current = true
+    setIsModalClosing(true)
+
+    closeTimerRef.current = window.setTimeout(() => {
+      selectedGameRef.current = null
+      isModalClosingRef.current = false
+      setSelectedGame(null)
+      setIsModalClosing(false)
+      closeTimerRef.current = null
+    }, modalCloseAnimationMs)
+  }, [])
+
+  useEffect(() => {
+    return () => {
+      if (closeTimerRef.current !== null) {
+        window.clearTimeout(closeTimerRef.current)
+      }
+    }
+  }, [])
 
   useEffect(() => {
     if (!selectedGame) {
       return
     }
 
+    selectedGameRef.current = selectedGame
+    isModalClosingRef.current = false
     previousFocusRef.current = document.activeElement instanceof HTMLElement ? document.activeElement : null
     const previousOverflow = document.body.style.overflow
     document.body.style.overflow = "hidden"
@@ -31,7 +76,7 @@ export function GamesLabClient({ items }: Props) {
 
     const handleKeyDown = (event: globalThis.KeyboardEvent) => {
       if (event.key === "Escape") {
-        setSelectedGame(null)
+        closeModal()
       }
     }
 
@@ -43,9 +88,7 @@ export function GamesLabClient({ items }: Props) {
       document.removeEventListener("keydown", handleKeyDown)
       previousFocusRef.current?.focus()
     }
-  }, [selectedGame])
-
-  const closeModal = () => setSelectedGame(null)
+  }, [closeModal, selectedGame])
 
   const handleOverlayMouseDown = (event: MouseEvent<HTMLDivElement>) => {
     if (event.target === event.currentTarget) {
@@ -102,19 +145,20 @@ export function GamesLabClient({ items }: Props) {
 
       <div className="mt-10 grid grid-cols-1 gap-4 min-[520px]:grid-cols-2 md:grid-cols-3 xl:grid-cols-5">
         {verticalGames.map((game) => (
-          <VerticalGameCard key={game.title} game={game} onView={setSelectedGame} />
+          <VerticalGameCard key={game.title} game={game} onView={openModal} />
         ))}
       </div>
 
       <div className="mt-6 space-y-6">
         {horizontalGames.map((game) => (
-          <HorizontalGameCard key={game.title} game={game} onView={setSelectedGame} />
+          <HorizontalGameCard key={game.title} game={game} onView={openModal} />
         ))}
       </div>
 
       {selectedGame ? (
         <div
-          className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto bg-background/80 p-4 backdrop-blur-md sm:items-center sm:p-6"
+          data-state={isModalClosing ? "closing" : "open"}
+          className="games-lab-modal-overlay fixed inset-0 z-50 flex items-start justify-center overflow-y-auto bg-background/80 p-4 backdrop-blur-md sm:items-center sm:p-6"
           onMouseDown={handleOverlayMouseDown}
         >
           <div
@@ -124,7 +168,7 @@ export function GamesLabClient({ items }: Props) {
             aria-labelledby="games-lab-modal-title"
             onKeyDown={handleDialogKeyDown}
             className={cn(
-              "glass flex max-h-[90vh] w-full flex-col overflow-hidden rounded-3xl border border-border shadow-2xl",
+              "games-lab-modal-panel glass flex max-h-[90vh] w-full flex-col overflow-hidden rounded-3xl border border-border shadow-2xl",
               selectedGame.orientation === "horizontal" ? "max-w-6xl" : "max-w-5xl",
             )}
           >
