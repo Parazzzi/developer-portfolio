@@ -74,6 +74,27 @@ export const services: Service[] = [
   },
 ]
 
+export type Achievement = {
+  title: string
+  description: string
+  image: string
+  imageAlt: string
+  tags: string[]
+  meta: string
+}
+
+export const achievements: Achievement[] = [
+  {
+    title: "Game Designer Certificate",
+    description:
+      "Completed a practical game design course covering game documentation, interface design, market analysis, and basic gameplay balance.",
+    image: "/game-designer-certificate.png",
+    imageAlt: "Game Designer certificate awarded to Besarab Dementiy",
+    tags: ["Game Design", "Documentation", "UI Design", "Balance"],
+    meta: "SHEPIT Courses / 2025",
+  },
+]
+
 export const skillGroups: SkillGroup[] = [
   {
     title: "Unity 2D/3D & C#",

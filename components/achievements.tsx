@@ -1,33 +1,55 @@
 import Image from "next/image"
 import { SectionHeading } from "@/components/section-heading"
+import { achievements } from "@/lib/portfolio-data"
 
 export function Achievements() {
   return (
     <section id="achievements" className="scroll-mt-24 px-6 py-24">
-      <div className="mx-auto w-full max-w-5xl">
+      <div className="mx-auto w-full max-w-6xl">
         <SectionHeading
           eyebrow="Achievements"
           title="Achievements"
-          description="A professional learning milestone connected to game design and practical project work."
+          description="Professional learning milestones connected to game design, production thinking, and practical Unity project work."
         />
 
-        <figure className="glass mt-14 overflow-hidden rounded-3xl border border-border p-3 transition-all duration-300 hover:glow-ring sm:p-4">
-          <div className="overflow-hidden rounded-2xl bg-secondary/50">
-            <Image
-              src="/game-designer-certificate.png"
-              alt="Game Designer certificate awarded to Besarab Dementiy"
-              width={3166}
-              height={2000}
-              sizes="(max-width: 768px) 100vw, 960px"
-              className="h-auto w-full object-contain"
-              loading="lazy"
-            />
-          </div>
-          <figcaption className="flex flex-col gap-1 px-2 py-4 text-center sm:flex-row sm:items-center sm:justify-between sm:text-left">
-            <span className="font-heading text-lg font-semibold tracking-tight">Certificate / Professional Achievement</span>
-            <span className="font-mono text-xs uppercase tracking-[0.2em] text-primary">SHEPIT Courses</span>
-          </figcaption>
-        </figure>
+        <div className="mx-auto mt-14 grid w-full max-w-sm gap-6">
+          {achievements.map((achievement) => (
+            <article
+              key={achievement.title}
+              className="group flex flex-col overflow-hidden rounded-2xl border border-border glass transition-all duration-300 hover:-translate-y-1.5 hover:glow-ring"
+            >
+              <div className="relative aspect-video overflow-hidden bg-secondary/50">
+                <Image
+                  src={achievement.image}
+                  alt={achievement.imageAlt}
+                  fill
+                  sizes="(max-width: 640px) 100vw, 384px"
+                  className="object-contain p-2 transition-transform duration-500 group-hover:scale-105"
+                  loading="lazy"
+                />
+              </div>
+
+              <div className="flex flex-1 flex-col p-6">
+                <p className="font-mono text-xs uppercase tracking-[0.2em] text-primary">{achievement.meta}</p>
+                <h3 className="mt-3 font-heading text-xl font-semibold tracking-tight">{achievement.title}</h3>
+                <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">
+                  {achievement.description}
+                </p>
+
+                <ul className="mt-5 flex flex-wrap gap-2">
+                  {achievement.tags.map((tag) => (
+                    <li
+                      key={tag}
+                      className="rounded-full border border-border bg-secondary/60 px-2.5 py-1 text-xs font-medium text-foreground/75"
+                    >
+                      {tag}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </article>
+          ))}
+        </div>
       </div>
     </section>
   )
