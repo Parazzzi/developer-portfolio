@@ -1,15 +1,24 @@
+"use client"
+
 import Image from "next/image"
 import { SectionHeading } from "@/components/section-heading"
-import { achievements } from "@/lib/portfolio-data"
+import { achievementItems } from "@/lib/portfolio-data"
+import { useLanguage } from "@/lib/i18n/language-context"
 
 export function Achievements() {
+  const { t } = useLanguage()
+  const achievements = achievementItems.map((achievement) => ({
+    ...achievement,
+    ...t.achievements.items[achievement.id],
+  }))
+
   return (
     <section id="achievements" className="scroll-mt-24 px-6 py-24">
       <div className="mx-auto w-full max-w-6xl">
         <SectionHeading
-          eyebrow="Achievements"
-          title="Achievements"
-          description="Professional learning milestones connected to game design, production thinking, and practical Unity project work."
+          eyebrow={t.achievements.eyebrow}
+          title={t.achievements.title}
+          description={t.achievements.description}
         />
 
         <div className="mx-auto mt-14 grid w-full max-w-sm gap-6">

@@ -1,18 +1,22 @@
+"use client"
+
 import { SectionHeading } from "@/components/section-heading"
-import { services } from "@/lib/portfolio-data"
+import { useLanguage } from "@/lib/i18n/language-context"
 
 export function Services() {
+  const { t } = useLanguage()
+
   return (
     <section id="services" className="scroll-mt-24 px-6 py-24">
       <div className="mx-auto w-full max-w-6xl">
         <SectionHeading
-          eyebrow="What I do"
-          title="What I can do for your project"
-          description="Focused Unity support for prototypes, production features, mobile releases, VR/XR work, and existing projects that need stability."
+          eyebrow={t.services.eyebrow}
+          title={t.services.title}
+          description={t.services.description}
         />
 
         <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {services.map((service, i) => (
+          {t.services.items.map((service, i) => (
             <article
               key={service.title}
               className="group glass rounded-2xl border border-border p-6 transition-all duration-300 hover:-translate-y-1 hover:glow-ring"

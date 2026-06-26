@@ -4,19 +4,12 @@ import { useEffect, useState } from "react"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { profile } from "@/lib/portfolio-data"
-
-const navItems = [
-  { label: "About", href: "#about" },
-  { label: "What I Do", href: "#services" },
-  { label: "Skills", href: "#skills" },
-  { label: "Projects", href: "#projects" },
-  { label: "Achievements", href: "#achievements" },
-  { label: "Workflow", href: "#workflow" },
-  { label: "Contact", href: "#contact" },
-]
+import { useLanguage } from "@/lib/i18n/language-context"
+import { languageLabels } from "@/lib/i18n/translations"
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false)
+  const { t } = useLanguage()
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 16)
@@ -50,7 +43,7 @@ export function Header() {
             scrolled ? "glass glow-ring" : "bg-card/40 backdrop-blur",
           )}
         >
-          {navItems.map((item) => (
+          {t.nav.items.map((item) => (
             <a
               key={item.href}
               href={item.href}
@@ -61,15 +54,41 @@ export function Header() {
           ))}
         </nav>
 
-        <Button
-          render={<a href={profile.links.email} />}
-          nativeButton={false}
-          size="sm"
-          className="rounded-full font-medium"
-        >
-          Contact Me
-        </Button>
+        <div className="flex shrink-0 items-center gap-2">
+          <LanguageSwitcher />
+          <Button
+            render={<a href={profile.links.email} />}
+            nativeButton={false}
+            size="sm"
+            className="rounded-full font-medium"
+          >
+            {t.nav.contact}
+          </Button>
+        </div>
       </div>
     </header>
+  )
+}
+
+function LanguageSwitcher() {
+  const { language, toggleLanguage, t } = useLanguage()
+
+  return (
+    <Button
+      type="button"
+      size="sm"
+      variant="outline"
+      aria-label={t.languageSwitcher.ariaLabel}
+      onClick={toggleLanguage}
+      className="rounded-full border-border bg-card/40 px-3 font-mono text-xs backdrop-blur hover:bg-secondary"
+    >
+      <span className={cn(language === "en" ? "text-primary" : "text-muted-foreground")}>
+        {languageLabels.en}
+      </span>
+      <span className="text-muted-foreground/60">/</span>
+      <span className={cn(language === "ua" ? "text-primary" : "text-muted-foreground")}>
+        {languageLabels.ua}
+      </span>
+    </Button>
   )
 }

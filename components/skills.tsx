@@ -1,18 +1,22 @@
+"use client"
+
 import { SectionHeading } from "@/components/section-heading"
-import { skillGroups } from "@/lib/portfolio-data"
+import { useLanguage } from "@/lib/i18n/language-context"
 
 export function Skills() {
+  const { t } = useLanguage()
+
   return (
     <section id="skills" className="scroll-mt-24 px-6 py-24">
       <div className="mx-auto w-full max-w-6xl">
         <SectionHeading
-          eyebrow="Skills"
-          title="A focused, production-ready toolkit"
-          description="Grouped by what I actually ship - from Unity systems to UI, integrations, optimization, and AI-assisted workflows."
+          eyebrow={t.skills.eyebrow}
+          title={t.skills.title}
+          description={t.skills.description}
         />
 
         <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {skillGroups.map((group, i) => (
+          {t.skills.groups.map((group, i) => (
             <article
               key={group.title}
               className="group glass rounded-2xl border border-border p-6 transition-all duration-300 hover:-translate-y-1 hover:glow-ring"

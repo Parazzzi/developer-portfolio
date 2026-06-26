@@ -9,10 +9,11 @@ import { Achievements } from "@/components/achievements"
 import { Workflow } from "@/components/workflow"
 import { Contact } from "@/components/contact"
 import { Footer } from "@/components/footer"
+import { LanguageProvider } from "@/lib/i18n/language-context"
 
 export default function Page() {
   return (
-    <>
+    <LanguageProvider>
       <AnimatedBackground />
       <Header />
       <main>
@@ -26,6 +27,6 @@ export default function Page() {
         <Contact />
       </main>
       <Footer />
-    </>
+    </LanguageProvider>
   )
 }

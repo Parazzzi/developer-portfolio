@@ -4,16 +4,21 @@ import { useCallback, useEffect, useRef, useState, type KeyboardEvent, type Mous
 import Image from "next/image"
 import { Eye, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import type { ResolvedGamesLabItem } from "@/lib/games-lab-data"
+import type { GamesLabContent, ResolvedGamesLabItem } from "@/lib/games-lab-data"
 import { cn } from "@/lib/utils"
+import { useLanguage } from "@/lib/i18n/language-context"
+import { formatMessage, type Translation } from "@/lib/i18n/translations"
 
 type Props = {
   items: ResolvedGamesLabItem[]
 }
 
+type GamesLabCopy = Pick<Translation["gamesLab"], "gameplayPreviewAlt" | "noPreview" | "viewButton">
+
 const modalCloseAnimationMs = 200
 
 export function GamesLabClient({ items }: Props) {
+  const { t } = useLanguage()
   const [selectedGame, setSelectedGame] = useState<ResolvedGamesLabItem | null>(null)
   const [isModalClosing, setIsModalClosing] = useState(false)
   const closeButtonRef = useRef<HTMLButtonElement | null>(null)
@@ -133,25 +138,36 @@ export function GamesLabClient({ items }: Props) {
   return (
     <div className="mt-16 border-t border-border/70 pt-14">
       <div className="mx-auto max-w-3xl text-center">
-        <h3 className="font-heading text-2xl font-semibold tracking-tight sm:text-3xl">Games Lab</h3>
+        <h3 className="font-heading text-2xl font-semibold tracking-tight sm:text-3xl">{t.gamesLab.heading}</h3>
         <p className="mt-3 text-pretty text-base font-medium text-foreground/90 sm:text-lg">
-          A collection of Unity mobile game prototypes and gameplay concepts.
+          {t.gamesLab.intro}
         </p>
         <p className="mt-3 text-sm leading-relaxed text-muted-foreground sm:text-base">
-          These prototypes explore different casual game mechanics, mobile UI flows, fast gameplay iteration, puzzle
-          logic, arcade gameplay, and experimental ideas built in Unity.
+          {t.gamesLab.description}
         </p>
       </div>
 
       <div className="mt-10 grid grid-cols-1 gap-4 min-[520px]:grid-cols-2 md:grid-cols-3 xl:grid-cols-5">
         {verticalGames.map((game) => (
-          <VerticalGameCard key={game.title} game={game} onView={openModal} />
+          <VerticalGameCard
+            key={game.id}
+            game={game}
+            content={t.gamesLab.items[game.id]}
+            labels={t.gamesLab}
+            onView={openModal}
+          />
         ))}
       </div>
 
       <div className="mt-6 space-y-6">
         {horizontalGames.map((game) => (
-          <HorizontalGameCard key={game.title} game={game} onView={openModal} />
+          <HorizontalGameCard
+            key={game.id}
+            game={game}
+            content={t.gamesLab.items[game.id]}
+            labels={t.gamesLab}
+            onView={openModal}
+          />
         ))}
       </div>
 
@@ -175,13 +191,13 @@ export function GamesLabClient({ items }: Props) {
             <div className="flex shrink-0 items-start justify-between gap-4 border-b border-border/80 p-5 sm:p-6">
               <div>
                 <p className="inline-flex rounded-full border border-border bg-secondary/70 px-3 py-1 text-xs font-medium text-foreground/75">
-                  {selectedGame.genre}
+                  {t.gamesLab.items[selectedGame.id].genre}
                 </p>
                 <h4 id="games-lab-modal-title" className="mt-3 font-heading text-2xl font-semibold tracking-tight">
                   {selectedGame.title}
                 </h4>
                 <p className="mt-2 max-w-3xl text-sm leading-relaxed text-muted-foreground sm:text-base">
-                  {selectedGame.fullDescription}
+                  {t.gamesLab.items[selectedGame.id].fullDescription}
                 </p>
               </div>
 
@@ -190,7 +206,7 @@ export function GamesLabClient({ items }: Props) {
                 type="button"
                 size="icon"
                 variant="outline"
-                aria-label={`Close ${selectedGame.title} gallery`}
+                aria-label={formatMessage(t.gamesLab.closeGalleryAria, { title: selectedGame.title })}
                 onClick={closeModal}
                 className="rounded-full border-border bg-background/40 hover:bg-secondary"
               >
@@ -230,7 +246,10 @@ export function GamesLabClient({ items }: Props) {
                       >
                         <Image
                           src={image}
-                          alt={`${selectedGame.title} screenshot ${index + 1}`}
+                          alt={formatMessage(t.gamesLab.screenshotAlt, {
+                            title: selectedGame.title,
+                            index: index + 1,
+                          })}
                           fill
                           sizes={
                             selectedGame.orientation === "horizontal"
@@ -246,7 +265,7 @@ export function GamesLabClient({ items }: Props) {
                 </div>
               ) : (
                 <div className="rounded-2xl border border-border bg-secondary/40 p-8 text-center text-sm text-muted-foreground">
-                  No screenshots found for this game.
+                  {t.gamesLab.noScreenshots}
                 </div>
               )}
             </div>
@@ -259,9 +278,13 @@ export function GamesLabClient({ items }: Props) {
 
 function VerticalGameCard({
   game,
+  content,
+  labels,
   onView,
 }: {
   game: ResolvedGamesLabItem
+  content: GamesLabContent
+  labels: GamesLabCopy
   onView: (game: ResolvedGamesLabItem) => void
 }) {
   return (
@@ -271,7 +294,7 @@ function VerticalGameCard({
           {game.previewImage ? (
             <Image
               src={game.previewImage}
-              alt={`${game.title} gameplay preview`}
+              alt={formatMessage(labels.gameplayPreviewAlt, { title: game.title })}
               fill
               sizes="(max-width: 520px) 82vw, (max-width: 768px) 42vw, (max-width: 1280px) 30vw, 190px"
               className="object-contain transition-transform duration-500 group-hover:scale-[1.03]"
@@ -279,7 +302,7 @@ function VerticalGameCard({
             />
           ) : (
             <div className="flex h-full items-center justify-center px-4 text-center text-xs text-muted-foreground">
-              No preview
+              {labels.noPreview}
             </div>
           )}
         </div>
@@ -287,10 +310,10 @@ function VerticalGameCard({
 
       <div className="flex flex-1 flex-col p-4">
         <p className="self-start rounded-full border border-border bg-secondary/60 px-2.5 py-1 text-[0.68rem] font-medium text-foreground/75">
-          {game.genre}
+          {content.genre}
         </p>
         <h4 className="mt-3 font-heading text-base font-semibold tracking-tight">{game.title}</h4>
-        <p className="mt-2 flex-1 text-xs leading-relaxed text-muted-foreground">{game.shortDescription}</p>
+        <p className="mt-2 flex-1 text-xs leading-relaxed text-muted-foreground">{content.shortDescription}</p>
         <Button
           type="button"
           size="sm"
@@ -298,7 +321,7 @@ function VerticalGameCard({
           aria-haspopup="dialog"
           className="mt-4 rounded-full font-medium"
         >
-          View
+          {labels.viewButton}
           <Eye className="size-3.5" />
         </Button>
       </div>
@@ -308,9 +331,13 @@ function VerticalGameCard({
 
 function HorizontalGameCard({
   game,
+  content,
+  labels,
   onView,
 }: {
   game: ResolvedGamesLabItem
+  content: GamesLabContent
+  labels: GamesLabCopy
   onView: (game: ResolvedGamesLabItem) => void
 }) {
   return (
@@ -319,23 +346,25 @@ function HorizontalGameCard({
         {game.previewImage ? (
           <Image
             src={game.previewImage}
-            alt={`${game.title} gameplay preview`}
+            alt={formatMessage(labels.gameplayPreviewAlt, { title: game.title })}
             fill
             sizes="(max-width: 768px) 92vw, 680px"
             className="object-contain transition-transform duration-500 group-hover:scale-[1.03]"
             loading="lazy"
           />
         ) : (
-          <div className="flex h-full items-center justify-center text-sm text-muted-foreground">No preview</div>
+          <div className="flex h-full items-center justify-center text-sm text-muted-foreground">
+            {labels.noPreview}
+          </div>
         )}
       </div>
 
       <div className="flex flex-col p-5 sm:p-6">
         <p className="self-start rounded-full border border-border bg-secondary/60 px-2.5 py-1 text-xs font-medium text-foreground/75">
-          {game.genre}
+          {content.genre}
         </p>
         <h4 className="mt-4 font-heading text-xl font-semibold tracking-tight">{game.title}</h4>
-        <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">{game.shortDescription}</p>
+        <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">{content.shortDescription}</p>
         <Button
           type="button"
           size="sm"
@@ -343,7 +372,7 @@ function HorizontalGameCard({
           aria-haspopup="dialog"
           className="mt-6 w-fit rounded-full font-medium"
         >
-          View
+          {labels.viewButton}
           <Eye className="size-3.5" />
         </Button>
       </div>

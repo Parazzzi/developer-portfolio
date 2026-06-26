@@ -1,18 +1,22 @@
+"use client"
+
 import { SectionHeading } from "@/components/section-heading"
-import { workflowSteps } from "@/lib/portfolio-data"
+import { useLanguage } from "@/lib/i18n/language-context"
 
 export function Workflow() {
+  const { t } = useLanguage()
+
   return (
     <section id="workflow" className="scroll-mt-24 px-6 py-24">
       <div className="mx-auto w-full max-w-4xl">
         <SectionHeading
-          eyebrow="Workflow"
-          title="How I work"
-          description="A repeatable process that keeps quality high from first idea to polished build."
+          eyebrow={t.workflow.eyebrow}
+          title={t.workflow.title}
+          description={t.workflow.description}
         />
 
         <ol className="mt-14 space-y-4">
-          {workflowSteps.map((step) => (
+          {t.workflow.steps.map((step) => (
             <li
               key={step.step}
               className="group glass relative flex gap-5 rounded-2xl border border-border p-6 transition-all duration-300 hover:glow-ring"

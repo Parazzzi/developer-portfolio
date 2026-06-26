@@ -1,9 +1,5 @@
 export const profile = {
   name: "Dementiy Besarab",
-  role: "Unity Developer | C# | Mobile Games | VR/XR",
-  subtitle:
-    "Unity Developer with 3+ years of commercial and freelance experience building mobile games, VR/XR projects, and interactive Unity applications from prototype to release.",
-  badges: ["Unity 2D/3D", "C#", "Android / iOS", "VR / XR", "AI-assisted Development"],
   email: "besarabdementij1@gmail.com",
   telegramHandle: "@besarabd",
   links: {
@@ -14,129 +10,9 @@ export const profile = {
   },
 }
 
-export const availabilityItems = [
-  "Full-time Unity Developer roles",
-  "Part-time / contract Unity work",
-  "Mobile game development",
-  "VR/XR prototypes",
-  "Project stabilization and bug fixing",
-  "Gameplay systems, UI, SDK integrations, optimization, and build preparation",
-]
-
-export const stats = [
-  { value: "3+", label: "Years Experience" },
-  { value: "Android / iOS", label: "Mobile Builds" },
-  { value: "VR / XR", label: "Interactive Projects" },
-  { value: "CREATY Games", label: "Recent Studio Role" },
-]
-
-export type SkillGroup = {
+export type ProjectStatic = {
+  id: string
   title: string
-  description: string
-  tags: string[]
-}
-
-export type Service = {
-  title: string
-  description: string
-}
-
-export const services: Service[] = [
-  {
-    title: "Gameplay systems",
-    description:
-      "Build and maintain core gameplay mechanics, game states, player interactions, progression systems, and feature logic in Unity/C#.",
-  },
-  {
-    title: "Mobile game development",
-    description:
-      "Work on Android/iOS Unity projects, UI flows, performance, build preparation, testing, and release-focused stability.",
-  },
-  {
-    title: "VR/XR prototypes",
-    description:
-      "Create and polish VR/XR interactions, spatial gameplay, Meta Quest prototypes, and headset-tested gameplay experiences.",
-  },
-  {
-    title: "UI, animation, and game feel",
-    description:
-      "Implement responsive UIs, polished transitions, DOTween animations, clear feedback, and smooth player-facing flows.",
-  },
-  {
-    title: "SDKs, analytics, and monetization",
-    description:
-      "Integrate Firebase, analytics, ads, SDK/NDK packages, monetization tools, and client-server features.",
-  },
-  {
-    title: "Project stabilization and bug fixing",
-    description:
-      "Analyze existing Unity projects, fix bugs, clean up fragile systems, improve structure, optimize performance, and prepare stable builds.",
-  },
-]
-
-export type Achievement = {
-  title: string
-  description: string
-  image: string
-  imageAlt: string
-  tags: string[]
-  meta: string
-}
-
-export const achievements: Achievement[] = [
-  {
-    title: "Game Designer Certificate",
-    description:
-      "Completed a practical game design course covering game documentation, interface design, market analysis, and basic gameplay balance.",
-    image: "/game-designer-certificate.png",
-    imageAlt: "Game Designer certificate awarded to Besarab Dementiy",
-    tags: ["Game Design", "Documentation", "UI Design", "Balance"],
-    meta: "SHEPIT Courses / 2025",
-  },
-]
-
-export const skillGroups: SkillGroup[] = [
-  {
-    title: "Unity 2D/3D & C#",
-    description: "Commercial Unity development across gameplay systems, prototypes, and production features.",
-    tags: ["Unity", "C#", "2D/3D", "Git"],
-  },
-  {
-    title: "Mobile Builds",
-    description: "Android and iOS build preparation, testing, optimization, and release-focused stability.",
-    tags: ["Android", "iOS", "Performance", "Game Testing"],
-  },
-  {
-    title: "VR/XR Development",
-    description: "Spatial interaction, headset testing, object placement, comfort, and natural player behavior.",
-    tags: ["VR/XR", "Meta Quest", "Spatial UX"],
-  },
-  {
-    title: "UI, Animation & Game Feel",
-    description: "Responsive UI, polished transitions, animations, sound hooks, and clear player feedback.",
-    tags: ["UGUI", "DOTween", "Spine", "UI/UX"],
-  },
-  {
-    title: "Architecture & Services",
-    description: "Maintainable systems built around SOLID principles, dependency injection, and clear project structure.",
-    tags: ["SOLID", "Zenject", "Refactoring", "Code Review"],
-  },
-  {
-    title: "SDKs & Monetization",
-    description: "Analytics, ads, SDK/NDK packages, backend interaction, and client-server feature support.",
-    tags: ["Firebase", "Game Analytics", "AppMetrica", "AdMob", "AppLovin"],
-  },
-  {
-    title: "AI-assisted Development",
-    description: "Using AI tools for codebase analysis, debugging, refactoring, routine code, and architecture validation.",
-    tags: ["Codex", "Claude Code", "ChatGPT", "Architecture Review"],
-  },
-]
-
-export type Project = {
-  title: string
-  description: string
-  tags: string[]
   video?: string
   youtubeEmbedUrl?: string
   poster?: string
@@ -148,12 +24,10 @@ export type Project = {
   }
 }
 
-export const projects: Project[] = [
+export const projectItems = [
   {
+    id: "pc-creator-3",
     title: "PC Creator 3",
-    description:
-      "Mobile tycoon simulator work for PC Creator 3, focused on production Unity systems, mobile UI, build stability, analytics, monetization, and release-ready Android/iOS delivery.",
-    tags: ["Unity", "C#", "Mobile", "Android/iOS", "Tycoon"],
     youtubeEmbedUrl:
       "https://www.youtube.com/embed/RmIpoEtc81U?autoplay=1&mute=1&loop=1&playlist=RmIpoEtc81U&controls=1&playsinline=1",
     poster: "/pc-creator-pro.png",
@@ -165,10 +39,8 @@ export const projects: Project[] = [
     },
   },
   {
+    id: "pc-creator-3-pro",
     title: "PC Creator 3 Pro",
-    description:
-      "Premium mobile simulation project in the PC Creator series, with Unity gameplay, UI flow, SDK integration, mobile optimization, and stable store build support.",
-    tags: ["Unity", "C#", "Mobile", "Simulation", "SDKs"],
     poster: "/pc-creator-pro.png",
     link: "https://play.google.com/store/apps/details?id=com.creatyglobal.pccreatorthreepro&hl=ru",
     primaryLinkLabel: "Play Market",
@@ -178,10 +50,8 @@ export const projects: Project[] = [
     },
   },
   {
+    id: "pc-creator-2",
     title: "PC Creator 2",
-    description:
-      "Commercial Unity mobile simulator work connected to CREATY's PC Creator line: gameplay and UI systems, Android/iOS build preparation, Firebase analytics, monetization SDKs, SDK/NDK packages, and release stability.",
-    tags: ["Unity", "C#", "Android/iOS", "Firebase", "Ads SDKs"],
     youtubeEmbedUrl:
       "https://www.youtube.com/embed/ahYLM1eCZ88?autoplay=1&mute=1&loop=1&playlist=ahYLM1eCZ88&controls=1&playsinline=1",
     poster: "/pc-creator-2.png",
@@ -193,39 +63,41 @@ export const projects: Project[] = [
     },
   },
   {
+    id: "vr-football-penalty",
     title: "VR Football Penalty",
-    description:
-      "Room-scale VR football penalty experience where shot height, direction, and angle are controlled by real body movement. The player steps forward, backward, left, and right around the ball to aim the kick naturally before taking the penalty.",
-    tags: ["Unity", "C#", "VR/XR", "Room-Scale", "Gameplay"],
     video: "/vr-football-penalty.mp4",
     poster: "/vr-football-penalty-poster.png",
   },
-]
+] as const satisfies readonly ProjectStatic[]
 
-export const workflowSteps = [
+export type ProjectId = (typeof projectItems)[number]["id"]
+
+export type ProjectContent = {
+  description: string
+  tags: string[]
+}
+
+export type Project = ProjectStatic & ProjectContent
+
+export type AchievementStatic = {
+  id: string
+  image: string
+  meta: string
+}
+
+export const achievementItems = [
   {
-    step: "01",
-    title: "Plan architecture and scope",
-    description: "Clarify gameplay goals, platform constraints, project structure, and the technical path before building.",
+    id: "game-designer-certificate",
+    image: "/game-designer-certificate.png",
+    meta: "SHEPIT Courses / 2025",
   },
-  {
-    step: "02",
-    title: "Build Unity gameplay systems",
-    description: "Implement gameplay, UI, services, saves, events, and game states with readable C# and maintainable boundaries.",
-  },
-  {
-    step: "03",
-    title: "Integrate SDKs and services",
-    description: "Connect analytics, ads, SDK/NDK packages, monetization, backend interaction, and client-server features.",
-  },
-  {
-    step: "04",
-    title: "Test, optimize, and stabilize",
-    description: "Profile performance, fix edge cases, verify mobile or headset behavior, and prepare stable builds.",
-  },
-  {
-    step: "05",
-    title: "Use AI as a technical teammate",
-    description: "Speed up analysis, debugging, refactoring, and architecture validation while keeping final ownership of decisions.",
-  },
-]
+] as const satisfies readonly AchievementStatic[]
+
+export type AchievementId = (typeof achievementItems)[number]["id"]
+
+export type AchievementContent = {
+  title: string
+  description: string
+  imageAlt: string
+  tags: string[]
+}

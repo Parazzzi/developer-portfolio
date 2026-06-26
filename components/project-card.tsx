@@ -5,9 +5,12 @@ import Image from "next/image"
 import { ArrowUpRight, Play } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import type { Project } from "@/lib/portfolio-data"
+import { useLanguage } from "@/lib/i18n/language-context"
+import { formatMessage } from "@/lib/i18n/translations"
 
 export function ProjectCard({ project }: { project: Project }) {
   const videoRef = useRef<HTMLVideoElement>(null)
+  const { t } = useLanguage()
 
   const handleEnter = () => {
     if (videoRef.current) {
@@ -34,7 +37,7 @@ export function ProjectCard({ project }: { project: Project }) {
           <iframe
             className="h-full w-full"
             src={project.youtubeEmbedUrl}
-            title={`${project.title} gameplay video`}
+            title={formatMessage(t.projects.card.gameplayVideoTitle, { title: project.title })}
             allow="autoplay; encrypted-media; picture-in-picture"
             allowFullScreen
           />
@@ -53,13 +56,15 @@ export function ProjectCard({ project }: { project: Project }) {
         ) : project.poster ? (
           <Image
             src={project.poster || "/placeholder.svg"}
-            alt={`${project.title} preview`}
+            alt={formatMessage(t.projects.card.previewAlt, { title: project.title })}
             fill
             sizes="(max-width: 768px) 100vw, 33vw"
             className="object-cover transition-transform duration-500 group-hover:scale-105"
           />
         ) : (
-          <div className="flex h-full w-full items-center justify-center text-muted-foreground">No preview</div>
+          <div className="flex h-full w-full items-center justify-center text-muted-foreground">
+            {t.projects.card.noPreview}
+          </div>
         )}
 
         {project.youtubeEmbedUrl || (project.video && !project.link) ? null : (
@@ -69,7 +74,7 @@ export function ProjectCard({ project }: { project: Project }) {
         {project.youtubeEmbedUrl || (project.video && !project.link) ? null : (
           <div className="pointer-events-none absolute bottom-3 left-3 flex items-center gap-2 rounded-full border border-border bg-background/60 px-3 py-1 text-xs font-medium text-foreground/90 backdrop-blur">
             <Play className="size-3 fill-primary text-primary" />
-            Gameplay preview
+            {t.projects.card.gameplayPreview}
           </div>
         )}
       </div>
@@ -98,7 +103,7 @@ export function ProjectCard({ project }: { project: Project }) {
                 size="sm"
                 className="rounded-full font-medium"
               >
-                {project.primaryLinkLabel ?? "Open project"}
+                {project.primaryLinkLabel ?? t.projects.card.openProject}
                 <ArrowUpRight className="size-4" />
               </Button>
             ) : null}
