@@ -7,6 +7,7 @@ export const profile = {
     linkedin: "https://www.linkedin.com/in/dementiy-besarab-6aa77a2a4/",
     telegram: "https://t.me/besarabd",
     cv: "/dementiy-besarab-cv.pdf",
+    funPortfolio3d: "https://3-d-portfolio-3d.vercel.app/",
   },
 }
 

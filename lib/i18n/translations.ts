@@ -65,6 +65,7 @@ type Translation = {
   hero: {
     status: string
     availableFor: string
+    funPortfolio3d: string
     availabilityItems: string[]
     viewProjects: string
     contactMe: string
@@ -166,6 +167,7 @@ export const translations: Record<Language, Translation> = {
     hero: {
       status: "Currently available",
       availableFor: "Currently available for:",
+      funPortfolio3d: "3D Fun Portfolio",
       availabilityItems: [
         "Full-time Unity Developer roles",
         "Part-time / contract Unity work",
@@ -485,6 +487,7 @@ export const translations: Record<Language, Translation> = {
     hero: {
       status: "Відкритий до пропозицій",
       availableFor: "Відкритий до:",
+      funPortfolio3d: "3D Fun Portfolio",
       availabilityItems: [
         "Full-time ролі Unity Developer",
         "Part-time / контрактна робота з Unity",

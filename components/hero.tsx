@@ -1,6 +1,6 @@
 "use client"
 
-import { ArrowDown, Check, Download, Mail } from "lucide-react"
+import { ArrowDown, ArrowUpRight, Check, Download, Mail } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { profile } from "@/lib/portfolio-data"
 import { useLanguage } from "@/lib/i18n/language-context"
@@ -31,6 +31,15 @@ export function Hero() {
 
         <div className="mt-7 w-full max-w-2xl rounded-3xl border border-border glass px-4 py-4 sm:px-5">
           <p className="font-mono text-xs uppercase tracking-[0.2em] text-primary">{t.hero.availableFor}</p>
+          <a
+            href={profile.links.funPortfolio3d}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-3 inline-flex items-center justify-center gap-1.5 rounded-full border border-primary/30 bg-primary/10 px-4 py-2 text-sm font-medium text-primary transition-colors hover:bg-primary/15"
+          >
+            {t.hero.funPortfolio3d}
+            <ArrowUpRight className="size-4" />
+          </a>
           <ul className="mt-3 grid gap-2 text-left text-sm text-muted-foreground sm:grid-cols-2">
             {t.hero.availabilityItems.map((item) => (
               <li key={item} className="flex gap-2.5">
