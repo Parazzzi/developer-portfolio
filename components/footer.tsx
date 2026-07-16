@@ -7,13 +7,23 @@ export function Footer() {
   const { t } = useLanguage()
 
   return (
-    <footer className="border-t border-border px-6 py-10">
-      <div className="mx-auto flex w-full max-w-6xl flex-col items-center justify-between gap-4 text-sm text-muted-foreground sm:flex-row">
-        <div className="flex items-center gap-2 font-mono">
-          <span className="inline-block h-2 w-2 rounded-full bg-primary shadow-[0_0_12px_var(--glow)]" />
-          {profile.name}
+    <footer className="px-4 py-8 sm:px-6">
+      <div className="site-shell flex flex-col gap-4 text-sm text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
+        <div>
+          <p className="font-semibold text-foreground">{profile.name}</p>
+          <p className="mt-1">{t.profile.role}</p>
         </div>
-        <p>{t.profile.role}</p>
+        <div className="flex flex-wrap gap-x-4 gap-y-2">
+          <a className="hover:text-orange" href={profile.links.email}>
+            {t.common.email}
+          </a>
+          <a className="hover:text-orange" href={profile.links.linkedin} target="_blank" rel="noopener noreferrer">
+            {t.common.linkedin}
+          </a>
+          <a className="hover:text-orange" href={profile.links.telegram} target="_blank" rel="noopener noreferrer">
+            {t.common.telegram}
+          </a>
+        </div>
         <p>&copy; {new Date().getFullYear()} - {t.footer.builtWith}</p>
       </div>
     </footer>

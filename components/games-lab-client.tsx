@@ -2,12 +2,12 @@
 
 import { useCallback, useEffect, useRef, useState, type KeyboardEvent, type MouseEvent } from "react"
 import Image from "next/image"
-import { Eye, X } from "lucide-react"
+import { Eye, Images, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import type { GamesLabContent, ResolvedGamesLabItem } from "@/lib/games-lab-data"
-import { cn } from "@/lib/utils"
 import { useLanguage } from "@/lib/i18n/language-context"
 import { formatMessage, type Translation } from "@/lib/i18n/translations"
+import { cn } from "@/lib/utils"
 
 type Props = {
   items: ResolvedGamesLabItem[]
@@ -27,8 +27,9 @@ export function GamesLabClient({ items }: Props) {
   const closeTimerRef = useRef<number | null>(null)
   const selectedGameRef = useRef<ResolvedGamesLabItem | null>(null)
   const isModalClosingRef = useRef(false)
-  const verticalGames = items.filter((game) => game.orientation === "vertical")
   const horizontalGames = items.filter((game) => game.orientation === "horizontal")
+  const verticalGames = items.filter((game) => game.orientation === "vertical")
+  const orderedGames = [...horizontalGames, ...verticalGames]
 
   const openModal = useCallback((game: ResolvedGamesLabItem) => {
     if (closeTimerRef.current !== null) {
@@ -136,45 +137,39 @@ export function GamesLabClient({ items }: Props) {
   }
 
   return (
-    <div className="mt-16 border-t border-border/70 pt-14">
-      <div className="mx-auto max-w-3xl text-center">
-        <h3 className="font-heading text-2xl font-semibold tracking-tight sm:text-3xl">{t.gamesLab.heading}</h3>
-        <p className="mt-3 text-pretty text-base font-medium text-foreground/90 sm:text-lg">
-          {t.gamesLab.intro}
-        </p>
-        <p className="mt-3 text-sm leading-relaxed text-muted-foreground sm:text-base">
-          {t.gamesLab.description}
-        </p>
-      </div>
+    <section id="games-lab" className="scroll-mt-24 px-4 py-20 sm:px-6 lg:py-28">
+      <div className="site-shell">
+        <div className="grid grid-cols-[minmax(0,1fr)] gap-6 lg:grid-cols-[0.78fr_1.22fr] lg:items-end">
+          <div className="min-w-0">
+            <p className="section-kicker">{t.gamesLab.eyebrow}</p>
+            <h2 className="mt-4 text-balance font-heading text-4xl font-semibold leading-tight tracking-tight sm:text-5xl">
+              {t.gamesLab.heading}
+            </h2>
+          </div>
+          <div className="min-w-0 max-w-2xl lg:justify-self-end">
+            <p className="text-pretty text-lg font-medium text-foreground/90">{t.gamesLab.intro}</p>
+            <p className="mt-3 text-pretty leading-relaxed text-muted-foreground">{t.gamesLab.description}</p>
+          </div>
+        </div>
 
-      <div className="mt-10 grid grid-cols-1 gap-4 min-[520px]:grid-cols-2 md:grid-cols-3 xl:grid-cols-5">
-        {verticalGames.map((game) => (
-          <VerticalGameCard
-            key={game.id}
-            game={game}
-            content={t.gamesLab.items[game.id]}
-            labels={t.gamesLab}
-            onView={openModal}
-          />
-        ))}
-      </div>
-
-      <div className="mt-6 space-y-6">
-        {horizontalGames.map((game) => (
-          <HorizontalGameCard
-            key={game.id}
-            game={game}
-            content={t.gamesLab.items[game.id]}
-            labels={t.gamesLab}
-            onView={openModal}
-          />
-        ))}
+        <div className="mt-10 grid grid-cols-1 gap-4 min-[560px]:grid-cols-2 lg:grid-cols-12">
+          {orderedGames.map((game, index) => (
+            <GameLabCard
+              key={game.id}
+              game={game}
+              content={t.gamesLab.items[game.id]}
+              labels={t.gamesLab}
+              index={index}
+              onView={openModal}
+            />
+          ))}
+        </div>
       </div>
 
       {selectedGame ? (
         <div
           data-state={isModalClosing ? "closing" : "open"}
-          className="games-lab-modal-overlay fixed inset-0 z-50 flex items-start justify-center overflow-y-auto bg-background/80 p-4 backdrop-blur-md sm:items-center sm:p-6"
+          className="games-lab-modal-overlay fixed inset-0 z-50 flex items-start justify-center overflow-y-auto bg-background/85 p-4 backdrop-blur-md sm:items-center sm:p-6"
           onMouseDown={handleOverlayMouseDown}
         >
           <div
@@ -184,18 +179,18 @@ export function GamesLabClient({ items }: Props) {
             aria-labelledby="games-lab-modal-title"
             onKeyDown={handleDialogKeyDown}
             className={cn(
-              "games-lab-modal-panel glass flex max-h-[90vh] w-full flex-col overflow-hidden rounded-3xl border border-border shadow-2xl",
+              "games-lab-modal-panel technical-surface flex max-h-[90vh] w-full flex-col overflow-hidden rounded-xl",
               selectedGame.orientation === "horizontal" ? "max-w-6xl" : "max-w-5xl",
             )}
           >
-            <div className="flex shrink-0 items-start justify-between gap-4 border-b border-border/80 p-5 sm:p-6">
+            <div className="flex shrink-0 items-start justify-between gap-4 border-b border-white/10 p-5 sm:p-6">
               <div>
-                <p className="inline-flex rounded-full border border-border bg-secondary/70 px-3 py-1 text-xs font-medium text-foreground/75">
+                <p className="inline-flex rounded-md border border-white/10 bg-white/[0.045] px-3 py-1 text-xs font-semibold text-foreground/75">
                   {t.gamesLab.items[selectedGame.id].genre}
                 </p>
-                <h4 id="games-lab-modal-title" className="mt-3 font-heading text-2xl font-semibold tracking-tight">
+                <h3 id="games-lab-modal-title" className="mt-3 font-heading text-2xl font-semibold tracking-tight">
                   {selectedGame.title}
-                </h4>
+                </h3>
                 <p className="mt-2 max-w-3xl text-sm leading-relaxed text-muted-foreground sm:text-base">
                   {t.gamesLab.items[selectedGame.id].fullDescription}
                 </p>
@@ -208,7 +203,7 @@ export function GamesLabClient({ items }: Props) {
                 variant="outline"
                 aria-label={formatMessage(t.gamesLab.closeGalleryAria, { title: selectedGame.title })}
                 onClick={closeModal}
-                className="rounded-full border-border bg-background/40 hover:bg-secondary"
+                className="rounded-md border-white/10 bg-background/40 hover:bg-white/10"
               >
                 <X className="size-4" />
               </Button>
@@ -230,7 +225,7 @@ export function GamesLabClient({ items }: Props) {
                     <figure
                       key={image}
                       className={cn(
-                        "overflow-hidden rounded-2xl border border-border bg-secondary/40 p-2",
+                        "overflow-hidden rounded-lg border border-white/10 bg-background/42 p-2",
                         selectedGame.orientation === "vertical" && selectedGame.images.length === 1
                           ? "mx-auto w-full max-w-[20rem]"
                           : null,
@@ -238,7 +233,7 @@ export function GamesLabClient({ items }: Props) {
                     >
                       <div
                         className={cn(
-                          "relative overflow-hidden rounded-xl bg-background/70",
+                          "relative overflow-hidden rounded-md bg-background/70",
                           selectedGame.orientation === "horizontal"
                             ? "aspect-[1820/848] w-full"
                             : "mx-auto aspect-[540/1161] w-full max-w-[18rem]",
@@ -264,7 +259,7 @@ export function GamesLabClient({ items }: Props) {
                   ))}
                 </div>
               ) : (
-                <div className="rounded-2xl border border-border bg-secondary/40 p-8 text-center text-sm text-muted-foreground">
+                <div className="rounded-lg border border-white/10 bg-background/42 p-8 text-center text-sm text-muted-foreground">
                   {t.gamesLab.noScreenshots}
                 </div>
               )}
@@ -272,54 +267,82 @@ export function GamesLabClient({ items }: Props) {
           </div>
         </div>
       ) : null}
-    </div>
+    </section>
   )
 }
 
-function VerticalGameCard({
+function GameLabCard({
   game,
   content,
   labels,
+  index,
   onView,
 }: {
   game: ResolvedGamesLabItem
   content: GamesLabContent
   labels: GamesLabCopy
+  index: number
   onView: (game: ResolvedGamesLabItem) => void
 }) {
+  const secondaryImage = game.images.find((image) => image !== game.previewImage)
+
   return (
-    <article className="group flex h-full flex-col overflow-hidden rounded-2xl border border-border glass transition-all duration-300 hover:-translate-y-1.5 hover:glow-ring">
-      <div className="bg-secondary/25 p-3">
-        <div className="relative mx-auto aspect-[540/1161] w-full max-w-[13rem] overflow-hidden rounded-2xl border border-border bg-background/60">
-          {game.previewImage ? (
+    <article className={cn("group overflow-hidden rounded-lg border border-white/10 bg-surface/74 transition duration-300 hover:-translate-y-1 hover:border-orange/35", getCardSpan(game, index))}>
+      <div
+        className={cn(
+          "relative overflow-hidden bg-background/60",
+          game.orientation === "horizontal" ? "aspect-[1820/848]" : "aspect-[540/1161]",
+        )}
+      >
+        {game.previewImage ? (
+          <>
             <Image
               src={game.previewImage}
               alt={formatMessage(labels.gameplayPreviewAlt, { title: game.title })}
               fill
-              sizes="(max-width: 520px) 82vw, (max-width: 768px) 42vw, (max-width: 1280px) 30vw, 190px"
-              className="object-contain transition-transform duration-500 group-hover:scale-[1.03]"
+              sizes={game.orientation === "horizontal" ? "(max-width: 1024px) 92vw, 620px" : "(max-width: 640px) 86vw, (max-width: 1024px) 44vw, 260px"}
+              className={cn(
+                "object-cover transition duration-500 group-hover:scale-[1.035]",
+                game.orientation === "vertical" ? "object-contain" : null,
+              )}
               loading="lazy"
             />
-          ) : (
-            <div className="flex h-full items-center justify-center px-4 text-center text-xs text-muted-foreground">
-              {labels.noPreview}
-            </div>
-          )}
+            {secondaryImage ? (
+              <Image
+                src={secondaryImage}
+                alt=""
+                fill
+                sizes={game.orientation === "horizontal" ? "(max-width: 1024px) 92vw, 620px" : "(max-width: 640px) 86vw, (max-width: 1024px) 44vw, 260px"}
+                className={cn(
+                  "object-cover opacity-0 transition duration-500 group-hover:opacity-100",
+                  game.orientation === "vertical" ? "object-contain" : null,
+                )}
+                loading="lazy"
+              />
+            ) : null}
+          </>
+        ) : (
+          <div className="flex h-full items-center justify-center px-4 text-center text-sm text-muted-foreground">
+            {labels.noPreview}
+          </div>
+        )}
+        <div className="absolute inset-0 bg-gradient-to-t from-background/85 via-transparent to-transparent opacity-90" />
+        <div className="absolute left-3 top-3 inline-flex items-center gap-1.5 rounded-md border border-white/10 bg-background/66 px-2.5 py-1 text-[0.68rem] font-semibold text-foreground/78 backdrop-blur">
+          <Images className="size-3.5 text-orange" />
+          {game.images.length}
         </div>
       </div>
 
-      <div className="flex flex-1 flex-col p-4">
-        <p className="self-start rounded-full border border-border bg-secondary/60 px-2.5 py-1 text-[0.68rem] font-medium text-foreground/75">
-          {content.genre}
-        </p>
-        <h4 className="mt-3 font-heading text-base font-semibold tracking-tight">{game.title}</h4>
-        <p className="mt-2 flex-1 text-xs leading-relaxed text-muted-foreground">{content.shortDescription}</p>
+      <div className="p-4">
+        <p className="font-mono text-[0.68rem] uppercase tracking-[0.16em] text-orange">{content.genre}</p>
+        <h3 className="mt-2 font-heading text-xl font-semibold tracking-tight">{game.title}</h3>
+        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{content.shortDescription}</p>
         <Button
           type="button"
           size="sm"
           onClick={() => onView(game)}
           aria-haspopup="dialog"
-          className="mt-4 rounded-full font-medium"
+          className="mt-4 rounded-md font-semibold"
         >
           {labels.viewButton}
           <Eye className="size-3.5" />
@@ -329,53 +352,11 @@ function VerticalGameCard({
   )
 }
 
-function HorizontalGameCard({
-  game,
-  content,
-  labels,
-  onView,
-}: {
-  game: ResolvedGamesLabItem
-  content: GamesLabContent
-  labels: GamesLabCopy
-  onView: (game: ResolvedGamesLabItem) => void
-}) {
-  return (
-    <article className="group grid overflow-hidden rounded-2xl border border-border glass transition-all duration-300 hover:-translate-y-1.5 hover:glow-ring md:grid-cols-[minmax(0,1.45fr)_minmax(280px,0.85fr)]">
-      <div className="relative aspect-[1820/848] overflow-hidden bg-secondary/30">
-        {game.previewImage ? (
-          <Image
-            src={game.previewImage}
-            alt={formatMessage(labels.gameplayPreviewAlt, { title: game.title })}
-            fill
-            sizes="(max-width: 768px) 92vw, 680px"
-            className="object-contain transition-transform duration-500 group-hover:scale-[1.03]"
-            loading="lazy"
-          />
-        ) : (
-          <div className="flex h-full items-center justify-center text-sm text-muted-foreground">
-            {labels.noPreview}
-          </div>
-        )}
-      </div>
+function getCardSpan(game: ResolvedGamesLabItem, index: number) {
+  if (game.orientation === "horizontal") {
+    return "lg:col-span-7"
+  }
 
-      <div className="flex flex-col p-5 sm:p-6">
-        <p className="self-start rounded-full border border-border bg-secondary/60 px-2.5 py-1 text-xs font-medium text-foreground/75">
-          {content.genre}
-        </p>
-        <h4 className="mt-4 font-heading text-xl font-semibold tracking-tight">{game.title}</h4>
-        <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">{content.shortDescription}</p>
-        <Button
-          type="button"
-          size="sm"
-          onClick={() => onView(game)}
-          aria-haspopup="dialog"
-          className="mt-6 w-fit rounded-full font-medium"
-        >
-          {labels.viewButton}
-          <Eye className="size-3.5" />
-        </Button>
-      </div>
-    </article>
-  )
+  const spans = ["lg:col-span-3", "lg:col-span-3", "lg:col-span-2", "lg:col-span-4", "lg:col-span-3", "lg:col-span-3"]
+  return spans[index % spans.length]
 }

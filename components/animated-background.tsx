@@ -1,28 +1,21 @@
 export function AnimatedBackground() {
   return (
-    <div aria-hidden="true" className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
-      {/* base */}
-      <div className="absolute inset-0 bg-background" />
-
-      {/* grid */}
+    <div aria-hidden="true" className="pointer-events-none fixed inset-0 -z-10 overflow-hidden bg-background">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_-20%,rgba(73,216,255,0.11),transparent_34%),linear-gradient(180deg,#08090c_0%,#0a0b0f_52%,#08090c_100%)]" />
       <div
-        className="absolute inset-0 opacity-[0.18]"
+        className="absolute inset-0 opacity-[0.16]"
         style={{
           backgroundImage:
-            "linear-gradient(to right, color-mix(in oklch, var(--foreground) 8%, transparent) 1px, transparent 1px), linear-gradient(to bottom, color-mix(in oklch, var(--foreground) 8%, transparent) 1px, transparent 1px)",
-          backgroundSize: "56px 56px",
-          maskImage: "radial-gradient(ellipse 80% 60% at 50% 0%, black 40%, transparent 100%)",
-          WebkitMaskImage: "radial-gradient(ellipse 80% 60% at 50% 0%, black 40%, transparent 100%)",
+            "linear-gradient(to right, rgba(255,255,255,0.075) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.075) 1px, transparent 1px)",
+          backgroundSize: "64px 64px",
+          maskImage: "linear-gradient(to bottom, black, transparent 86%)",
+          WebkitMaskImage: "linear-gradient(to bottom, black, transparent 86%)",
         }}
       />
-
-      {/* glow orbs */}
-      <div className="absolute -top-32 left-1/2 h-[40rem] w-[40rem] -translate-x-1/2 rounded-full bg-primary/20 blur-[120px] animate-pulse-glow" />
-      <div className="absolute top-1/3 -right-24 h-[28rem] w-[28rem] rounded-full bg-chart-2/15 blur-[120px] animate-pulse-glow" />
-      <div className="absolute bottom-0 -left-24 h-[28rem] w-[28rem] rounded-full bg-chart-3/15 blur-[120px] animate-pulse-glow" />
-
-      {/* vignette */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background" />
+      <div className="noise-overlay absolute inset-0" />
+      <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-background to-transparent" />
+      <div className="absolute inset-x-0 bottom-0 h-80 bg-gradient-to-t from-background to-transparent" />
+      <div className="absolute inset-0 shadow-[inset_0_0_140px_rgba(0,0,0,0.72)]" />
     </div>
   )
 }

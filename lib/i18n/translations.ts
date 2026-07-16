@@ -32,21 +32,37 @@ type Stat = {
   label: string
 }
 
-type Service = {
+type CaseStudy = {
+  eyebrow: string
   title: string
+  subtitle: string
+  mediaLabel: string
+  mediaAlt: string
+  platformLabel: string
+  roleLabel: string
+  responsibilitiesLabel: string
+  challengesLabel: string
+  contributionLabel: string
+  technologiesLabel: string
+  projectsLabel: string
+  storeLinksLabel: string
+  platforms: string
+  role: string
+  responsibilities: string[]
+  challenges: string[]
+  contribution: string
+  technologies: string[]
+}
+
+type FlowNode = {
+  label: string
   description: string
 }
 
-type SkillGroup = {
+type ToolkitCategory = {
   title: string
   description: string
-  tags: string[]
-}
-
-type WorkflowStep = {
-  step: string
-  title: string
-  description: string
+  technologies: string[]
 }
 
 type Translation = {
@@ -56,44 +72,49 @@ type Translation = {
   nav: {
     items: NavItem[]
     contact: string
+    downloadCv: string
+    downloadCvAria: string
+    availability: string
+    openMenuAria: string
+    closeMenuAria: string
+  }
+  common: {
+    email: string
+    linkedin: string
+    telegram: string
+    externalLinkAria: string
+    playMedia: string
+    selected: string
   }
   profile: {
     role: string
+    compactRole: string
     subtitle: string
+    availability: string
     badges: string[]
   }
   hero: {
-    status: string
-    availableFor: string
-    funPortfolio3d: string
-    availabilityItems: string[]
-    viewProjects: string
-    contactMe: string
-    downloadCv: string
-    downloadCvAria: string
-  }
-  about: {
     eyebrow: string
-    title: string
-    paragraphs: string[]
+    headline: string
+    subtitle: string
+    primaryCta: string
+    contactCta: string
+    downloadCv: string
+    socialLabel: string
+    mediaTitle: string
+    mediaSubtitle: string
+    mediaAlt: string
+    portfolio3d: string
     stats: Stat[]
   }
-  services: {
+  work: {
     eyebrow: string
     title: string
     description: string
-    items: Service[]
-  }
-  skills: {
-    eyebrow: string
-    title: string
-    description: string
-    groups: SkillGroup[]
+    pc: CaseStudy
+    vr: CaseStudy
   }
   projects: {
-    eyebrow: string
-    title: string
-    description: string
     card: {
       gameplayVideoTitle: string
       previewAlt: string
@@ -103,17 +124,57 @@ type Translation = {
     }
     items: Record<ProjectId, ProjectContent>
   }
+  gamesLab: {
+    eyebrow: string
+    heading: string
+    intro: string
+    description: string
+    viewButton: string
+    noPreview: string
+    noScreenshots: string
+    closeGalleryAria: string
+    screenshotAlt: string
+    gameplayPreviewAlt: string
+    items: Record<GamesLabItemId, GamesLabContent>
+  }
+  underHood: {
+    eyebrow: string
+    title: string
+    description: string
+    flowLabel: string
+    flow: FlowNode[]
+    topicsLabel: string
+    topics: ToolkitCategory[]
+    codeLabel: string
+    codeTitle: string
+    codeLines: string[]
+  }
+  toolkit: {
+    eyebrow: string
+    title: string
+    description: string
+    categories: ToolkitCategory[]
+  }
+  about: {
+    eyebrow: string
+    title: string
+    paragraphs: string[]
+    stats: Stat[]
+    availabilityLabel: string
+    availabilityItems: string[]
+    aiNote: string
+    certificate: {
+      label: string
+      title: string
+      description: string
+      imageAlt: string
+    }
+  }
   achievements: {
     eyebrow: string
     title: string
     description: string
     items: Record<AchievementId, AchievementContent>
-  }
-  workflow: {
-    eyebrow: string
-    title: string
-    description: string
-    steps: WorkflowStep[]
   }
   contact: {
     eyebrow: string
@@ -127,18 +188,6 @@ type Translation = {
   footer: {
     builtWith: string
   }
-  gamesLab: {
-    heading: string
-    intro: string
-    description: string
-    viewButton: string
-    noPreview: string
-    noScreenshots: string
-    closeGalleryAria: string
-    screenshotAlt: string
-    gameplayPreviewAlt: string
-    items: Record<GamesLabItemId, GamesLabContent>
-  }
 }
 
 export const translations: Record<Language, Translation> = {
@@ -148,140 +197,124 @@ export const translations: Record<Language, Translation> = {
     },
     nav: {
       items: [
+        { label: "Work", href: "#work" },
+        { label: "Games Lab", href: "#games-lab" },
         { label: "About", href: "#about" },
-        { label: "What I Do", href: "#services" },
-        { label: "Skills", href: "#skills" },
-        { label: "Projects", href: "#projects" },
-        { label: "Achievements", href: "#achievements" },
-        { label: "Workflow", href: "#workflow" },
         { label: "Contact", href: "#contact" },
       ],
-      contact: "Contact Me",
+      contact: "Contact",
+      downloadCv: "CV",
+      downloadCvAria: "Download Dementiy Besarab CV",
+      availability: "Available",
+      openMenuAria: "Open navigation menu",
+      closeMenuAria: "Close navigation menu",
+    },
+    common: {
+      email: "Email",
+      linkedin: "LinkedIn",
+      telegram: "Telegram",
+      externalLinkAria: "Open {label} in a new tab",
+      playMedia: "Play media",
+      selected: "Selected",
     },
     profile: {
-      role: "Unity Developer | C# | Mobile Games | VR/XR",
+      role: "Unity C# Developer",
+      compactRole: "Unity C# / Mobile / VR-XR",
       subtitle:
-        "Unity Developer with 3+ years of commercial and freelance experience building mobile games, VR/XR projects, and interactive Unity applications from prototype to release.",
-      badges: ["Unity 2D/3D", "C#", "Android / iOS", "VR / XR", "AI-assisted Development"],
+        "Unity C# Developer focused on mobile games, VR/XR experiences, production-ready gameplay systems, UI, integrations, architecture, and optimization.",
+      availability: "Currently available for full-time, part-time, and project-based Unity work.",
+      badges: ["Mobile games", "VR/XR", "Gameplay systems", "Production UI", "SDK integrations"],
     },
     hero: {
-      status: "Currently available",
-      availableFor: "Currently available for:",
-      funPortfolio3d: "3D Fun Portfolio",
-      availabilityItems: [
-        "Full-time Unity Developer roles",
-        "Part-time / contract Unity work",
-        "Mobile game development",
-        "VR/XR prototypes",
-        "Project stabilization and bug fixing",
-        "Gameplay systems, UI, SDK integrations, optimization, and build preparation",
-      ],
-      viewProjects: "View Projects",
-      contactMe: "Contact Me",
+      eyebrow: "Playable Developer Portfolio",
+      headline: "I build Unity games that feel good and ship.",
+      subtitle:
+        "Unity C# Developer focused on mobile games, VR/XR experiences and production-ready gameplay systems.",
+      primaryCta: "View selected work",
+      contactCta: "Start a conversation",
       downloadCv: "Download CV",
-      downloadCvAria: "Download Dementiy Besarab CV",
-    },
-    about: {
-      eyebrow: "About",
-      title: "Unity development from prototype to release",
-      paragraphs: [
-        "I am a Unity Developer with 3+ years of commercial and freelance experience building mobile games, VR/XR projects, and interactive applications with Unity and C#.",
-        "My work covers gameplay systems, UI implementation, Android/iOS build preparation, optimization, SDK integrations, analytics, monetization, client-server features, and stable production delivery.",
-        "I use AI tools like Codex, Claude Code, and ChatGPT for analysis, debugging, refactoring, and architecture validation while keeping ownership of technical decisions and final code quality.",
-      ],
+      socialLabel: "Contact channels",
+      mediaTitle: "Commercial mobile + room-scale VR",
+      mediaSubtitle: "Gameplay media from shipped and prototype Unity work.",
+      mediaAlt: "Cinematic gameplay composition with VR football and mobile game previews",
+      portfolio3d: "3D Fun Portfolio",
       stats: [
-        { value: "3+", label: "Years Experience" },
-        { value: "Android / iOS", label: "Mobile Builds" },
-        { value: "VR / XR", label: "Interactive Projects" },
-        { value: "CREATY Games", label: "Recent Studio Role" },
+        { value: "3+", label: "Years commercial and freelance Unity work" },
+        { value: "Android / iOS", label: "Mobile build and release support" },
+        { value: "VR / XR", label: "Spatial interaction prototypes" },
       ],
     },
-    services: {
-      eyebrow: "What I do",
-      title: "What I can do for your project",
+    work: {
+      eyebrow: "Selected Commercial Work",
+      title: "Production Unity work, presented as systems instead of thumbnails.",
       description:
-        "Focused Unity support for prototypes, production features, mobile releases, VR/XR work, and existing projects that need stability.",
-      items: [
-        {
-          title: "Gameplay systems",
-          description:
-            "Build and maintain core gameplay mechanics, game states, player interactions, progression systems, and feature logic in Unity/C#.",
-        },
-        {
-          title: "Mobile game development",
-          description:
-            "Work on Android/iOS Unity projects, UI flows, performance, build preparation, testing, and release-focused stability.",
-        },
-        {
-          title: "VR/XR prototypes",
-          description:
-            "Create and polish VR/XR interactions, spatial gameplay, Meta Quest prototypes, and headset-tested gameplay experiences.",
-        },
-        {
-          title: "UI, animation, and game feel",
-          description:
-            "Implement responsive UIs, polished transitions, DOTween animations, clear feedback, and smooth player-facing flows.",
-        },
-        {
-          title: "SDKs, analytics, and monetization",
-          description:
-            "Integrate Firebase, analytics, ads, SDK/NDK packages, monetization tools, and client-server features.",
-        },
-        {
-          title: "Project stabilization and bug fixing",
-          description:
-            "Analyze existing Unity projects, fix bugs, clean up fragile systems, improve structure, optimize performance, and prepare stable builds.",
-        },
-      ],
-    },
-    skills: {
-      eyebrow: "Skills",
-      title: "A focused, production-ready toolkit",
-      description:
-        "Grouped by what I actually ship - from Unity systems to UI, integrations, optimization, and AI-assisted workflows.",
-      groups: [
-        {
-          title: "Unity 2D/3D & C#",
-          description: "Commercial Unity development across gameplay systems, prototypes, and production features.",
-          tags: ["Unity", "C#", "2D/3D", "Git"],
-        },
-        {
-          title: "Mobile Builds",
-          description: "Android and iOS build preparation, testing, optimization, and release-focused stability.",
-          tags: ["Android", "iOS", "Performance", "Game Testing"],
-        },
-        {
-          title: "VR/XR Development",
-          description: "Spatial interaction, headset testing, object placement, comfort, and natural player behavior.",
-          tags: ["VR/XR", "Meta Quest", "Spatial UX"],
-        },
-        {
-          title: "UI, Animation & Game Feel",
-          description: "Responsive UI, polished transitions, animations, sound hooks, and clear player feedback.",
-          tags: ["UGUI", "DOTween", "Spine", "UI/UX"],
-        },
-        {
-          title: "Architecture & Services",
-          description: "Maintainable systems built around SOLID principles, dependency injection, and clear project structure.",
-          tags: ["SOLID", "Zenject", "Refactoring", "Code Review"],
-        },
-        {
-          title: "SDKs & Monetization",
-          description: "Analytics, ads, SDK/NDK packages, backend interaction, and client-server feature support.",
-          tags: ["Firebase", "Game Analytics", "AppMetrica", "AdMob", "AppLovin"],
-        },
-        {
-          title: "AI-assisted Development",
-          description:
-            "Using AI tools for codebase analysis, debugging, refactoring, routine code, and architecture validation.",
-          tags: ["Codex", "Claude Code", "ChatGPT", "Architecture Review"],
-        },
-      ],
+        "The strongest commercial experience is grouped into focused case studies: mobile tycoon production work and a spatial VR football mechanic.",
+      pc: {
+        eyebrow: "Commercial mobile case study",
+        title: "PC Creator Series",
+        subtitle:
+          "Commercial Unity mobile simulator work across PC Creator 2, PC Creator 3 and PC Creator 3 Pro, focused on production systems, mobile UI, integrations and stable store builds.",
+        mediaLabel: "Mobile production reel",
+        mediaAlt: "PC Creator Series project covers",
+        platformLabel: "Platforms",
+        roleLabel: "Role",
+        responsibilitiesLabel: "Responsibilities",
+        challengesLabel: "Production challenges",
+        contributionLabel: "Contribution",
+        technologiesLabel: "Technologies",
+        projectsLabel: "Individual releases",
+        storeLinksLabel: "Store links",
+        platforms: "Android / iOS",
+        role: "Unity C# Developer, commercial mobile game production",
+        responsibilities: [
+          "Gameplay systems and feature logic",
+          "Production UI flows and player-facing feedback",
+          "Firebase, analytics, monetization and SDK/NDK integrations",
+          "Android and iOS build preparation, debugging and maintenance",
+        ],
+        challenges: [
+          "Keeping mobile UI, integrations and gameplay systems stable across store builds",
+          "Supporting commercial production needs without adding unnecessary complexity",
+          "Debugging, optimization and release-focused maintenance",
+        ],
+        contribution:
+          "Helped turn PC Creator work into release-ready Unity mobile products by supporting gameplay, UI, integrations, stability and build delivery.",
+        technologies: ["Unity", "C#", "Android", "iOS", "Firebase", "Game Analytics", "AdMob", "AppLovin"],
+      },
+      vr: {
+        eyebrow: "VR/XR case study",
+        title: "VR Football Penalty",
+        subtitle:
+          "A room-scale VR football penalty prototype where shot height, direction and angle are controlled by real body movement around the ball.",
+        mediaLabel: "Room-scale interaction",
+        mediaAlt: "VR Football Penalty gameplay preview in a stadium",
+        platformLabel: "Platform",
+        roleLabel: "Core mechanic",
+        responsibilitiesLabel: "Interaction work",
+        challengesLabel: "Challenges solved",
+        contributionLabel: "Technical contribution",
+        technologiesLabel: "Technologies",
+        projectsLabel: "Gameplay focus",
+        storeLinksLabel: "Links",
+        platforms: "VR / XR, headset-tested interaction",
+        role: "Natural penalty aiming through player position and body movement",
+        responsibilities: [
+          "Spatial player movement around the ball",
+          "Shot direction, height and angle control",
+          "Room-scale gameplay feel and readable player feedback",
+          "VR-focused testing and iteration",
+        ],
+        challenges: [
+          "Making the mechanic understandable without flat-screen UI",
+          "Keeping aiming physical, readable and comfortable",
+          "Balancing responsive movement with stable interaction logic",
+        ],
+        contribution:
+          "Built the core VR interaction loop so the player can aim naturally by stepping forward, backward, left and right before taking the penalty.",
+        technologies: ["Unity", "C#", "VR/XR", "Room-scale", "Gameplay"],
+      },
     },
     projects: {
-      eyebrow: "Projects",
-      title: "Selected work",
-      description: "Selected Unity games across PC Creator mobile tycoon projects and room-scale VR football gameplay.",
       card: {
         gameplayVideoTitle: "{title} gameplay video",
         previewAlt: "{title} preview",
@@ -308,79 +341,17 @@ export const translations: Record<Language, Translation> = {
         "vr-football-penalty": {
           description:
             "Room-scale VR football penalty experience where shot height, direction, and angle are controlled by real body movement. The player steps forward, backward, left, and right around the ball to aim the kick naturally before taking the penalty.",
-          tags: ["Unity", "C#", "VR/XR", "Room-Scale", "Gameplay"],
+          tags: ["Unity", "C#", "VR/XR", "Room-scale", "Gameplay"],
         },
       },
-    },
-    achievements: {
-      eyebrow: "Achievements",
-      title: "Achievements",
-      description:
-        "Professional learning milestones connected to game design, production thinking, and practical Unity project work.",
-      items: {
-        "game-designer-certificate": {
-          title: "Game Designer Certificate",
-          description:
-            "Completed a practical game design course covering game documentation, interface design, market analysis, and basic gameplay balance.",
-          imageAlt: "Game Designer certificate awarded to Besarab Dementiy",
-          tags: ["Game Design", "Documentation", "UI Design", "Balance"],
-        },
-      },
-    },
-    workflow: {
-      eyebrow: "Workflow",
-      title: "How I work",
-      description: "A repeatable process that keeps quality high from first idea to polished build.",
-      steps: [
-        {
-          step: "01",
-          title: "Plan architecture and scope",
-          description: "Clarify gameplay goals, platform constraints, project structure, and the technical path before building.",
-        },
-        {
-          step: "02",
-          title: "Build Unity gameplay systems",
-          description:
-            "Implement gameplay, UI, services, saves, events, and game states with readable C# and maintainable boundaries.",
-        },
-        {
-          step: "03",
-          title: "Integrate SDKs and services",
-          description:
-            "Connect analytics, ads, SDK/NDK packages, monetization, backend interaction, and client-server features.",
-        },
-        {
-          step: "04",
-          title: "Test, optimize, and stabilize",
-          description: "Profile performance, fix edge cases, verify mobile or headset behavior, and prepare stable builds.",
-        },
-        {
-          step: "05",
-          title: "Use AI as a technical teammate",
-          description:
-            "Speed up analysis, debugging, refactoring, and architecture validation while keeping final ownership of decisions.",
-        },
-      ],
-    },
-    contact: {
-      eyebrow: "Contact",
-      title: "Let's build something playable, polished, and actually fun.",
-      description:
-        "Have a mobile game, VR/XR concept, or Unity project that needs a reliable developer? I'd love to hear about it.",
-      emailMe: "Email me",
-      downloadCv: "Download CV",
-      downloadCvAria: "Download Dementiy Besarab CV",
-      telegramLabel: "Telegram:",
-    },
-    footer: {
-      builtWith: "Built with Next.js",
     },
     gamesLab: {
-      heading: "Games Lab",
-      intro: "A collection of Unity mobile game prototypes and gameplay concepts.",
+      eyebrow: "Games Lab",
+      heading: "Prototype shelf, not a template grid.",
+      intro: "Unity mobile prototypes, solo experiments and gameplay concepts.",
       description:
-        "These prototypes explore different casual game mechanics, mobile UI flows, fast gameplay iteration, puzzle logic, arcade gameplay, and experimental ideas built in Unity.",
-      viewButton: "View",
+        "These smaller projects explore casual mechanics, mobile UI flows, puzzle logic, arcade feel, fast iteration and experimental Unity gameplay.",
+      viewButton: "Open gallery",
       noPreview: "No preview",
       noScreenshots: "No screenshots found for this game.",
       closeGalleryAria: "Close {title} gallery",
@@ -461,6 +432,153 @@ export const translations: Record<Language, Translation> = {
         },
       },
     },
+    underHood: {
+      eyebrow: "Under the Hood",
+      title: "Gameplay is only half the work. The other half is keeping systems understandable.",
+      description:
+        "This section visualizes the production architecture skills already present in the portfolio: services, events, UI, saves, analytics, optimization and VR interaction loops.",
+      flowLabel: "Unity feature flow",
+      flow: [
+        { label: "Input", description: "Touch, controller, headset movement, player intent" },
+        { label: "Gameplay Systems", description: "Mechanics, states, progression, interaction rules" },
+        { label: "Events / State", description: "Clear boundaries between feature logic and presentation" },
+        { label: "UI / Audio / Saves / Analytics", description: "Feedback, persistence, integrations and release data" },
+      ],
+      topicsLabel: "Production topics",
+      topics: [
+        {
+          title: "Modular gameplay",
+          description: "Feature logic separated enough to debug, tune and ship without rewriting unrelated systems.",
+          technologies: ["C#", "SOLID", "State machines", "Events"],
+        },
+        {
+          title: "Services and SDKs",
+          description: "Firebase, analytics, ads and backend-facing packages connected with release stability in mind.",
+          technologies: ["Firebase", "Game Analytics", "AppMetrica", "AdMob", "AppLovin"],
+        },
+        {
+          title: "Mobile and VR constraints",
+          description: "Interaction and performance choices shaped by mobile devices, store builds and headset comfort.",
+          technologies: ["Android", "iOS", "VR/XR", "Optimization"],
+        },
+      ],
+      codeLabel: "Small pattern",
+      codeTitle: "Event-driven UI update",
+      codeLines: [
+        "public void Construct(IWallet wallet, IAnalytics analytics)",
+        "{",
+        "    wallet.Changed += RefreshBalance;",
+        "    analytics.Track(\"shop_opened\");",
+        "}",
+      ],
+    },
+    toolkit: {
+      eyebrow: "Experience and Toolkit",
+      title: "A compact toolbelt for production Unity work.",
+      description: "Select a category to see the working context instead of scanning another wall of badges.",
+      categories: [
+        {
+          title: "Unity and C#",
+          description: "Commercial Unity development across gameplay systems, prototypes and production features.",
+          technologies: ["Unity", "C#", "2D/3D", "Git"],
+        },
+        {
+          title: "Mobile",
+          description: "Android and iOS build preparation, testing, optimization and release-focused stability.",
+          technologies: ["Android", "iOS", "Performance", "Game testing"],
+        },
+        {
+          title: "VR/XR",
+          description: "Spatial interaction, headset-tested behavior, object placement and natural player movement.",
+          technologies: ["VR/XR", "Meta Quest", "Room-scale", "Spatial UX"],
+        },
+        {
+          title: "Gameplay",
+          description: "Mechanics, game states, progression systems, player feedback and fast iteration loops.",
+          technologies: ["Gameplay systems", "State machines", "Events", "Balancing"],
+        },
+        {
+          title: "UI",
+          description: "Responsive Unity UI, transitions, animation hooks and clear player-facing flows.",
+          technologies: ["UGUI", "DOTween", "Spine", "UI/UX"],
+        },
+        {
+          title: "Architecture",
+          description: "Maintainable systems using clear boundaries, dependency injection and pragmatic refactoring.",
+          technologies: ["SOLID", "Zenject", "Services", "Code review"],
+        },
+        {
+          title: "SDKs and Services",
+          description: "Analytics, ads, SDK/NDK packages, monetization tools and client-server feature support.",
+          technologies: ["Firebase", "Game Analytics", "AppMetrica", "AdMob", "AppLovin"],
+        },
+        {
+          title: "Tools",
+          description: "AI is used as a support tool for analysis, debugging, repetitive automation and workflow speed.",
+          technologies: ["Codex", "Claude Code", "ChatGPT", "Automation"],
+        },
+      ],
+    },
+    about: {
+      eyebrow: "About",
+      title: "A Unity developer who can move from feature idea to release work.",
+      paragraphs: [
+        "I am a Unity C# Developer with 3+ years of commercial and freelance experience building mobile games, VR/XR projects and interactive Unity applications.",
+        "My work covers gameplay systems, production UI, Android/iOS build preparation, optimization, SDK integrations, analytics, monetization, client-server features and stable delivery.",
+        "I care about maintainable architecture because production game work changes constantly: systems need to be readable, testable enough to trust and simple enough to ship.",
+      ],
+      stats: [
+        { value: "3+", label: "Years experience" },
+        { value: "Android / iOS", label: "Mobile releases" },
+        { value: "VR / XR", label: "Interactive projects" },
+        { value: "CREATY Games", label: "Recent studio role" },
+      ],
+      availabilityLabel: "Available for",
+      availabilityItems: [
+        "Full-time Unity Developer roles",
+        "Part-time or contract Unity work",
+        "Mobile game production",
+        "VR/XR prototypes",
+        "Project stabilization and bug fixing",
+      ],
+      aiNote:
+        "AI tools support codebase analysis, debugging, refactoring and repetitive automation; the main specialization remains Unity C# development.",
+      certificate: {
+        label: "Game design learning",
+        title: "Game Designer Certificate",
+        description:
+          "Completed a practical game design course covering game documentation, interface design, market analysis and basic gameplay balance.",
+        imageAlt: "Game Designer certificate awarded to Besarab Dementiy",
+      },
+    },
+    achievements: {
+      eyebrow: "Achievements",
+      title: "Achievements",
+      description:
+        "Professional learning milestones connected to game design, production thinking, and practical Unity project work.",
+      items: {
+        "game-designer-certificate": {
+          title: "Game Designer Certificate",
+          description:
+            "Completed a practical game design course covering game documentation, interface design, market analysis, and basic gameplay balance.",
+          imageAlt: "Game Designer certificate awarded to Besarab Dementiy",
+          tags: ["Game Design", "Documentation", "UI Design", "Balance"],
+        },
+      },
+    },
+    contact: {
+      eyebrow: "Contact",
+      title: "Let's build something worth playing.",
+      description:
+        "Have a mobile game, VR/XR concept or Unity project that needs production-minded execution? Send the context and I will respond with the most useful next step.",
+      emailMe: "Email me",
+      downloadCv: "Download CV",
+      downloadCvAria: "Download Dementiy Besarab CV",
+      telegramLabel: "Telegram:",
+    },
+    footer: {
+      builtWith: "Built with Next.js",
+    },
   },
   ua: {
     languageSwitcher: {
@@ -468,170 +586,360 @@ export const translations: Record<Language, Translation> = {
     },
     nav: {
       items: [
+        { label: "Роботи", href: "#work" },
+        { label: "Games Lab", href: "#games-lab" },
         { label: "Про мене", href: "#about" },
-        { label: "Що я роблю", href: "#services" },
-        { label: "Навички", href: "#skills" },
-        { label: "Проєкти", href: "#projects" },
-        { label: "Досягнення", href: "#achievements" },
-        { label: "Процес", href: "#workflow" },
         { label: "Контакти", href: "#contact" },
       ],
-      contact: "Зв'язатися",
+      contact: "Контакти",
+      downloadCv: "CV",
+      downloadCvAria: "Завантажити CV Dementiy Besarab",
+      availability: "Доступний",
+      openMenuAria: "Відкрити меню навігації",
+      closeMenuAria: "Закрити меню навігації",
+    },
+    common: {
+      email: "Email",
+      linkedin: "LinkedIn",
+      telegram: "Telegram",
+      externalLinkAria: "Відкрити {label} у новій вкладці",
+      playMedia: "Відтворити медіа",
+      selected: "Вибрано",
     },
     profile: {
-      role: "Unity Developer | C# | Мобільні ігри | VR/XR",
+      role: "Unity C# Developer",
+      compactRole: "Unity C# / Mobile / VR-XR",
       subtitle:
-        "Unity Developer із понад 3 роками комерційного та фриланс-досвіду у створенні мобільних ігор, VR/XR-проєктів та інтерактивних Unity-застосунків від прототипу до релізу.",
-      badges: ["Unity 2D/3D", "C#", "Android / iOS", "VR / XR", "AI-assisted розробка"],
+        "Unity C# Developer, який фокусується на мобільних іграх, VR/XR-досвідах, production-ready gameplay-системах, UI, інтеграціях, архітектурі та оптимізації.",
+      availability: "Зараз відкритий до full-time, part-time та проєктної Unity-роботи.",
+      badges: ["Мобільні ігри", "VR/XR", "Gameplay-системи", "Production UI", "SDK-інтеграції"],
     },
     hero: {
-      status: "Відкритий до пропозицій",
-      availableFor: "Відкритий до:",
-      funPortfolio3d: "3D Fun Portfolio",
-      availabilityItems: [
-        "Full-time ролі Unity Developer",
-        "Part-time / контрактна робота з Unity",
-        "Розробка мобільних ігор",
-        "VR/XR прототипи",
-        "Стабілізація проєктів і виправлення багів",
-        "Gameplay-системи, UI, SDK-інтеграції, оптимізація та підготовка білдів",
-      ],
-      viewProjects: "Переглянути проєкти",
-      contactMe: "Зв'язатися",
+      eyebrow: "Playable Developer Portfolio",
+      headline: "Я створюю Unity-ігри, які відчуваються добре і доходять до релізу.",
+      subtitle:
+        "Unity C# Developer з фокусом на мобільні ігри, VR/XR-досвіди та production-ready gameplay-системи.",
+      primaryCta: "Переглянути роботи",
+      contactCta: "Обговорити проєкт",
       downloadCv: "Завантажити CV",
-      downloadCvAria: "Завантажити CV Dementiy Besarab",
-    },
-    about: {
-      eyebrow: "Про мене",
-      title: "Unity-розробка від прототипу до релізу",
-      paragraphs: [
-        "Я Unity Developer із понад 3 роками комерційного та фриланс-досвіду у створенні мобільних ігор, VR/XR-проєктів та інтерактивних застосунків на Unity і C#.",
-        "Моя робота охоплює gameplay-системи, реалізацію UI, підготовку Android/iOS білдів, оптимізацію, SDK-інтеграції, аналітику, монетизацію, клієнт-серверні функції та стабільну production-доставку.",
-        "Я використовую AI-інструменти, зокрема Codex, Claude Code і ChatGPT, для аналізу, дебагу, рефакторингу та перевірки архітектури, зберігаючи відповідальність за технічні рішення й фінальну якість коду.",
-      ],
+      socialLabel: "Канали зв'язку",
+      mediaTitle: "Комерційний mobile + room-scale VR",
+      mediaSubtitle: "Gameplay-медіа з релізних і прототипних Unity-проєктів.",
+      mediaAlt: "Кінематографічна композиція з VR-футболом і прев'ю мобільних ігор",
+      portfolio3d: "3D Fun Portfolio",
       stats: [
-        { value: "3+", label: "Роки досвіду" },
-        { value: "Android / iOS", label: "Мобільні білди" },
-        { value: "VR / XR", label: "Інтерактивні проєкти" },
-        { value: "CREATY Games", label: "Остання студійна роль" },
+        { value: "3+", label: "Роки комерційної та freelance Unity-роботи" },
+        { value: "Android / iOS", label: "Підтримка mobile build та release" },
+        { value: "VR / XR", label: "Прототипи просторової взаємодії" },
       ],
     },
-    services: {
-      eyebrow: "Що я роблю",
-      title: "Чим можу допомогти вашому проєкту",
+    work: {
+      eyebrow: "Вибрані комерційні роботи",
+      title: "Production Unity-досвід, поданий як системи, а не набір карток.",
       description:
-        "Сфокусована Unity-підтримка для прототипів, production-фіч, мобільних релізів, VR/XR-робіт і наявних проєктів, яким потрібна стабільність.",
-      items: [
-        {
-          title: "Gameplay-системи",
-          description:
-            "Створюю та підтримую основні gameplay-механіки, ігрові стани, взаємодію гравця, системи прогресу та feature-логіку на Unity/C#.",
-        },
-        {
-          title: "Розробка мобільних ігор",
-          description:
-            "Працюю з Android/iOS Unity-проєктами, UI-флоу, продуктивністю, підготовкою білдів, тестуванням і стабільністю перед релізом.",
-        },
-        {
-          title: "VR/XR прототипи",
-          description:
-            "Створюю й полірую VR/XR-взаємодії, просторовий gameplay, Meta Quest прототипи та gameplay-досвід, перевірений у headset.",
-        },
-        {
-          title: "UI, анімація та game feel",
-          description:
-            "Реалізую адаптивні UI, відполіровані переходи, DOTween-анімації, зрозумілий feedback і плавні player-facing флоу.",
-        },
-        {
-          title: "SDK, аналітика та монетизація",
-          description:
-            "Інтегрую Firebase, аналітику, рекламу, SDK/NDK пакети, інструменти монетизації та клієнт-серверні функції.",
-        },
-        {
-          title: "Стабілізація проєктів і виправлення багів",
-          description:
-            "Аналізую наявні Unity-проєкти, виправляю баги, приводжу крихкі системи до ладу, покращую структуру, оптимізую продуктивність і готую стабільні білди.",
-        },
-      ],
-    },
-    skills: {
-      eyebrow: "Навички",
-      title: "Сфокусований інструментарій для production",
-      description:
-        "Згруповано за тим, що я реально доводжу до релізу: Unity-системи, UI, інтеграції, оптимізація та AI-assisted workflows.",
-      groups: [
-        {
-          title: "Unity 2D/3D & C#",
-          description: "Комерційна Unity-розробка gameplay-систем, прототипів і production-фіч.",
-          tags: ["Unity", "C#", "2D/3D", "Git"],
-        },
-        {
-          title: "Мобільні білди",
-          description: "Підготовка Android та iOS білдів, тестування, оптимізація і стабільність перед релізом.",
-          tags: ["Android", "iOS", "Оптимізація", "Тестування ігор"],
-        },
-        {
-          title: "VR/XR розробка",
-          description: "Просторова взаємодія, тестування у headset, розміщення об'єктів, комфорт і природна поведінка гравця.",
-          tags: ["VR/XR", "Meta Quest", "Spatial UX"],
-        },
-        {
-          title: "UI, анімація та game feel",
-          description: "Адаптивний UI, відполіровані переходи, анімації, sound hooks і зрозумілий feedback для гравця.",
-          tags: ["UGUI", "DOTween", "Spine", "UI/UX"],
-        },
-        {
-          title: "Архітектура та сервіси",
-          description:
-            "Підтримувані системи на базі SOLID-принципів, dependency injection і зрозумілої структури проєкту.",
-          tags: ["SOLID", "Zenject", "Рефакторинг", "Рев'ю коду"],
-        },
-        {
-          title: "SDK та монетизація",
-          description: "Аналітика, реклама, SDK/NDK пакети, backend-взаємодія та підтримка клієнт-серверних функцій.",
-          tags: ["Firebase", "Game Analytics", "AppMetrica", "AdMob", "AppLovin"],
-        },
-        {
-          title: "AI-assisted розробка",
-          description:
-            "Використання AI-інструментів для аналізу кодової бази, дебагу, рефакторингу, routine-коду та перевірки архітектури.",
-          tags: ["Codex", "Claude Code", "ChatGPT", "Архітектурне рев'ю"],
-        },
-      ],
+        "Найсильніший комерційний досвід згруповано в case studies: mobile tycoon production та spatial VR football mechanic.",
+      pc: {
+        eyebrow: "Комерційний mobile case study",
+        title: "PC Creator Series",
+        subtitle:
+          "Комерційна Unity-робота над мобільними симуляторами PC Creator 2, PC Creator 3 і PC Creator 3 Pro з фокусом на production systems, mobile UI, інтеграції та стабільні store builds.",
+        mediaLabel: "Mobile production reel",
+        mediaAlt: "Обкладинки проєктів PC Creator Series",
+        platformLabel: "Платформи",
+        roleLabel: "Роль",
+        responsibilitiesLabel: "Зони відповідальності",
+        challengesLabel: "Production-виклики",
+        contributionLabel: "Внесок",
+        technologiesLabel: "Технології",
+        projectsLabel: "Окремі релізи",
+        storeLinksLabel: "Store links",
+        platforms: "Android / iOS",
+        role: "Unity C# Developer, commercial mobile game production",
+        responsibilities: [
+          "Gameplay-системи та feature logic",
+          "Production UI flows і player-facing feedback",
+          "Firebase, analytics, monetization та SDK/NDK інтеграції",
+          "Підготовка Android/iOS builds, debugging і maintenance",
+        ],
+        challenges: [
+          "Підтримувати стабільність mobile UI, integrations і gameplay systems у store builds",
+          "Закривати production-потреби без зайвої складності в системах",
+          "Debugging, optimization і release-focused maintenance",
+        ],
+        contribution:
+          "Допомагав доводити PC Creator work до release-ready Unity mobile products через gameplay, UI, integrations, stability та build delivery.",
+        technologies: ["Unity", "C#", "Android", "iOS", "Firebase", "Game Analytics", "AdMob", "AppLovin"],
+      },
+      vr: {
+        eyebrow: "VR/XR case study",
+        title: "VR Football Penalty",
+        subtitle:
+          "Room-scale VR prototype футбольного пенальті, де висота, напрямок і кут удару контролюються реальним рухом тіла навколо м'яча.",
+        mediaLabel: "Room-scale interaction",
+        mediaAlt: "Gameplay preview VR Football Penalty на стадіоні",
+        platformLabel: "Платформа",
+        roleLabel: "Core mechanic",
+        responsibilitiesLabel: "Interaction work",
+        challengesLabel: "Вирішені виклики",
+        contributionLabel: "Технічний внесок",
+        technologiesLabel: "Технології",
+        projectsLabel: "Gameplay focus",
+        storeLinksLabel: "Links",
+        platforms: "VR / XR, headset-tested interaction",
+        role: "Natural penalty aiming через позицію гравця і рух тіла",
+        responsibilities: [
+          "Просторовий рух гравця навколо м'яча",
+          "Контроль direction, height та angle удару",
+          "Room-scale gameplay feel і зрозумілий player feedback",
+          "VR-focused testing та ітерації",
+        ],
+        challenges: [
+          "Зробити механіку зрозумілою без flat-screen UI",
+          "Зберегти прицілювання фізичним, читабельним і комфортним",
+          "Поєднати responsive movement зі стабільною interaction logic",
+        ],
+        contribution:
+          "Побудував core VR interaction loop, щоб гравець міг природно прицілюватися, рухаючись вперед, назад, ліворуч і праворуч перед ударом.",
+        technologies: ["Unity", "C#", "VR/XR", "Room-scale", "Gameplay"],
+      },
     },
     projects: {
-      eyebrow: "Проєкти",
-      title: "Вибрані роботи",
-      description:
-        "Вибрані Unity-проєкти: мобільні tycoon-ігри PC Creator та room-scale VR football gameplay.",
       card: {
-        gameplayVideoTitle: "Відео gameplay для {title}",
+        gameplayVideoTitle: "{title} gameplay video",
         previewAlt: "Прев'ю {title}",
         noPreview: "Немає прев'ю",
-        gameplayPreview: "Прев'ю gameplay",
+        gameplayPreview: "Gameplay preview",
         openProject: "Відкрити проєкт",
       },
       items: {
         "pc-creator-3": {
           description:
-            "Робота над мобільним tycoon-симулятором PC Creator 3 з фокусом на production Unity-системах, мобільному UI, стабільності білдів, аналітиці, монетизації та релізній Android/iOS-доставці.",
-          tags: ["Unity", "C#", "Мобільна розробка", "Android/iOS", "Tycoon"],
+            "Робота над mobile tycoon simulator PC Creator 3 з фокусом на production Unity systems, mobile UI, build stability, analytics, monetization та release-ready Android/iOS delivery.",
+          tags: ["Unity", "C#", "Mobile", "Android/iOS", "Tycoon"],
         },
         "pc-creator-3-pro": {
           description:
-            "Преміальний мобільний simulation-проєкт у серії PC Creator: Unity gameplay, UI-флоу, SDK-інтеграція, мобільна оптимізація та підтримка стабільних store-білдів.",
-          tags: ["Unity", "C#", "Мобільна розробка", "Симуляція", "SDK"],
+            "Premium mobile simulation project у PC Creator series: Unity gameplay, UI flow, SDK integration, mobile optimization і stable store build support.",
+          tags: ["Unity", "C#", "Mobile", "Simulation", "SDKs"],
         },
         "pc-creator-2": {
           description:
-            "Комерційна Unity-робота над мобільним симулятором із лінійки PC Creator від CREATY: gameplay та UI-системи, підготовка Android/iOS білдів, Firebase-аналітика, SDK монетизації, SDK/NDK пакети та релізна стабільність.",
-          tags: ["Unity", "C#", "Android/iOS", "Firebase", "Ads SDK"],
+            "Комерційна Unity-робота над mobile simulator із лінійки PC Creator від CREATY: gameplay та UI systems, Android/iOS build preparation, Firebase analytics, monetization SDKs, SDK/NDK packages і release stability.",
+          tags: ["Unity", "C#", "Android/iOS", "Firebase", "Ads SDKs"],
         },
         "vr-football-penalty": {
           description:
-            "Room-scale VR-досвід футбольного пенальті, де висота, напрямок і кут удару контролюються реальним рухом тіла. Гравець рухається вперед, назад, ліворуч і праворуч навколо м'яча, щоб природно прицілитися перед ударом.",
+            "Room-scale VR football penalty experience, де height, direction і angle удару керуються реальним рухом тіла. Гравець рухається вперед, назад, ліворуч і праворуч навколо м'яча, щоб природно прицілитися перед ударом.",
           tags: ["Unity", "C#", "VR/XR", "Room-scale", "Gameplay"],
         },
+      },
+    },
+    gamesLab: {
+      eyebrow: "Games Lab",
+      heading: "Полиця прототипів, а не шаблонна grid-секція.",
+      intro: "Unity mobile prototypes, solo experiments і gameplay concepts.",
+      description:
+        "Менші проєкти досліджують casual mechanics, mobile UI flows, puzzle logic, arcade feel, швидку ітерацію та experimental Unity gameplay.",
+      viewButton: "Відкрити галерею",
+      noPreview: "Немає прев'ю",
+      noScreenshots: "Для цієї гри скриншоти не знайдено.",
+      closeGalleryAria: "Закрити галерею {title}",
+      screenshotAlt: "{title}, скриншот {index}",
+      gameplayPreviewAlt: "Gameplay preview {title}",
+      items: {
+        "2048": {
+          shortDescription:
+            "Класична числова головоломка, побудована на об'єднанні плиток і досягненні максимального рахунку.",
+          fullDescription:
+            "Класичний mobile puzzle prototype у стилі 2048 з фокусом на tile merging, score progression і простий casual gameplay.",
+          genre: "Number Puzzle / Casual",
+        },
+        "bvda-match-arena": {
+          shortDescription:
+            "Мінігра з американського футболу з двома режимами: field goals і точні паси партнерам.",
+          fullDescription:
+            "Mobile American football prototype із двома gameplay modes: ударом по м'ячу в ціль і точними пасами партнерам по команді.",
+          genre: "Sports / Arcade",
+        },
+        cyberyolk: {
+          shortDescription: "Класична Minesweeper-style головоломка, переосмислена в яскравому cyber-themed стилі.",
+          fullDescription:
+            "Cyber-themed mobile puzzle prototype у стилі Minesweeper з фокусом на grid logic, risk-based choices і clean mobile UI feedback.",
+          genre: "Puzzle / Logic",
+        },
+        darksummoning: {
+          shortDescription:
+            "Reaction-based arcade, де гравець ловить лише правильні предмети, щоб набрати більше очок.",
+          fullDescription:
+            "Швидкий arcade prototype, у якому гравець має швидко реагувати, збирати правильні предмети, уникати помилок і набирати вищий рахунок.",
+          genre: "Arcade / Reaction",
+        },
+        feathermoon: {
+          shortDescription: "Класична mobile Sudoku puzzle з обмеженою кількістю життів і clean number-based gameplay.",
+          fullDescription:
+            "FeatherMoon - класичний mobile puzzle prototype у стилі Sudoku. Гравець розв'язує сітку, розміщуючи правильні числа, маючи лише 3 життя для проходження рівня. Гра фокусується на логіці, уважних рішеннях і простій mobile-friendly взаємодії.",
+          genre: "Sudoku / Logic Puzzle",
+        },
+        fistcraft: {
+          shortDescription:
+            "Fighting game про правильний вибір attacks і blocks для перемоги. Підтримує двох гравців на одному телефоні.",
+          fullDescription:
+            "Local fighting prototype, де гравці використовують правильні attacks, blocks і timing, щоб перемогти суперника. У гру можуть грати двоє людей на одному телефоні.",
+          genre: "Fighting / Local Multiplayer",
+        },
+        lexpunk: {
+          shortDescription: "Memory quiz, у якому гравець запам'ятовує слова й об'єкти, щоб відповідати правильно.",
+          fullDescription:
+            "Memory-based quiz prototype з фокусом на запам'ятовуванні слів, об'єктів і visual details, а потім виборі правильних відповідей.",
+          genre: "Quiz / Memory",
+        },
+        meowtubes: {
+          shortDescription:
+            "Sorting puzzle, де котів потрібно переміщати між tubes за кольором. Різні кольори не можна змішувати неправильно.",
+          fullDescription:
+            "Mobile sorting puzzle prototype, де гравець переміщує котів між tubes і групує їх за кольором, дотримуючись правил розміщення.",
+          genre: "Sorting Puzzle / Casual",
+        },
+        "queue-dash": {
+          shortDescription:
+            "Швидка casual game, де гравець обирає найшвидшу чергу до каси, щоб фінішувати першим.",
+          fullDescription:
+            "Casual decision-making prototype, де гравець має вибрати найшвидшу чергу, уникати повільних ліній і першим дістатися каси.",
+          genre: "Casual / Decision Game",
+        },
+        "tamagichi-tramp": {
+          shortDescription:
+            "Virtual pet-style game, де гравець підтримує его персонажа подарунками та оновленнями офісу.",
+          fullDescription:
+            "Virtual pet-style prototype, де гравець дарує подарунки, покращує офіс і підтримує високе его персонажа через upgrades та interaction.",
+          genre: "Virtual Pet / Simulation",
+        },
+        valdrisrun: {
+          shortDescription:
+            "Vampire runner, де гравець виживає якомога довше, уникає небезпек, збирає монети та перетворюється на кажана.",
+          fullDescription:
+            "Horizontal runner prototype про вампіра, який намагається вижити якомога довше. Гравець уникає obstacles, збирає coins і може перетворюватися на кажана, щоб летіти крізь level.",
+          genre: "Runner / Platformer / Arcade",
+        },
+      },
+    },
+    underHood: {
+      eyebrow: "Under the Hood",
+      title: "Gameplay - це лише половина роботи. Друга половина - тримати системи зрозумілими.",
+      description:
+        "Ця секція показує production architecture skills, які вже є в портфоліо: services, events, UI, saves, analytics, optimization і VR interaction loops.",
+      flowLabel: "Unity feature flow",
+      flow: [
+        { label: "Input", description: "Touch, controller, headset movement, player intent" },
+        { label: "Gameplay Systems", description: "Mechanics, states, progression, interaction rules" },
+        { label: "Events / State", description: "Чіткі межі між feature logic і presentation" },
+        { label: "UI / Audio / Saves / Analytics", description: "Feedback, persistence, integrations і release data" },
+      ],
+      topicsLabel: "Production topics",
+      topics: [
+        {
+          title: "Modular gameplay",
+          description: "Feature logic відокремлена достатньо, щоб її було легко debug, tune і ship без переписування суміжних систем.",
+          technologies: ["C#", "SOLID", "State machines", "Events"],
+        },
+        {
+          title: "Services and SDKs",
+          description: "Firebase, analytics, ads і backend-facing packages підключаються з фокусом на release stability.",
+          technologies: ["Firebase", "Game Analytics", "AppMetrica", "AdMob", "AppLovin"],
+        },
+        {
+          title: "Mobile and VR constraints",
+          description: "Interaction та performance choices враховують mobile devices, store builds і headset comfort.",
+          technologies: ["Android", "iOS", "VR/XR", "Optimization"],
+        },
+      ],
+      codeLabel: "Small pattern",
+      codeTitle: "Event-driven UI update",
+      codeLines: [
+        "public void Construct(IWallet wallet, IAnalytics analytics)",
+        "{",
+        "    wallet.Changed += RefreshBalance;",
+        "    analytics.Track(\"shop_opened\");",
+        "}",
+      ],
+    },
+    toolkit: {
+      eyebrow: "Experience and Toolkit",
+      title: "Компактний toolbelt для production Unity-роботи.",
+      description: "Оберіть категорію, щоб побачити робочий контекст замість ще однієї стіни badges.",
+      categories: [
+        {
+          title: "Unity and C#",
+          description: "Комерційна Unity-розробка: gameplay systems, prototypes і production features.",
+          technologies: ["Unity", "C#", "2D/3D", "Git"],
+        },
+        {
+          title: "Mobile",
+          description: "Android/iOS build preparation, testing, optimization і release-focused stability.",
+          technologies: ["Android", "iOS", "Performance", "Game testing"],
+        },
+        {
+          title: "VR/XR",
+          description: "Spatial interaction, headset-tested behavior, object placement і natural player movement.",
+          technologies: ["VR/XR", "Meta Quest", "Room-scale", "Spatial UX"],
+        },
+        {
+          title: "Gameplay",
+          description: "Mechanics, game states, progression systems, player feedback і fast iteration loops.",
+          technologies: ["Gameplay systems", "State machines", "Events", "Balancing"],
+        },
+        {
+          title: "UI",
+          description: "Responsive Unity UI, transitions, animation hooks і clear player-facing flows.",
+          technologies: ["UGUI", "DOTween", "Spine", "UI/UX"],
+        },
+        {
+          title: "Architecture",
+          description: "Maintainable systems із clear boundaries, dependency injection і pragmatic refactoring.",
+          technologies: ["SOLID", "Zenject", "Services", "Code review"],
+        },
+        {
+          title: "SDKs and Services",
+          description: "Analytics, ads, SDK/NDK packages, monetization tools і client-server feature support.",
+          technologies: ["Firebase", "Game Analytics", "AppMetrica", "AdMob", "AppLovin"],
+        },
+        {
+          title: "Tools",
+          description: "AI використовується як support tool для analysis, debugging, repetitive automation і workflow speed.",
+          technologies: ["Codex", "Claude Code", "ChatGPT", "Automation"],
+        },
+      ],
+    },
+    about: {
+      eyebrow: "Про мене",
+      title: "Unity developer, який може рухати feature від ідеї до release work.",
+      paragraphs: [
+        "Я Unity C# Developer із понад 3 роками комерційного та freelance досвіду у створенні mobile games, VR/XR projects та interactive Unity applications.",
+        "Моя робота охоплює gameplay systems, production UI, Android/iOS build preparation, optimization, SDK integrations, analytics, monetization, client-server features і stable delivery.",
+        "Я ціную maintainable architecture, бо production game work постійно змінюється: системи мають бути readable, достатньо testable і простими для shipping.",
+      ],
+      stats: [
+        { value: "3+", label: "Роки досвіду" },
+        { value: "Android / iOS", label: "Mobile releases" },
+        { value: "VR / XR", label: "Interactive projects" },
+        { value: "CREATY Games", label: "Recent studio role" },
+      ],
+      availabilityLabel: "Доступний для",
+      availabilityItems: [
+        "Full-time Unity Developer roles",
+        "Part-time або contract Unity work",
+        "Mobile game production",
+        "VR/XR prototypes",
+        "Project stabilization and bug fixing",
+      ],
+      aiNote:
+        "AI tools допомагають з codebase analysis, debugging, refactoring і repetitive automation; основна спеціалізація залишається Unity C# development.",
+      certificate: {
+        label: "Game design learning",
+        title: "Game Designer Certificate",
+        description:
+          "Завершив практичний курс із game design: game documentation, interface design, market analysis і basic gameplay balance.",
+        imageAlt: "Сертифікат Game Designer, виданий Besarab Dementiy",
       },
     },
     achievements: {
@@ -641,152 +949,26 @@ export const translations: Record<Language, Translation> = {
         "Професійні навчальні milestones, пов'язані з game design, production-мисленням і практичною Unity-розробкою.",
       items: {
         "game-designer-certificate": {
-          title: "Сертифікат Game Designer",
+          title: "Game Designer Certificate",
           description:
-            "Завершив практичний курс із game design, що охоплював ігрову документацію, дизайн інтерфейсів, аналіз ринку та базовий gameplay balance.",
+            "Завершив практичний курс із game design, що охоплював game documentation, interface design, market analysis і basic gameplay balance.",
           imageAlt: "Сертифікат Game Designer, виданий Besarab Dementiy",
-          tags: ["Геймдизайн", "Документація", "UI-дизайн", "Баланс"],
+          tags: ["Game Design", "Documentation", "UI Design", "Balance"],
         },
       },
     },
-    workflow: {
-      eyebrow: "Процес",
-      title: "Як я працюю",
-      description: "Повторюваний процес, який допомагає тримати якість високою від першої ідеї до polished build.",
-      steps: [
-        {
-          step: "01",
-          title: "Планую архітектуру та scope",
-          description:
-            "Уточнюю gameplay-цілі, платформні обмеження, структуру проєкту та технічний шлях перед розробкою.",
-        },
-        {
-          step: "02",
-          title: "Будую Unity gameplay-системи",
-          description:
-            "Реалізую gameplay, UI, сервіси, saves, events і game states з читабельним C# та підтримуваними межами відповідальності.",
-        },
-        {
-          step: "03",
-          title: "Інтегрую SDK та сервіси",
-          description:
-            "Підключаю аналітику, рекламу, SDK/NDK пакети, монетизацію, backend-взаємодію та клієнт-серверні функції.",
-        },
-        {
-          step: "04",
-          title: "Тестую, оптимізую та стабілізую",
-          description:
-            "Профілюю продуктивність, виправляю edge cases, перевіряю mobile або headset behavior і готую стабільні білди.",
-        },
-        {
-          step: "05",
-          title: "Використовую AI як технічного teammate",
-          description:
-            "Прискорюю аналіз, дебаг, рефакторинг і перевірку архітектури, залишаючи фінальну відповідальність за рішення за собою.",
-        },
-      ],
-    },
     contact: {
       eyebrow: "Контакти",
-      title: "Створімо щось іграбельне, відполіроване й справді захопливе.",
+      title: "Створімо щось, у що хочеться грати.",
       description:
-        "Маєте мобільну гру, VR/XR-концепт або Unity-проєкт, якому потрібен надійний розробник? Буду радий почути деталі.",
+        "Маєте mobile game, VR/XR concept або Unity project, якому потрібне production-minded виконання? Надішліть контекст, і я відповім із найкориснішим наступним кроком.",
       emailMe: "Написати email",
       downloadCv: "Завантажити CV",
       downloadCvAria: "Завантажити CV Dementiy Besarab",
       telegramLabel: "Telegram:",
     },
     footer: {
-      builtWith: "Створено на Next.js",
-    },
-    gamesLab: {
-      heading: "Ігрова лабораторія",
-      intro: "Колекція Unity-прототипів мобільних ігор та gameplay-концептів.",
-      description:
-        "Ці прототипи досліджують різні casual-механіки, мобільні UI-флоу, швидку gameplay-ітерацію, puzzle-логіку, аркадний gameplay та експериментальні ідеї, створені в Unity.",
-      viewButton: "Переглянути",
-      noPreview: "Немає прев'ю",
-      noScreenshots: "Для цієї гри скриншоти не знайдено.",
-      closeGalleryAria: "Закрити галерею {title}",
-      screenshotAlt: "{title}, скриншот {index}",
-      gameplayPreviewAlt: "Прев'ю gameplay {title}",
-      items: {
-        "2048": {
-          shortDescription:
-            "Класична числова головоломка, побудована на об'єднанні плиток і досягненні максимально можливого рахунку.",
-          fullDescription:
-            "Класичний мобільний puzzle-прототип у стилі 2048 з фокусом на об'єднанні плиток, прогресії рахунку та простому casual gameplay.",
-          genre: "Числова головоломка / Casual",
-        },
-        "bvda-match-arena": {
-          shortDescription:
-            "Мінігра з американського футболу з двома режимами: забивання field goals і точні паси партнерам.",
-          fullDescription:
-            "Мобільний прототип з американського футболу з двома gameplay-режимами: ударом по м'ячу в ціль і точними пасами партнерам по команді.",
-          genre: "Спорт / Аркада",
-        },
-        cyberyolk: {
-          shortDescription:
-            "Класична головоломка у стилі Minesweeper, переосмислена у яскравому cyber-themed візуальному стилі.",
-          fullDescription:
-            "Cyber-themed мобільний puzzle-прототип у стилі Minesweeper з фокусом на grid logic, risk-based choices і чистому mobile UI feedback.",
-          genre: "Головоломка / Логіка",
-        },
-        darksummoning: {
-          shortDescription:
-            "Reaction-based аркада, де гравець ловить лише правильні предмети, щоб набрати більше очок.",
-          fullDescription:
-            "Швидкий arcade-прототип, у якому гравець має швидко реагувати, збирати лише правильні предмети, уникати помилок і набирати вищий рахунок.",
-          genre: "Аркада / Реакція",
-        },
-        feathermoon: {
-          shortDescription: "Класична мобільна Sudoku-головоломка з обмеженою кількістю життів і чистим number-based gameplay.",
-          fullDescription:
-            "FeatherMoon - класичний мобільний puzzle-прототип у стилі Sudoku. Гравець розв'язує сітку, розміщуючи правильні числа, маючи лише 3 життя для проходження рівня. Гра фокусується на логіці, уважних рішеннях і простій mobile-friendly взаємодії.",
-          genre: "Sudoku / Логічна головоломка",
-        },
-        fistcraft: {
-          shortDescription:
-            "Fighting-гра з фокусом на правильному виборі атак і блоків для перемоги над суперником. Підтримує двох гравців на одному телефоні.",
-          fullDescription:
-            "Локальний fighting-прототип, де гравці використовують правильні атаки, блоки й таймінг, щоб перемогти суперника. У гру можуть грати двоє людей на одному телефоні.",
-          genre: "Fighting / Local Multiplayer",
-        },
-        lexpunk: {
-          shortDescription: "Memory quiz, у якому гравець запам'ятовує слова й об'єкти, щоб правильно відповідати.",
-          fullDescription:
-            "Memory-based quiz-прототип з фокусом на запам'ятовуванні слів, об'єктів і візуальних деталей, а потім виборі правильних відповідей.",
-          genre: "Quiz / Memory",
-        },
-        meowtubes: {
-          shortDescription:
-            "Sorting puzzle, де котів потрібно переміщати між tubes за кольором. Різні кольори не можна змішувати неправильно.",
-          fullDescription:
-            "Мобільний sorting puzzle-прототип, де гравець переміщує котів між tubes і групує їх за кольором, дотримуючись правил розміщення.",
-          genre: "Sorting Puzzle / Casual",
-        },
-        "queue-dash": {
-          shortDescription:
-            "Швидка casual-гра, де гравець обирає найшвидшу чергу до каси, щоб фінішувати першим і перемогти.",
-          fullDescription:
-            "Casual decision-making прототип, де гравець має вибрати найшвидшу чергу, уникати повільних ліній і першим дістатися каси.",
-          genre: "Casual / Decision Game",
-        },
-        "tamagichi-tramp": {
-          shortDescription:
-            "Virtual pet-style гра, де гравець підтримує его персонажа подарунками та оновленнями офісу.",
-          fullDescription:
-            "Virtual pet-style прототип, де гравець дарує подарунки, покращує офіс і підтримує високе его персонажа через upgrade-и та взаємодію.",
-          genre: "Virtual Pet / Simulation",
-        },
-        valdrisrun: {
-          shortDescription:
-            "Vampire runner, де гравець виживає якомога довше, уникає небезпек, збирає монети та перетворюється на кажана для польоту.",
-          fullDescription:
-            "Горизонтальний runner-прототип про вампіра, який намагається вижити якомога довше. Гравець уникає перешкод, збирає монети й може перетворюватися на кажана, щоб летіти крізь рівень.",
-          genre: "Runner / Platformer / Arcade",
-        },
-      },
+      builtWith: "Built with Next.js",
     },
   },
 }
