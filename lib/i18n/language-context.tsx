@@ -7,6 +7,7 @@ import {
   useEffect,
   useMemo,
   useState,
+  useSyncExternalStore,
   type ReactNode,
 } from "react"
 import {
@@ -18,6 +19,19 @@ import {
 } from "@/lib/i18n/translations"
 
 const storageKey = "portfolio-language"
+
+function readStoredLanguage(): Language {
+  try {
+    const stored = window.localStorage.getItem(storageKey)
+    return isLanguage(stored) ? stored : defaultLanguage
+  } catch {
+    return defaultLanguage
+  }
+}
+
+const subscribeHydration = () => () => {}
+const clientHydrationSnapshot = () => true
+const serverHydrationSnapshot = () => false
 
 type LanguageContextValue = {
   language: Language
@@ -33,16 +47,10 @@ function syncDocumentLanguage(language: Language) {
 }
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [language, setLanguageState] = useState<Language>(defaultLanguage)
-
-  useEffect(() => {
-    const storedLanguage = window.localStorage.getItem(storageKey)
-
-    if (isLanguage(storedLanguage)) {
-      setLanguageState(storedLanguage)
-      syncDocumentLanguage(storedLanguage)
-    }
-  }, [])
+  const hydrated = useSyncExternalStore(subscribeHydration, clientHydrationSnapshot, serverHydrationSnapshot)
+  const [preferredLanguage, setLanguageState] = useState<Language>(readStoredLanguage)
+  // The server and first hydration render always agree; storage is read only once.
+  const language = hydrated ? preferredLanguage : defaultLanguage
 
   useEffect(() => {
     syncDocumentLanguage(language)
@@ -50,7 +58,11 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
 
   const setLanguage = useCallback((nextLanguage: Language) => {
     setLanguageState(nextLanguage)
-    window.localStorage.setItem(storageKey, nextLanguage)
+    try {
+      window.localStorage.setItem(storageKey, nextLanguage)
+    } catch {
+      // Language switching still works when the browser blocks persistent storage.
+    }
     syncDocumentLanguage(nextLanguage)
   }, [])
 

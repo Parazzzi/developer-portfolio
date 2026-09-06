@@ -9,58 +9,41 @@ type CinematicVideoProps = {
   src: string
   poster: string
   label: string
+  playLabel?: string
   className?: string
   controls?: boolean
 }
 
-export function CinematicVideo({ src, poster, label, className, controls = false }: CinematicVideoProps) {
-  const videoRef = useRef<HTMLVideoElement | null>(null)
+export function CinematicVideo({ src, poster, label, playLabel = "Play media", className, controls = true }: CinematicVideoProps) {
+  const [isLoaded, setIsLoaded] = useState(false)
+  const videoRef = useRef<HTMLVideoElement>(null)
 
   useEffect(() => {
     const video = videoRef.current
+    if (!isLoaded || !video) return
 
-    if (!video) {
-      return
-    }
-
-    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
-
-    if (prefersReducedMotion) {
-      video.pause()
-      return
-    }
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          video.play().catch(() => {})
-          return
-        }
-
-        video.pause()
-      },
-      { threshold: 0.35 },
-    )
-
+    // Playback starts only after an explicit action. Offscreen media never keeps playing.
+    video.play().catch(() => {})
+    const observer = new IntersectionObserver(([entry]) => {
+      if (!entry.isIntersecting) video.pause()
+    }, { threshold: 0.05 })
+    const pauseWhenHidden = () => { if (document.hidden) video.pause() }
     observer.observe(video)
+    document.addEventListener("visibilitychange", pauseWhenHidden)
+    video.focus()
 
-    return () => observer.disconnect()
-  }, [])
+    return () => {
+      video.pause()
+      observer.disconnect()
+      document.removeEventListener("visibilitychange", pauseWhenHidden)
+    }
+  }, [isLoaded])
 
-  return (
-    <video
-      ref={videoRef}
-      aria-label={label}
-      className={cn("h-full w-full object-cover", className)}
-      src={src}
-      poster={poster}
-      muted
-      loop
-      playsInline
-      preload="metadata"
-      controls={controls}
-    />
-  )
+  if (!isLoaded) {
+    return <MediaPoster poster={poster} alt={label} playLabel={playLabel} onPlay={() => setIsLoaded(true)} className={className} />
+  }
+
+  return <video ref={videoRef} aria-label={label} className={cn("artifact-video", className)} src={src} poster={poster} muted playsInline preload="none" controls={controls} tabIndex={0} />
 }
 
 type LazyYoutubeEmbedProps = {
@@ -70,46 +53,41 @@ type LazyYoutubeEmbedProps = {
   posterAlt: string
   playLabel: string
   className?: string
+  containPoster?: boolean
 }
 
-export function LazyYoutubeEmbed({ title, src, poster, posterAlt, playLabel, className }: LazyYoutubeEmbedProps) {
+export function LazyYoutubeEmbed({ title, src, poster, posterAlt, playLabel, className, containPoster = false }: LazyYoutubeEmbedProps) {
   const [isLoaded, setIsLoaded] = useState(false)
+  const iframeRef = useRef<HTMLIFrameElement>(null)
+
+  useEffect(() => {
+    const iframe = iframeRef.current
+    if (!isLoaded || !iframe) return
+    iframe.focus()
+    const pause = () => iframe.contentWindow?.postMessage(JSON.stringify({ event: "command", func: "pauseVideo", args: [] }), "https://www.youtube.com")
+    const observer = new IntersectionObserver(([entry]) => { if (!entry.isIntersecting) pause() }, { threshold: 0.05 })
+    const pauseWhenHidden = () => { if (document.hidden) pause() }
+    observer.observe(iframe)
+    document.addEventListener("visibilitychange", pauseWhenHidden)
+    return () => {
+      observer.disconnect()
+      document.removeEventListener("visibilitychange", pauseWhenHidden)
+    }
+  }, [isLoaded])
 
   if (isLoaded) {
-    return (
-      <iframe
-        className={cn("h-full w-full", className)}
-        src={src}
-        title={title}
-        loading="lazy"
-        allow="autoplay; encrypted-media; picture-in-picture"
-        allowFullScreen
-      />
-    )
+    const playerSrc = `${src}${src.includes("?") ? "&" : "?"}enablejsapi=1`
+    return <iframe ref={iframeRef} className={cn("artifact-video", className)} src={playerSrc} title={title} loading="lazy" allow="autoplay; encrypted-media; picture-in-picture" allowFullScreen />
   }
 
+  return <MediaPoster poster={poster} alt={posterAlt} playLabel={playLabel} contain={containPoster} onPlay={() => setIsLoaded(true)} className={className} />
+}
+
+function MediaPoster({ poster, alt, playLabel, onPlay, className, contain = false }: { poster: string; alt: string; playLabel: string; onPlay: () => void; className?: string; contain?: boolean }) {
   return (
-    <button
-      type="button"
-      onClick={() => setIsLoaded(true)}
-      className={cn(
-        "group relative block h-full w-full overflow-hidden text-left focus-visible:outline-cyan",
-        className,
-      )}
-      aria-label={playLabel}
-    >
-      <Image
-        src={poster}
-        alt={posterAlt}
-        fill
-        sizes="(max-width: 768px) 92vw, 760px"
-        className="object-cover transition duration-500 group-hover:scale-[1.035]"
-      />
-      <span className="absolute inset-0 bg-gradient-to-t from-background/80 via-background/20 to-transparent" />
-      <span className="absolute bottom-4 left-4 inline-flex items-center gap-2 rounded-md border border-white/15 bg-background/72 px-3 py-2 text-sm font-semibold text-foreground backdrop-blur">
-        <Play className="size-4 fill-orange text-orange" />
-        {playLabel}
-      </span>
+    <button type="button" onClick={onPlay} className={cn("artifact-media-trigger", className)} aria-label={`${playLabel}: ${alt}`}>
+      <Image src={poster} alt={alt} fill sizes="(max-width: 760px) 90vw, 55vw" className={contain ? "project-poster-contain" : "project-poster-cover"} loading="lazy" />
+      <span className="artifact-play-label"><span className="artifact-play-icon"><Play size={14} fill="currentColor" aria-hidden="true" /></span>{playLabel}<span aria-hidden="true">↗</span></span>
     </button>
   )
 }

@@ -1,4 +1,4 @@
-import { AnimatedBackground } from "@/components/animated-background"
+import { ArtifactCanvas } from "@/components/artifacts/artifact-canvas"
 import { Header } from "@/components/header"
 import { Hero } from "@/components/hero"
 import { About } from "@/components/about"
@@ -7,19 +7,21 @@ import { ProjectsGrid } from "@/components/projects-grid"
 import { UnderTheHood } from "@/components/under-the-hood"
 import { Contact } from "@/components/contact"
 import { Footer } from "@/components/footer"
+import { Experience } from "@/components/experience"
 import { LanguageProvider } from "@/lib/i18n/language-context"
 
 export default function Page() {
   return (
     <LanguageProvider>
-      <AnimatedBackground />
+      <ArtifactCanvas />
       <Header />
-      <main>
+      <main id="main-content" tabIndex={-1}>
         <Hero />
         <ProjectsGrid />
         <UnderTheHood />
         <Skills />
         <About />
+        <Experience />
         <Contact />
       </main>
       <Footer />

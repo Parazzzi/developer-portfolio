@@ -15,3 +15,5 @@ node_modules
 .DS_Store
 *.tsbuildinfo
 .codex-dev-server.*.log
+test-results/
+playwright-report/

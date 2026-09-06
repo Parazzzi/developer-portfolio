@@ -1,362 +1,117 @@
 "use client"
 
-import { useCallback, useEffect, useRef, useState, type KeyboardEvent, type MouseEvent } from "react"
+import { useEffect, useRef, useState } from "react"
 import Image from "next/image"
-import { Eye, Images, X } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import type { GamesLabContent, ResolvedGamesLabItem } from "@/lib/games-lab-data"
+import { ArrowLeft, ArrowRight, ArrowUpRight, Plus, X } from "lucide-react"
+import type { ResolvedGamesLabItem } from "@/lib/games-lab-data"
+import { optimizedImage } from "@/lib/media"
 import { useLanguage } from "@/lib/i18n/language-context"
-import { formatMessage, type Translation } from "@/lib/i18n/translations"
-import { cn } from "@/lib/utils"
+import { formatMessage } from "@/lib/i18n/translations"
 
-type Props = {
-  items: ResolvedGamesLabItem[]
-}
-
-type GamesLabCopy = Pick<Translation["gamesLab"], "gameplayPreviewAlt" | "noPreview" | "viewButton">
-
-const modalCloseAnimationMs = 200
+type Props = { items: ResolvedGamesLabItem[] }
+const featuredIds = ["valdrisrun", "meowtubes", "fistcraft", "cyberyolk", "feathermoon"]
 
 export function GamesLabClient({ items }: Props) {
-  const { t } = useLanguage()
+  const { t, language } = useLanguage()
   const [selectedGame, setSelectedGame] = useState<ResolvedGamesLabItem | null>(null)
-  const [isModalClosing, setIsModalClosing] = useState(false)
-  const closeButtonRef = useRef<HTMLButtonElement | null>(null)
-  const dialogRef = useRef<HTMLDivElement | null>(null)
-  const previousFocusRef = useRef<HTMLElement | null>(null)
-  const closeTimerRef = useRef<number | null>(null)
-  const selectedGameRef = useRef<ResolvedGamesLabItem | null>(null)
-  const isModalClosingRef = useRef(false)
-  const horizontalGames = items.filter((game) => game.orientation === "horizontal")
-  const verticalGames = items.filter((game) => game.orientation === "vertical")
-  const orderedGames = [...horizontalGames, ...verticalGames]
+  const galleryRef = useRef<HTMLDialogElement>(null)
+  const stripRef = useRef<HTMLDivElement>(null)
+  const returnFocusRef = useRef<HTMLElement | null>(null)
+  const previews = featuredIds.flatMap((id) => items.filter((game) => game.id === id))
 
-  const openModal = useCallback((game: ResolvedGamesLabItem) => {
-    if (closeTimerRef.current !== null) {
-      window.clearTimeout(closeTimerRef.current)
-      closeTimerRef.current = null
-    }
-
-    selectedGameRef.current = game
-    isModalClosingRef.current = false
-    setIsModalClosing(false)
+  function openGallery(game: ResolvedGamesLabItem) {
+    returnFocusRef.current = document.activeElement instanceof HTMLElement ? document.activeElement : null
     setSelectedGame(game)
-  }, [])
-
-  const closeModal = useCallback(() => {
-    if (!selectedGameRef.current || isModalClosingRef.current) {
-      return
-    }
-
-    isModalClosingRef.current = true
-    setIsModalClosing(true)
-
-    closeTimerRef.current = window.setTimeout(() => {
-      selectedGameRef.current = null
-      isModalClosingRef.current = false
-      setSelectedGame(null)
-      setIsModalClosing(false)
-      closeTimerRef.current = null
-    }, modalCloseAnimationMs)
-  }, [])
-
-  useEffect(() => {
-    return () => {
-      if (closeTimerRef.current !== null) {
-        window.clearTimeout(closeTimerRef.current)
-      }
-    }
-  }, [])
-
-  useEffect(() => {
-    if (!selectedGame) {
-      return
-    }
-
-    selectedGameRef.current = selectedGame
-    isModalClosingRef.current = false
-    previousFocusRef.current = document.activeElement instanceof HTMLElement ? document.activeElement : null
-    const previousOverflow = document.body.style.overflow
-    document.body.style.overflow = "hidden"
-    const focusTimer = window.setTimeout(() => closeButtonRef.current?.focus(), 0)
-
-    const handleKeyDown = (event: globalThis.KeyboardEvent) => {
-      if (event.key === "Escape") {
-        closeModal()
-      }
-    }
-
-    document.addEventListener("keydown", handleKeyDown)
-
-    return () => {
-      window.clearTimeout(focusTimer)
-      document.body.style.overflow = previousOverflow
-      document.removeEventListener("keydown", handleKeyDown)
-      previousFocusRef.current?.focus()
-    }
-  }, [closeModal, selectedGame])
-
-  const handleOverlayMouseDown = (event: MouseEvent<HTMLDivElement>) => {
-    if (event.target === event.currentTarget) {
-      closeModal()
-    }
   }
 
-  const handleDialogKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
-    if (event.key !== "Tab") {
-      return
+  useEffect(() => {
+    const dialog = galleryRef.current
+    if (!selectedGame || !dialog) return
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = "hidden"
+    if (!dialog.open) dialog.showModal()
+
+    return () => {
+      document.body.style.overflow = previousOverflow
+      if (dialog.open) dialog.close()
+      returnFocusRef.current?.focus({ preventScroll: true })
     }
+  }, [selectedGame])
 
-    const dialog = dialogRef.current
-
-    if (!dialog) {
-      return
-    }
-
-    const focusableElements = dialog.querySelectorAll<HTMLElement>(
-      'a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])',
-    )
-
-    if (focusableElements.length === 0) {
-      return
-    }
-
-    const firstElement = focusableElements[0]
-    const lastElement = focusableElements[focusableElements.length - 1]
-
-    if (event.shiftKey && document.activeElement === firstElement) {
-      event.preventDefault()
-      lastElement.focus()
-      return
-    }
-
-    if (!event.shiftKey && document.activeElement === lastElement) {
-      event.preventDefault()
-      firstElement.focus()
-    }
+  function scrollPreviews(direction: number) {
+    const strip = stripRef.current
+    if (!strip) return
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    strip.scrollBy({ left: direction * strip.clientWidth * 0.7, behavior: reducedMotion ? "instant" : "smooth" })
   }
 
   return (
-    <section id="games-lab" className="scroll-mt-24 px-4 py-20 sm:px-6 lg:py-28">
+    <section id="games-lab" className="lab-section" data-artifact="gameplay" aria-labelledby="games-lab-title">
       <div className="site-shell">
-        <div className="grid grid-cols-[minmax(0,1fr)] gap-6 lg:grid-cols-[0.78fr_1.22fr] lg:items-end">
-          <div className="min-w-0">
-            <p className="section-kicker">{t.gamesLab.eyebrow}</p>
-            <h2 className="mt-4 text-balance font-heading text-4xl font-semibold leading-tight tracking-tight sm:text-5xl">
-              {t.gamesLab.heading}
-            </h2>
+        <div className="lab-intro">
+          <div>
+            <p className="eyebrow"><span className="index-mark">02 /</span> {t.gamesLab.eyebrow}</p>
+            <h2 id="games-lab-title" className="section-title">{language === "en" ? <>Play. Iterate.<br /><span className="lab-title-last">Repeat.</span></> : <>Грай. Змінюй.<br /><span className="lab-title-last">Повторюй.</span></>}</h2>
           </div>
-          <div className="min-w-0 max-w-2xl lg:justify-self-end">
-            <p className="text-pretty text-lg font-medium text-foreground/90">{t.gamesLab.intro}</p>
-            <p className="mt-3 text-pretty leading-relaxed text-muted-foreground">{t.gamesLab.description}</p>
-          </div>
+          <div className="lab-intro-copy"><p>{t.gamesLab.intro}</p><p>{t.gamesLab.description}</p></div>
         </div>
 
-        <div className="mt-10 grid grid-cols-1 gap-4 min-[560px]:grid-cols-2 lg:grid-cols-12">
-          {orderedGames.map((game, index) => (
-            <GameLabCard
-              key={game.id}
-              game={game}
-              content={t.gamesLab.items[game.id]}
-              labels={t.gamesLab}
-              index={index}
-              onView={openModal}
-            />
+        <div className="lab-strip-topline">
+          <p className="eyebrow">{String(items.length).padStart(2, "0")} / {language === "en" ? "EXPERIMENTS IN PLAY" : "ІГРОВІ ЕКСПЕРИМЕНТИ"}</p>
+          <div className="lab-strip-controls">
+            <button type="button" onClick={() => scrollPreviews(-1)} aria-label={language === "en" ? "Previous previews" : "Попередні превʼю"}><ArrowLeft size={18} aria-hidden="true" /></button>
+            <button type="button" onClick={() => scrollPreviews(1)} aria-label={language === "en" ? "Next previews" : "Наступні превʼю"}><ArrowRight size={18} aria-hidden="true" /></button>
+          </div>
+        </div>
+        <div ref={stripRef} className="lab-preview-strip" tabIndex={0} aria-label={language === "en" ? "Selected prototype previews" : "Вибрані превʼю прототипів"}>
+          {previews.map((game) => (
+            <button className={`lab-preview ${game.orientation === "horizontal" ? "lab-preview-wide" : ""}`} type="button" key={game.id} onClick={() => openGallery(game)} aria-haspopup="dialog" aria-label={`${t.gamesLab.viewButton}: ${game.title}`}>
+              <div className="lab-preview-image">
+                {game.previewImage ? <Image src={optimizedImage(game.previewImage)} alt={formatMessage(t.gamesLab.gameplayPreviewAlt, { title: game.title })} fill sizes={game.orientation === "horizontal" ? "(max-width: 760px) 80vw, 550px" : "190px"} className="lab-screenshot" loading="lazy" /> : <span>{t.gamesLab.noPreview}</span>}
+                <span className="lab-preview-open" aria-hidden="true"><ArrowUpRight size={18} /></span>
+              </div>
+              <span className="lab-preview-caption"><span>{game.title}</span><span className="eyebrow">{String(game.images.length).padStart(2, "0")} IMG</span></span>
+            </button>
+          ))}
+        </div>
+
+        <div className="lab-index" aria-label={language === "en" ? "All prototypes" : "Усі прототипи"}>
+          <div className="lab-index-label eyebrow"><span>{language === "en" ? "THE COMPLETE INDEX" : "ПОВНИЙ КАТАЛОГ"}</span><span>UNITY / C#</span></div>
+          {items.map((game, index) => (
+            <details key={game.id} className="lab-index-entry">
+              <summary>
+                <span className="lab-index-number eyebrow">{String(index + 1).padStart(2, "0")}</span>
+                <span className="lab-index-name"><span>{game.title}</span><span className="eyebrow">{t.gamesLab.items[game.id].genre}</span></span>
+                <span className="lab-index-description">{t.gamesLab.items[game.id].shortDescription}</span>
+                <Plus size={18} className="lab-index-expand" aria-hidden="true" />
+              </summary>
+              <div className="lab-index-detail">
+                <p>{t.gamesLab.items[game.id].fullDescription}</p>
+                <button type="button" className="text-link" onClick={() => openGallery(game)} aria-haspopup="dialog">{t.gamesLab.viewButton}<ArrowUpRight size={17} aria-hidden="true" /></button>
+              </div>
+            </details>
           ))}
         </div>
       </div>
 
-      {selectedGame ? (
-        <div
-          data-state={isModalClosing ? "closing" : "open"}
-          className="games-lab-modal-overlay fixed inset-0 z-50 flex items-start justify-center overflow-y-auto bg-background/85 p-4 backdrop-blur-md sm:items-center sm:p-6"
-          onMouseDown={handleOverlayMouseDown}
-        >
-          <div
-            ref={dialogRef}
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="games-lab-modal-title"
-            onKeyDown={handleDialogKeyDown}
-            className={cn(
-              "games-lab-modal-panel technical-surface flex max-h-[90vh] w-full flex-col overflow-hidden rounded-xl",
-              selectedGame.orientation === "horizontal" ? "max-w-6xl" : "max-w-5xl",
-            )}
-          >
-            <div className="flex shrink-0 items-start justify-between gap-4 border-b border-white/10 p-5 sm:p-6">
-              <div>
-                <p className="inline-flex rounded-md border border-white/10 bg-white/[0.045] px-3 py-1 text-xs font-semibold text-foreground/75">
-                  {t.gamesLab.items[selectedGame.id].genre}
-                </p>
-                <h3 id="games-lab-modal-title" className="mt-3 font-heading text-2xl font-semibold tracking-tight">
-                  {selectedGame.title}
-                </h3>
-                <p className="mt-2 max-w-3xl text-sm leading-relaxed text-muted-foreground sm:text-base">
-                  {t.gamesLab.items[selectedGame.id].fullDescription}
-                </p>
-              </div>
-
-              <Button
-                ref={closeButtonRef}
-                type="button"
-                size="icon"
-                variant="outline"
-                aria-label={formatMessage(t.gamesLab.closeGalleryAria, { title: selectedGame.title })}
-                onClick={closeModal}
-                className="rounded-md border-white/10 bg-background/40 hover:bg-white/10"
-              >
-                <X className="size-4" />
-              </Button>
+      <dialog ref={galleryRef} className={`lab-gallery ${selectedGame?.orientation === "vertical" ? "lab-gallery-vertical" : ""}`} aria-labelledby="lab-gallery-title" onClose={() => setSelectedGame(null)} onClick={(event) => { if (event.target === event.currentTarget) galleryRef.current?.close() }}>
+        {selectedGame ? (
+          <div className="lab-gallery-panel">
+            <div className="lab-gallery-header">
+              <div><p className="eyebrow">{t.gamesLab.items[selectedGame.id].genre}</p><h3 id="lab-gallery-title">{selectedGame.title}</h3><p className="lab-gallery-description">{t.gamesLab.items[selectedGame.id].fullDescription}</p></div>
+              <button type="button" autoFocus className="lab-gallery-close" onClick={() => galleryRef.current?.close()} aria-label={formatMessage(t.gamesLab.closeGalleryAria, { title: selectedGame.title })}><X size={20} aria-hidden="true" /></button>
             </div>
-
-            <div className="min-h-0 flex-1 overflow-y-auto p-5 sm:p-6">
-              {selectedGame.images.length > 0 ? (
-                <div
-                  className={cn(
-                    "grid gap-4",
-                    selectedGame.orientation === "horizontal"
-                      ? "grid-cols-1 lg:grid-cols-2"
-                      : selectedGame.images.length === 1
-                        ? "grid-cols-1"
-                        : "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3",
-                  )}
-                >
-                  {selectedGame.images.map((image, index) => (
-                    <figure
-                      key={image}
-                      className={cn(
-                        "overflow-hidden rounded-lg border border-white/10 bg-background/42 p-2",
-                        selectedGame.orientation === "vertical" && selectedGame.images.length === 1
-                          ? "mx-auto w-full max-w-[20rem]"
-                          : null,
-                      )}
-                    >
-                      <div
-                        className={cn(
-                          "relative overflow-hidden rounded-md bg-background/70",
-                          selectedGame.orientation === "horizontal"
-                            ? "aspect-[1820/848] w-full"
-                            : "mx-auto aspect-[540/1161] w-full max-w-[18rem]",
-                        )}
-                      >
-                        <Image
-                          src={image}
-                          alt={formatMessage(t.gamesLab.screenshotAlt, {
-                            title: selectedGame.title,
-                            index: index + 1,
-                          })}
-                          fill
-                          sizes={
-                            selectedGame.orientation === "horizontal"
-                              ? "(max-width: 1024px) 92vw, 520px"
-                              : "(max-width: 640px) 82vw, (max-width: 1024px) 42vw, 280px"
-                          }
-                          className="object-contain"
-                          loading="lazy"
-                        />
-                      </div>
-                    </figure>
-                  ))}
-                </div>
-              ) : (
-                <div className="rounded-lg border border-white/10 bg-background/42 p-8 text-center text-sm text-muted-foreground">
-                  {t.gamesLab.noScreenshots}
-                </div>
-              )}
+            <div className="lab-gallery-media">
+              {selectedGame.images.length ? selectedGame.images.map((source, index) => (
+                <figure key={source}>
+                  <div className="lab-gallery-image"><Image src={optimizedImage(source)} alt={formatMessage(t.gamesLab.screenshotAlt, { title: selectedGame.title, index: index + 1 })} fill sizes={selectedGame.orientation === "horizontal" ? "(max-width: 760px) 90vw, 50vw" : "(max-width: 600px) 80vw, 300px"} className="lab-screenshot" loading="lazy" /></div>
+                  <figcaption className="eyebrow">{String(index + 1).padStart(2, "0")} / {String(selectedGame.images.length).padStart(2, "0")}</figcaption>
+                </figure>
+              )) : <p>{t.gamesLab.noScreenshots}</p>}
             </div>
           </div>
-        </div>
-      ) : null}
+        ) : null}
+      </dialog>
     </section>
   )
-}
-
-function GameLabCard({
-  game,
-  content,
-  labels,
-  index,
-  onView,
-}: {
-  game: ResolvedGamesLabItem
-  content: GamesLabContent
-  labels: GamesLabCopy
-  index: number
-  onView: (game: ResolvedGamesLabItem) => void
-}) {
-  const secondaryImage = game.images.find((image) => image !== game.previewImage)
-
-  return (
-    <article className={cn("group overflow-hidden rounded-lg border border-white/10 bg-surface/74 transition duration-300 hover:-translate-y-1 hover:border-orange/35", getCardSpan(game, index))}>
-      <div
-        className={cn(
-          "relative overflow-hidden bg-background/60",
-          game.orientation === "horizontal" ? "aspect-[1820/848]" : "aspect-[540/1161]",
-        )}
-      >
-        {game.previewImage ? (
-          <>
-            <Image
-              src={game.previewImage}
-              alt={formatMessage(labels.gameplayPreviewAlt, { title: game.title })}
-              fill
-              sizes={game.orientation === "horizontal" ? "(max-width: 1024px) 92vw, 620px" : "(max-width: 640px) 86vw, (max-width: 1024px) 44vw, 260px"}
-              className={cn(
-                "object-cover transition duration-500 group-hover:scale-[1.035]",
-                game.orientation === "vertical" ? "object-contain" : null,
-              )}
-              loading="lazy"
-            />
-            {secondaryImage ? (
-              <Image
-                src={secondaryImage}
-                alt=""
-                fill
-                sizes={game.orientation === "horizontal" ? "(max-width: 1024px) 92vw, 620px" : "(max-width: 640px) 86vw, (max-width: 1024px) 44vw, 260px"}
-                className={cn(
-                  "object-cover opacity-0 transition duration-500 group-hover:opacity-100",
-                  game.orientation === "vertical" ? "object-contain" : null,
-                )}
-                loading="lazy"
-              />
-            ) : null}
-          </>
-        ) : (
-          <div className="flex h-full items-center justify-center px-4 text-center text-sm text-muted-foreground">
-            {labels.noPreview}
-          </div>
-        )}
-        <div className="absolute inset-0 bg-gradient-to-t from-background/85 via-transparent to-transparent opacity-90" />
-        <div className="absolute left-3 top-3 inline-flex items-center gap-1.5 rounded-md border border-white/10 bg-background/66 px-2.5 py-1 text-[0.68rem] font-semibold text-foreground/78 backdrop-blur">
-          <Images className="size-3.5 text-orange" />
-          {game.images.length}
-        </div>
-      </div>
-
-      <div className="p-4">
-        <p className="font-mono text-[0.68rem] uppercase tracking-[0.16em] text-orange">{content.genre}</p>
-        <h3 className="mt-2 font-heading text-xl font-semibold tracking-tight">{game.title}</h3>
-        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{content.shortDescription}</p>
-        <Button
-          type="button"
-          size="sm"
-          onClick={() => onView(game)}
-          aria-haspopup="dialog"
-          className="mt-4 rounded-md font-semibold"
-        >
-          {labels.viewButton}
-          <Eye className="size-3.5" />
-        </Button>
-      </div>
-    </article>
-  )
-}
-
-function getCardSpan(game: ResolvedGamesLabItem, index: number) {
-  if (game.orientation === "horizontal") {
-    return "lg:col-span-7"
-  }
-
-  const spans = ["lg:col-span-3", "lg:col-span-3", "lg:col-span-2", "lg:col-span-4", "lg:col-span-3", "lg:col-span-3"]
-  return spans[index % spans.length]
 }
