@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useRef } from "react"
+import { createAtmosphere } from "@/lib/artifacts/atmosphere"
 import "./artifact.css"
 
 /** Decorative, progressively enhanced WebGL; every portfolio detail stays in the DOM. */
@@ -9,6 +10,8 @@ export function ArtifactCanvas() {
   const stageRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
+    if (!stageRef.current) return
+    const disposeAtmosphere = createAtmosphere(stageRef.current)
     let cancelled = false
     let dispose: (() => void) | undefined
     const timer = window.setTimeout(async () => {
@@ -27,11 +30,12 @@ export function ArtifactCanvas() {
       cancelled = true
       window.clearTimeout(timer)
       dispose?.()
+      disposeAtmosphere()
     }
   }, [])
 
   return (
-    <div className="artifact-stage" ref={stageRef} aria-hidden="true">
+    <><div className="page-atmosphere" aria-hidden="true" /><div className="artifact-stage" ref={stageRef} aria-hidden="true">
       <div className="artifact-fallback">
         <span className="artifact-fallback-orbit artifact-fallback-orbit-one" />
         <span className="artifact-fallback-orbit artifact-fallback-orbit-two" />
@@ -39,6 +43,6 @@ export function ArtifactCanvas() {
         <span className="artifact-fallback-core" />
       </div>
       <canvas className="artifact-canvas" ref={canvasRef} />
-    </div>
+    </div></>
   )
 }

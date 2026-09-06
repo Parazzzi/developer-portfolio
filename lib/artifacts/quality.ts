@@ -9,7 +9,7 @@ export interface ArtifactQuality {
 }
 
 export function getArtifactQuality(): ArtifactQuality {
-  const compact = window.innerWidth < 768
+  const compact = window.innerWidth <= 800
   const memory = (navigator as Navigator & { deviceMemory?: number }).deviceMemory
   const lowPower = compact || (memory !== undefined && memory <= 4) || navigator.hardwareConcurrency <= 4
 

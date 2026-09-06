@@ -20,10 +20,10 @@ export function Experience() {
   ]
 
   return (
-    <section id="experience" className="editorial-section experience-section" aria-labelledby="experience-title" data-artifact="systems">
+    <section id="experience" className="editorial-section experience-section" aria-labelledby="experience-title" data-artifact="experience">
       <div className="site-shell">
         <div className="editorial-heading-row">
-          <p className="eyebrow">05 / {language === "en" ? "Experience" : "Досвід"}</p>
+          <p className="eyebrow">06 / {language === "en" ? "Experience" : "Досвід"}</p>
           <p className="editorial-index-note">{language === "en" ? "PRACTICE & PERSPECTIVE" : "ПРАКТИКА ТА РОЗВИТОК"}</p>
         </div>
         <h2 id="experience-title" className="section-title experience-title">

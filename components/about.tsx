@@ -1,6 +1,6 @@
 "use client"
 
-import { ArrowDownRight, Download } from "lucide-react"
+import { Download } from "lucide-react"
 import { profile } from "@/lib/portfolio-data"
 import { useLanguage } from "@/lib/i18n/language-context"
 import "./editorial.css"
@@ -12,14 +12,14 @@ export function About() {
     <section id="about" className="editorial-section about-section" aria-labelledby="about-title" data-artifact="about">
       <div className="site-shell">
         <div className="editorial-heading-row">
-          <p className="eyebrow">04 / {t.about.eyebrow}</p>
+          <p className="eyebrow">01 / {t.about.eyebrow}</p>
           <p className="editorial-index-note">DEMENTIY BESARAB</p>
         </div>
         <div className="about-heading">
           <h2 id="about-title" className="section-title">
             {language === "en" ? <>From idea.<br /><span>To release.</span></> : <>Від ідеї.<br /><span>До релізу.</span></>}
           </h2>
-          <ArrowDownRight className="about-direction" aria-hidden="true" strokeWidth={0.8} />
+          <div className="about-artifact-space" data-artifact-slot aria-hidden="true" />
         </div>
         <div className="about-body">
           <div className="about-position">

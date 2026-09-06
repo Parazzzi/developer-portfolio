@@ -25,7 +25,7 @@ export function createArtifactRuntime(canvas: HTMLCanvasElement, stage: HTMLDivE
   camera.position.z = CAMERA_DISTANCE
   const environmentSource = new RoomEnvironment()
   const environmentGenerator = new PMREMGenerator(renderer)
-  const environment = environmentGenerator.fromScene(environmentSource, 0.025)
+  const environment = environmentGenerator.fromScene(environmentSource)
   scene.environment = environment.texture
   scene.environmentIntensity = 1.25
   environmentSource.dispose()
@@ -71,7 +71,7 @@ export function createArtifactRuntime(canvas: HTMLCanvasElement, stage: HTMLDivE
   function resize() {
     viewportWidth = window.innerWidth
     viewportHeight = window.innerHeight
-    quality.compact = viewportWidth < 768
+    quality.compact = viewportWidth <= 800
     camera.aspect = viewportWidth / viewportHeight
     camera.updateProjectionMatrix()
     renderer.setSize(viewportWidth, viewportHeight, false)
@@ -115,7 +115,10 @@ export function createArtifactRuntime(canvas: HTMLCanvasElement, stage: HTMLDivE
     )
     sculpture.update(current, elapsed)
     canvas.style.opacity = String(current.opacity)
-    renderer.render(scene, camera)
+    sculpture.group.visible = current.opacity > 0.005
+    renderer.toneMappingExposure = MathUtils.lerp(1.05, 0.78, current.light)
+    scene.environmentIntensity = MathUtils.lerp(1.05, 0.7, current.light)
+    if (sculpture.group.visible) renderer.render(scene, camera)
     stage.dataset.ready = "true"
 
     // Sustained slow frames lower resolution once, avoiding quality oscillation.
@@ -127,7 +130,8 @@ export function createArtifactRuntime(canvas: HTMLCanvasElement, stage: HTMLDivE
         adapted = true
       }
     }
-    if (animated) requestFrame()
+    const settling = stateKeys.some(property => Math.abs(current[property] - target[property]) > 0.002)
+    if (animated && (sculpture.group.visible || settling)) requestFrame()
   }
 
   function handleScroll() { dirty = true; requestFrame() }

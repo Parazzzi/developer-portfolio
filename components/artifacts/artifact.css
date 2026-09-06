@@ -59,3 +59,6 @@
 @media print {
   .artifact-stage { display: none; }
 }
+
+.artifact-fallback { left: var(--fallback-x, 77%); top: var(--fallback-y, 47%); width: min(44vw, 70vh); transform: translate(-50%, -50%) rotate(-24deg) scale(var(--fallback-scale, .84)); opacity: var(--fallback-opacity, .55); }
+@media (max-width: 767px) { .artifact-fallback { width: 80vw; } }

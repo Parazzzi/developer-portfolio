@@ -74,7 +74,7 @@ export default function RootLayout({
     <html lang="en" className={`dark ${geistSans.variable} ${geistMono.variable} bg-background`}>
       <body className="font-sans antialiased">
         {children}
-        <Analytics />
+        {process.env.VERCEL === '1' ? <Analytics /> : null}
       </body>
     </html>
   )
