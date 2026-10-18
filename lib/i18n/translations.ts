@@ -218,18 +218,18 @@ export const translations: Record<Language, Translation> = {
       selected: "Selected",
     },
     profile: {
-      role: "Unity C# Developer",
-      compactRole: "Unity C# / Mobile / VR-XR",
+      role: "Unity & Software Developer",
+      compactRole: "C# / TypeScript / JavaScript / VR-XR",
       subtitle:
-        "Unity C# Developer focused on mobile games, VR/XR experiences, production-ready gameplay systems, UI, integrations, architecture, and optimization.",
-      availability: "Currently available for full-time, part-time, and project-based Unity work.",
-      badges: ["Mobile games", "VR/XR", "Gameplay systems", "Production UI", "SDK integrations"],
+        "Software developer working across Unity, C#, mobile games, VR/XR, TypeScript, JavaScript, websites, admin dashboards and web applications.",
+      availability: "Open to Unity and software development opportunities.",
+      badges: ["Unity & C#", "TypeScript", "Web applications", "VR/XR", "Clean architecture"],
     },
     hero: {
       eyebrow: "Playable Developer Portfolio",
-      headline: "I build Unity games that feel good and ship.",
+      headline: "I build interactive products from idea to delivery.",
       subtitle:
-        "Unity C# Developer focused on mobile games, VR/XR experiences and production-ready gameplay systems.",
+        "Unity & Software Developer focused on maintainable code, polished UI and end-to-end delivery across games, VR/XR and web applications.",
       primaryCta: "View selected work",
       contactCta: "Start a conversation",
       downloadCv: "Download CV",
@@ -239,7 +239,7 @@ export const translations: Record<Language, Translation> = {
       mediaAlt: "Cinematic gameplay composition with VR football and mobile game previews",
       portfolio3d: "3D Fun Portfolio",
       stats: [
-        { value: "3+", label: "Years commercial and freelance Unity work" },
+        { value: "4+", label: "Years commercial and freelance development" },
         { value: "Android / iOS", label: "Mobile build and release support" },
         { value: "VR / XR", label: "Spatial interaction prototypes" },
       ],
@@ -474,7 +474,7 @@ export const translations: Record<Language, Translation> = {
     },
     toolkit: {
       eyebrow: "Experience and Toolkit",
-      title: "A compact toolbelt for production Unity work.",
+      title: "A compact toolbelt for Unity and software development.",
       description: "Select a category to see the working context instead of scanning another wall of badges.",
       categories: [
         {
@@ -513,36 +513,36 @@ export const translations: Record<Language, Translation> = {
           technologies: ["Firebase", "Game Analytics", "AppMetrica", "AdMob", "AppLovin"],
         },
         {
-          title: "Tools",
-          description: "AI is used as a support tool for analysis, debugging, repetitive automation and workflow speed.",
-          technologies: ["Codex", "Claude Code", "ChatGPT", "Automation"],
+          title: "Web Development",
+          description: "Responsive websites, web applications and administrative dashboards delivered from structure and UI through final implementation.",
+          technologies: ["TypeScript", "JavaScript", "HTML5", "CSS3", "Responsive UI"],
         },
       ],
     },
     about: {
       eyebrow: "About",
-      title: "A Unity developer who can move from feature idea to release work.",
+      title: "A software developer who can move from idea to release.",
       paragraphs: [
-        "I am a Unity C# Developer with 3+ years of commercial and freelance experience building mobile games, VR/XR projects and interactive Unity applications.",
-        "My work covers gameplay systems, production UI, Android/iOS build preparation, optimization, SDK integrations, analytics, monetization, client-server features and stable delivery.",
-        "I care about maintainable architecture because production game work changes constantly: systems need to be readable, testable enough to trust and simple enough to ship.",
+        "I am a software developer with 4+ years of commercial and freelance experience across Unity, C#, mobile games, VR/XR, interactive applications and web development.",
+        "Alongside part-time Unity work, I independently develop websites, admin dashboards and web applications with TypeScript, JavaScript and HTML/CSS.",
+        "I focus on clean architecture, maintainable code, polished UI and dependable end-to-end delivery.",
       ],
       stats: [
-        { value: "3+", label: "Years experience" },
+        { value: "4+", label: "Years experience" },
         { value: "Android / iOS", label: "Mobile releases" },
         { value: "VR / XR", label: "Interactive projects" },
-        { value: "CREATY Games", label: "Recent studio role" },
+        { value: "Web", label: "Apps and dashboards" },
       ],
       availabilityLabel: "Available for",
       availabilityItems: [
-        "Full-time Unity Developer roles",
-        "Part-time or contract Unity work",
+        "Unity and software developer roles",
+        "Part-time or contract development",
+        "Web applications and admin dashboards",
         "Mobile game production",
         "VR/XR prototypes",
-        "Project stabilization and bug fixing",
       ],
       aiNote:
-        "AI tools support codebase analysis, debugging, refactoring and repetitive automation; the main specialization remains Unity C# development.",
+        "AI tools support codebase analysis, testing, debugging, refactoring and code review while architecture, technical decisions and final quality remain developer-owned.",
       certificate: {
         label: "Game design learning",
         title: "Game Designer Certificate",
@@ -570,7 +570,7 @@ export const translations: Record<Language, Translation> = {
       eyebrow: "Contact",
       title: "Let's build something worth playing.",
       description:
-        "Have a mobile game, VR/XR concept or Unity project that needs production-minded execution? Send the context and I will respond with the most useful next step.",
+        "Have a web product, mobile game, VR/XR concept or Unity project that needs production-minded execution? Send the context and I will respond with the most useful next step.",
       emailMe: "Email me",
       downloadCv: "Download CV",
       downloadCvAria: "Download Dementiy Besarab CV",
@@ -607,18 +607,18 @@ export const translations: Record<Language, Translation> = {
       selected: "Вибрано",
     },
     profile: {
-      role: "Unity C# Developer",
-      compactRole: "Unity C# / Mobile / VR-XR",
+      role: "Unity & Software Developer",
+      compactRole: "C# / TypeScript / JavaScript / VR-XR",
       subtitle:
-        "Unity C# Developer, який фокусується на мобільних іграх, VR/XR-досвідах, production-ready gameplay-системах, UI, інтеграціях, архітектурі та оптимізації.",
-      availability: "Зараз відкритий до full-time, part-time та проєктної Unity-роботи.",
-      badges: ["Мобільні ігри", "VR/XR", "Gameplay-системи", "Production UI", "SDK-інтеграції"],
+        "Software developer, який працює з Unity, C#, mobile games, VR/XR, TypeScript, JavaScript, сайтами, admin dashboards і web applications.",
+      availability: "Відкритий до можливостей у Unity та software development.",
+      badges: ["Unity & C#", "TypeScript", "Web applications", "VR/XR", "Clean architecture"],
     },
     hero: {
       eyebrow: "Playable Developer Portfolio",
-      headline: "Я створюю Unity-ігри, які відчуваються добре і доходять до релізу.",
+      headline: "Я створюю інтерактивні продукти від ідеї до delivery.",
       subtitle:
-        "Unity C# Developer з фокусом на мобільні ігри, VR/XR-досвіди та production-ready gameplay-системи.",
+        "Unity & Software Developer із фокусом на maintainable code, якісний UI та end-to-end delivery для ігор, VR/XR і web applications.",
       primaryCta: "Переглянути роботи",
       contactCta: "Обговорити проєкт",
       downloadCv: "Завантажити CV",
@@ -628,7 +628,7 @@ export const translations: Record<Language, Translation> = {
       mediaAlt: "Кінематографічна композиція з VR-футболом і прев'ю мобільних ігор",
       portfolio3d: "3D Fun Portfolio",
       stats: [
-        { value: "3+", label: "Роки комерційної та freelance Unity-роботи" },
+        { value: "4+", label: "Роки комерційної та freelance розробки" },
         { value: "Android / iOS", label: "Підтримка mobile build та release" },
         { value: "VR / XR", label: "Прототипи просторової взаємодії" },
       ],
@@ -865,7 +865,7 @@ export const translations: Record<Language, Translation> = {
     },
     toolkit: {
       eyebrow: "Experience and Toolkit",
-      title: "Компактний toolbelt для production Unity-роботи.",
+      title: "Компактний toolbelt для Unity та software development.",
       description: "Оберіть категорію, щоб побачити робочий контекст замість ще однієї стіни badges.",
       categories: [
         {
@@ -904,36 +904,36 @@ export const translations: Record<Language, Translation> = {
           technologies: ["Firebase", "Game Analytics", "AppMetrica", "AdMob", "AppLovin"],
         },
         {
-          title: "Tools",
-          description: "AI використовується як support tool для analysis, debugging, repetitive automation і workflow speed.",
-          technologies: ["Codex", "Claude Code", "ChatGPT", "Automation"],
+          title: "Web Development",
+          description: "Responsive websites, web applications та administrative dashboards — від структури й UI до фінальної реалізації.",
+          technologies: ["TypeScript", "JavaScript", "HTML5", "CSS3", "Responsive UI"],
         },
       ],
     },
     about: {
       eyebrow: "Про мене",
-      title: "Unity developer, який може рухати feature від ідеї до release work.",
+      title: "Software developer, який може провести ідею до релізу.",
       paragraphs: [
-        "Я Unity C# Developer із понад 3 роками комерційного та freelance досвіду у створенні mobile games, VR/XR projects та interactive Unity applications.",
-        "Моя робота охоплює gameplay systems, production UI, Android/iOS build preparation, optimization, SDK integrations, analytics, monetization, client-server features і stable delivery.",
-        "Я ціную maintainable architecture, бо production game work постійно змінюється: системи мають бути readable, достатньо testable і простими для shipping.",
+        "Я software developer із понад 4 роками комерційного та freelance досвіду в Unity, C#, mobile games, VR/XR, interactive applications і web development.",
+        "Паралельно з part-time Unity-роботою я самостійно розробляю сайти, admin dashboards і web applications на TypeScript, JavaScript та HTML/CSS.",
+        "Я фокусуюся на clean architecture, maintainable code, якісному UI та надійному end-to-end delivery.",
       ],
       stats: [
-        { value: "3+", label: "Роки досвіду" },
+        { value: "4+", label: "Роки досвіду" },
         { value: "Android / iOS", label: "Mobile releases" },
         { value: "VR / XR", label: "Interactive projects" },
-        { value: "CREATY Games", label: "Recent studio role" },
+        { value: "Web", label: "Apps і dashboards" },
       ],
       availabilityLabel: "Доступний для",
       availabilityItems: [
-        "Full-time Unity Developer roles",
-        "Part-time або contract Unity work",
+        "Unity та software developer roles",
+        "Part-time або contract development",
+        "Web applications та admin dashboards",
         "Mobile game production",
         "VR/XR prototypes",
-        "Project stabilization and bug fixing",
       ],
       aiNote:
-        "AI tools допомагають з codebase analysis, debugging, refactoring і repetitive automation; основна спеціалізація залишається Unity C# development.",
+        "AI tools допомагають із codebase analysis, testing, debugging, refactoring і code review; архітектура, технічні рішення та фінальна якість залишаються відповідальністю розробника.",
       certificate: {
         label: "Game design learning",
         title: "Game Designer Certificate",
@@ -961,7 +961,7 @@ export const translations: Record<Language, Translation> = {
       eyebrow: "Контакти",
       title: "Створімо щось, у що хочеться грати.",
       description:
-        "Маєте mobile game, VR/XR concept або Unity project, якому потрібне production-minded виконання? Надішліть контекст, і я відповім із найкориснішим наступним кроком.",
+        "Маєте web product, mobile game, VR/XR concept або Unity project, якому потрібне production-minded виконання? Надішліть контекст, і я відповім із найкориснішим наступним кроком.",
       emailMe: "Написати email",
       downloadCv: "Завантажити CV",
       downloadCvAria: "Завантажити CV Dementiy Besarab",

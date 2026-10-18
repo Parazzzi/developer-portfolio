@@ -11,16 +11,16 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://dementiy-besarab.vercel.app'),
-  title: 'Dementiy Besarab - Unity C# Developer',
+  title: 'Dementiy Besarab - Unity & Software Developer',
   description:
-    'Premium Unity C# Developer portfolio for mobile games, VR/XR experiences, gameplay systems, production UI, integrations, architecture, and optimization.',
+    'Unity and software developer portfolio covering C#, TypeScript, JavaScript, mobile games, VR/XR, web applications, architecture, and end-to-end delivery.',
   alternates: {
     canonical: '/',
   },
   openGraph: {
-    title: 'Dementiy Besarab - Unity C# Developer',
+    title: 'Dementiy Besarab - Unity & Software Developer',
     description:
-      'Unity C# Developer focused on mobile games, VR/XR experiences and production-ready gameplay systems.',
+      'Software developer with 4+ years of experience across Unity, C#, mobile games, VR/XR, TypeScript, JavaScript, and web applications.',
     url: '/',
     siteName: 'Dementiy Besarab Portfolio',
     images: [
@@ -36,9 +36,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Dementiy Besarab - Unity C# Developer',
+    title: 'Dementiy Besarab - Unity & Software Developer',
     description:
-      'Unity C# Developer focused on mobile games, VR/XR experiences and production-ready gameplay systems.',
+      'Software developer with 4+ years of experience across Unity, C#, mobile games, VR/XR, TypeScript, JavaScript, and web applications.',
     images: ['/vr-football-penalty-poster.png'],
   },
   icons: {

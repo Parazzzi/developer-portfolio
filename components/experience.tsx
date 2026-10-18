@@ -12,11 +12,15 @@ export function Experience() {
   const certificate = achievementItems.find((achievement) => achievement.id === "game-designer-certificate")
   const achievement = t.achievements.items["game-designer-certificate"]
   const entries = language === "en" ? [
-    { label: "Recent studio role", title: "CREATY Games", role: "Unity C# Developer", description: "Commercial mobile game production across the PC Creator series. Gameplay systems, production UI, SDK integrations and Android / iOS release support.", link: "#work", linkLabel: "Explore the work" },
-    { label: "3+ years", title: "Commercial & freelance", role: "Unity / Mobile / VR-XR", description: t.about.paragraphs[0], link: "#games-lab", linkLabel: "Explore the experiments" },
+    { label: "2026 — Present", title: "Freelance / Self-employed", role: "Software Developer", description: "Websites, web applications and admin dashboards built with TypeScript, JavaScript and HTML/CSS, including Math-Veb and AUTOCOREx.", link: "#contact", linkLabel: "Start a conversation" },
+    { label: "Apr 2026 — Present", title: "Mirko Solutions", role: "Unity Developer · Full-time, then part-time", description: "Outsourced Unity VR/XR and interactive applications: gameplay, VR interactions, UI and client-server features, including work on an NDA-protected VR project.", link: "#work", linkLabel: "Explore the work" },
+    { label: "May 2024 — Apr 2026", title: "CREATY", role: "Unity Developer", description: "Two mid-core Unity projects developed from scratch through release, covering gameplay, UI, Android/iOS builds, analytics, monetization and third-party integrations.", link: "#work", linkLabel: "Explore the releases" },
+    { label: "Apr 2023 — Apr 2024", title: "Bugiko & Freelance", role: "Unity Developer", description: "A large-scale Unity prototype plus casual mobile games and interactive applications, with responsibility spanning architecture, mechanics, UI, optimization and delivery.", link: "#games-lab", linkLabel: "Explore the experiments" },
   ] : [
-    { label: "Recent studio role", title: "CREATY Games", role: "Unity C# Developer", description: "Комерційна розробка mobile games у серії PC Creator. Gameplay-системи, production UI, SDK-інтеграції та підтримка релізів Android / iOS.", link: "#work", linkLabel: "Переглянути роботи" },
-    { label: "3+ роки", title: "Комерційна робота / freelance", role: "Unity / Mobile / VR-XR", description: t.about.paragraphs[0], link: "#games-lab", linkLabel: "Переглянути експерименти" },
+    { label: "2026 — дотепер", title: "Freelance / Self-employed", role: "Software Developer", description: "Сайти, web applications та admin dashboards на TypeScript, JavaScript і HTML/CSS, зокрема Math-Veb та AUTOCOREx.", link: "#contact", linkLabel: "Обговорити проєкт" },
+    { label: "Квіт 2026 — дотепер", title: "Mirko Solutions", role: "Unity Developer · Full-time, потім part-time", description: "Outsource Unity VR/XR та interactive applications: gameplay, VR interactions, UI і client-server features, зокрема робота над NDA-захищеним VR-проєктом.", link: "#work", linkLabel: "Переглянути роботи" },
+    { label: "Трав 2024 — квіт 2026", title: "CREATY", role: "Unity Developer", description: "Два mid-core Unity-проєкти від старту до релізу: gameplay, UI, Android/iOS builds, analytics, monetization і third-party integrations.", link: "#work", linkLabel: "Переглянути релізи" },
+    { label: "Квіт 2023 — квіт 2024", title: "Bugiko та Freelance", role: "Unity Developer", description: "Великий Unity-прототип, casual mobile games та interactive applications із роботою над архітектурою, механіками, UI, оптимізацією й delivery.", link: "#games-lab", linkLabel: "Переглянути експерименти" },
   ]
 
   return (
