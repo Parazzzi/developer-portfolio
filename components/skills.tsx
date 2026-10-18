@@ -11,16 +11,15 @@ export function Skills() {
       <span id="skills" className="editorial-anchor" aria-hidden="true" />
       <div className="site-shell">
         <div className="editorial-heading-row">
-          <p className="eyebrow">04 / {language === "en" ? "Capabilities" : "Компетенції"}</p>
+          <p className="eyebrow">03 / {language === "en" ? "Capabilities" : "Компетенції"}</p>
           <p className="editorial-index-note">UNITY / C# / XR</p>
         </div>
         <div className="capabilities-intro">
           <h2 id="capabilities-title" className="section-title">
             {language === "en" ? <>A working<br />toolkit.</> : <>Робочі<br />інструменти.</>}
           </h2>
-          <div className="capabilities-artifact-space" data-artifact-slot aria-hidden="true" />
+          <p className="editorial-lead">{t.toolkit.title}</p>
         </div>
-        <p className="capabilities-context editorial-lead">{t.toolkit.title}</p>
         <ol className="capabilities-index">
           {t.toolkit.categories.map((category, index) => (
             <li key={category.title} className="capability-entry">

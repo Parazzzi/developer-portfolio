@@ -131,10 +131,6 @@ export function createSculpture(quality: ArtifactQuality) {
   const dustMaterial = new PointsMaterial({ color: 0xb7c4a3, size: 0.008, transparent: true, opacity: 0.48, blending: AdditiveBlending, depthWrite: false })
   const dust = new Points(dustGeometry, dustMaterial)
   group.add(dust)
-  const chromeDark = new Color(0x434b3f)
-  const chromeLight = new Color(0xb8bdb9)
-  const wireDark = new Color(0x2a3824)
-  const wireLight = new Color(0x9caa90)
 
   function update(state: ArtifactState, time: number) {
     for (const fragment of fragments) {
@@ -150,11 +146,6 @@ export function createSculpture(quality: ArtifactQuality) {
     dust.rotation.z = -time * 0.018
     glass.opacity = quality.lowPower ? MathUtils.lerp(0.12, 0.33, state.crystal) : MathUtils.lerp(0.4, 0.8, state.crystal)
     chrome.roughness = MathUtils.lerp(0.23, 0.36, state.wire)
-    chrome.color.copy(chromeLight).lerp(chromeDark, state.light)
-    wireMaterial.color.copy(wireLight).lerp(wireDark, state.light)
-    chrome.wireframe = state.wire > 0.82
-    porcelain.wireframe = state.wire > 0.82
-    blackMetal.wireframe = state.wire > 0.9
     wireMaterial.opacity = MathUtils.lerp(0.2, 0.7, state.wire)
     accentWire.opacity = MathUtils.lerp(0.22, 0.5, state.wire)
     coreMaterial.emissiveIntensity = 0.18 + state.crystal * 0.13

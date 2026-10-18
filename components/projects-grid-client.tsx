@@ -11,7 +11,7 @@ import { formatMessage, type Translation } from "@/lib/i18n/translations"
 import "@/components/work.css"
 
 type StaticProject = (typeof projectItems)[number]
-const presentationOrder: ProjectId[] = ["pc-creator-3", "pc-creator-3-pro", "pc-creator-2"]
+const presentationOrder: ProjectId[] = ["pc-creator-3", "vr-football-penalty", "pc-creator-3-pro", "pc-creator-2"]
 
 export function ProjectsGridClient({ gamesLab }: { gamesLab: ReactNode }) {
   const { t, language } = useLanguage()
@@ -22,13 +22,12 @@ export function ProjectsGridClient({ gamesLab }: { gamesLab: ReactNode }) {
         <div className="site-shell">
           <div className="work-intro">
             <div>
-              <p className="eyebrow"><span className="index-mark">02 /</span> {t.work.eyebrow}</p>
+              <p className="eyebrow"><span className="index-mark">01 /</span> {t.work.eyebrow}</p>
               <h2 id="work-title" className="section-title">{language === "en" ? <>Selected<br /><span className="work-title-indent">work.</span></> : <>Вибрані<br /><span className="work-title-indent">роботи.</span></>}</h2>
             </div>
             <div className="work-intro-copy">
               <p>{t.work.description}</p>
-              <span className="eyebrow">03 / {language === "en" ? "MOBILE RELEASES" : "МОБІЛЬНІ РЕЛІЗИ"}</span>
-              <a className="text-link work-xr-link" href="#xr">VR / XR <ArrowUpRight size={15} /></a>
+              <span className="eyebrow">04 / {language === "en" ? "PROJECTS" : "ПРОЄКТИ"}</span>
             </div>
           </div>
 
@@ -50,15 +49,6 @@ export function ProjectsGridClient({ gamesLab }: { gamesLab: ReactNode }) {
   )
 }
 
-export function XrWork() {
-  const { language } = useLanguage()
-  const project = projectItems.find(item => item.id === "vr-football-penalty")!
-  return <section id="xr" className="xr-section work-section" data-artifact="xr" aria-labelledby="xr-title"><div className="site-shell">
-    <div className="xr-intro"><div className="xr-artifact-space" data-artifact-slot aria-hidden="true" /><div><p className="eyebrow">05 / VR & XR</p><h2 id="xr-title" className="section-title">{language === "en" ? <>Beyond<br />the screen.</> : <>За межами<br />екрана.</>}</h2><p className="xr-intro-copy">{language === "en" ? "Real movement. Spatial interaction. Built in Unity." : "Реальний рух. Просторова взаємодія. Створено в Unity."}</p></div></div>
-    <ProjectFeature project={project} index={3} />
-  </div></section>
-}
-
 function ProjectFeature({ project, index }: { project: StaticProject; index: number }) {
   const { t, language } = useLanguage()
   const content = t.projects.items[project.id]
@@ -68,7 +58,7 @@ function ProjectFeature({ project, index }: { project: StaticProject; index: num
   const category = isVr ? "VR / XR" : "MOBILE / ANDROID / IOS"
 
   return (
-    <article className={`project-feature ${index % 2 === 1 ? "project-feature-reverse" : ""}`} data-artifact="mobile" aria-labelledby={`project-${project.id}`}>
+    <article className={`project-feature ${index % 2 === 1 ? "project-feature-reverse" : ""}`} data-artifact={isVr ? "xr" : "mobile"} aria-labelledby={`project-${project.id}`}>
       <div className="project-topline eyebrow">
         <span>{number} / {isVr ? (language === "en" ? "SPATIAL INTERACTION" : "ПРОСТОРОВА ВЗАЄМОДІЯ") : (language === "en" ? "COMMERCIAL RELEASE" : "КОМЕРЦІЙНИЙ РЕЛІЗ")}</span>
         <span>{category}</span>

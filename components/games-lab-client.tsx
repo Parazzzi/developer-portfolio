@@ -94,23 +94,14 @@ export function GamesLabClient({ items }: Props) {
         </div>
       </div>
 
-      <dialog ref={galleryRef} className={`lab-gallery ${selectedGame?.orientation === "vertical" ? "lab-gallery-vertical" : ""}`} aria-labelledby="lab-gallery-title" onClose={() => setSelectedGame(null)}
-        onKeyDown={(event) => {
-          if (event.key !== "Tab") return
-          const controls = event.currentTarget.querySelectorAll<HTMLElement>('button, [tabindex="0"]')
-          const first = controls[0]
-          const last = controls[controls.length - 1]
-          if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last?.focus() }
-          else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first?.focus() }
-        }}
-        onClick={(event) => { if (event.target === event.currentTarget) galleryRef.current?.close() }}>
+      <dialog ref={galleryRef} className={`lab-gallery ${selectedGame?.orientation === "vertical" ? "lab-gallery-vertical" : ""}`} aria-labelledby="lab-gallery-title" onClose={() => setSelectedGame(null)} onClick={(event) => { if (event.target === event.currentTarget) galleryRef.current?.close() }}>
         {selectedGame ? (
           <div className="lab-gallery-panel">
             <div className="lab-gallery-header">
               <div><p className="eyebrow">{t.gamesLab.items[selectedGame.id].genre}</p><h3 id="lab-gallery-title">{selectedGame.title}</h3><p className="lab-gallery-description">{t.gamesLab.items[selectedGame.id].fullDescription}</p></div>
               <button type="button" autoFocus className="lab-gallery-close" onClick={() => galleryRef.current?.close()} aria-label={formatMessage(t.gamesLab.closeGalleryAria, { title: selectedGame.title })}><X size={20} aria-hidden="true" /></button>
             </div>
-            <div className="lab-gallery-media" tabIndex={0} role="group" aria-label={language === "en" ? "Project screenshots" : "Скриншоти проєкту"}>
+            <div className="lab-gallery-media">
               {selectedGame.images.length ? selectedGame.images.map((source, index) => (
                 <figure key={source}>
                   <div className="lab-gallery-image"><Image src={optimizedImage(source)} alt={formatMessage(t.gamesLab.screenshotAlt, { title: selectedGame.title, index: index + 1 })} fill sizes={selectedGame.orientation === "horizontal" ? "(max-width: 760px) 90vw, 50vw" : "(max-width: 600px) 80vw, 300px"} className="lab-screenshot" loading="lazy" /></div>

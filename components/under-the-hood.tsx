@@ -11,7 +11,7 @@ export function UnderTheHood() {
     <section id="under-the-hood" className="editorial-section systems-section" data-artifact="systems" aria-labelledby="systems-title">
       <div className="site-shell">
         <div className="editorial-heading-row">
-          <p className="eyebrow">03 / {t.underHood.eyebrow}</p>
+          <p className="eyebrow">02 / {t.underHood.eyebrow}</p>
           <p className="editorial-index-note">LOGIC → INTERACTION</p>
         </div>
         <div className="systems-composition">
