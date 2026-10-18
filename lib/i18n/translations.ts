@@ -43,6 +43,14 @@ type SkillGroup = {
   tags: string[]
 }
 
+type ExperienceItem = {
+  role: string
+  company: string
+  period: string
+  arrangement: string
+  highlights: string[]
+}
+
 type WorkflowStep = {
   step: string
   title: string
@@ -89,6 +97,12 @@ type Translation = {
     title: string
     description: string
     groups: SkillGroup[]
+  }
+  experience: {
+    eyebrow: string
+    title: string
+    description: string
+    items: ExperienceItem[]
   }
   projects: {
     eyebrow: string
@@ -151,6 +165,7 @@ export const translations: Record<Language, Translation> = {
         { label: "About", href: "#about" },
         { label: "What I Do", href: "#services" },
         { label: "Skills", href: "#skills" },
+        { label: "Experience", href: "#experience" },
         { label: "Projects", href: "#projects" },
         { label: "Achievements", href: "#achievements" },
         { label: "Workflow", href: "#workflow" },
@@ -159,22 +174,22 @@ export const translations: Record<Language, Translation> = {
       contact: "Contact Me",
     },
     profile: {
-      role: "Unity Developer | C# | Mobile Games | VR/XR",
+      role: "Unity & Software Developer | C# | TypeScript | JavaScript | VR/XR",
       subtitle:
-        "Unity Developer with 3+ years of commercial and freelance experience building mobile games, VR/XR projects, and interactive Unity applications from prototype to release.",
-      badges: ["Unity 2D/3D", "C#", "Android / iOS", "VR / XR", "AI-assisted Development"],
+        "Software developer with 4+ years of commercial and freelance experience across Unity, mobile games, VR/XR, websites, admin dashboards, and web applications.",
+      badges: ["C#", "TypeScript / JavaScript", "Unity 2D/3D", "Web Apps & Dashboards", "VR / XR"],
     },
     hero: {
       status: "Currently available",
       availableFor: "Currently available for:",
       funPortfolio3d: "3D Fun Portfolio",
       availabilityItems: [
-        "Full-time Unity Developer roles",
-        "Part-time / contract Unity work",
-        "Mobile game development",
-        "VR/XR prototypes",
+        "Software development roles and contracts",
+        "Websites, web applications, and admin dashboards",
+        "Unity and mobile game development",
+        "VR/XR and interactive applications",
         "Project stabilization and bug fixing",
-        "Gameplay systems, UI, SDK integrations, optimization, and build preparation",
+        "UI, service integrations, client-server features, and end-to-end delivery",
       ],
       viewProjects: "View Projects",
       contactMe: "Contact Me",
@@ -183,54 +198,54 @@ export const translations: Record<Language, Translation> = {
     },
     about: {
       eyebrow: "About",
-      title: "Unity development from prototype to release",
+      title: "Unity and software development from idea to delivery",
       paragraphs: [
-        "I am a Unity Developer with 3+ years of commercial and freelance experience building mobile games, VR/XR projects, and interactive applications with Unity and C#.",
-        "My work covers gameplay systems, UI implementation, Android/iOS build preparation, optimization, SDK integrations, analytics, monetization, client-server features, and stable production delivery.",
-        "I use AI tools like Codex, Claude Code, and ChatGPT for analysis, debugging, refactoring, and architecture validation while keeping ownership of technical decisions and final code quality.",
+        "I am a Unity and Software Developer with 4+ years of commercial and freelance experience in Unity, C#, mobile games, VR/XR, and interactive applications.",
+        "Alongside part-time Unity work, I independently develop websites, web applications, and administrative dashboards with TypeScript, JavaScript, HTML, and CSS, handling UI, project structure, and delivery.",
+        "I focus on clean architecture, maintainable code, UI quality, testing, debugging, and end-to-end delivery. AI tools support my analysis and refactoring, while technical decisions and final quality remain my responsibility.",
       ],
       stats: [
-        { value: "3+", label: "Years Experience" },
-        { value: "Android / iOS", label: "Mobile Builds" },
-        { value: "VR / XR", label: "Interactive Projects" },
-        { value: "CREATY Games", label: "Recent Studio Role" },
+        { value: "4+", label: "Years Experience" },
+        { value: "C# / TS / JS", label: "Core Languages" },
+        { value: "Unity / VR/XR", label: "Interactive Development" },
+        { value: "Web Apps", label: "Sites & Admin Dashboards" },
       ],
     },
     services: {
       eyebrow: "What I do",
       title: "What I can do for your project",
       description:
-        "Focused Unity support for prototypes, production features, mobile releases, VR/XR work, and existing projects that need stability.",
+        "End-to-end development for web products, Unity projects, mobile releases, VR/XR experiences, and existing codebases that need stability.",
       items: [
         {
-          title: "Gameplay systems",
+          title: "Websites & web applications",
           description:
-            "Build and maintain core gameplay mechanics, game states, player interactions, progression systems, and feature logic in Unity/C#.",
+            "Build responsive websites and web applications with TypeScript, JavaScript, HTML, and CSS, from structure and UI through final delivery.",
         },
         {
-          title: "Mobile game development",
+          title: "Administrative dashboards",
           description:
-            "Work on Android/iOS Unity projects, UI flows, performance, build preparation, testing, and release-focused stability.",
+            "Create practical admin interfaces and workflows with clear information architecture, maintainable frontend code, and polished responsive UI.",
         },
         {
-          title: "VR/XR prototypes",
+          title: "Unity & mobile development",
           description:
-            "Create and polish VR/XR interactions, spatial gameplay, Meta Quest prototypes, and headset-tested gameplay experiences.",
+            "Develop gameplay systems, UI flows, Android/iOS builds, optimization, testing, analytics, monetization, and production features in Unity/C#.",
         },
         {
-          title: "UI, animation, and game feel",
+          title: "VR/XR & interactive applications",
           description:
-            "Implement responsive UIs, polished transitions, DOTween animations, clear feedback, and smooth player-facing flows.",
+            "Build and polish spatial interactions, VR gameplay, UI, and client-server features for headset-tested interactive experiences.",
         },
         {
-          title: "SDKs, analytics, and monetization",
+          title: "Architecture & integrations",
           description:
-            "Integrate Firebase, analytics, ads, SDK/NDK packages, monetization tools, and client-server features.",
+            "Shape maintainable project structure and integrate services, SDKs, backend interaction, analytics, ads, and client-server functionality.",
         },
         {
           title: "Project stabilization and bug fixing",
           description:
-            "Analyze existing Unity projects, fix bugs, clean up fragile systems, improve structure, optimize performance, and prepare stable builds.",
+            "Analyze existing codebases, fix bugs, refactor fragile systems, improve performance and maintainability, and prepare stable releases.",
         },
       ],
     },
@@ -238,17 +253,17 @@ export const translations: Record<Language, Translation> = {
       eyebrow: "Skills",
       title: "A focused, production-ready toolkit",
       description:
-        "Grouped by what I actually ship - from Unity systems to UI, integrations, optimization, and AI-assisted workflows.",
+        "A practical toolkit spanning web products, Unity systems, VR/XR, architecture, integrations, and delivery quality.",
       groups: [
         {
-          title: "Unity 2D/3D & C#",
-          description: "Commercial Unity development across gameplay systems, prototypes, and production features.",
-          tags: ["Unity", "C#", "2D/3D", "Git"],
+          title: "Languages & Web",
+          description: "Responsive websites, web applications, and administrative dashboards with maintainable frontend code.",
+          tags: ["C#", "TypeScript", "JavaScript", "HTML5", "CSS3", "Markdown"],
         },
         {
-          title: "Mobile Builds",
-          description: "Android and iOS build preparation, testing, optimization, and release-focused stability.",
-          tags: ["Android", "iOS", "Performance", "Game Testing"],
+          title: "Unity & Mobile",
+          description: "Commercial Unity development across gameplay systems, production features, and mobile releases.",
+          tags: ["Unity 2D/3D", "C#", "Android", "iOS", "Optimization"],
         },
         {
           title: "VR/XR Development",
@@ -261,9 +276,9 @@ export const translations: Record<Language, Translation> = {
           tags: ["UGUI", "DOTween", "Spine", "UI/UX"],
         },
         {
-          title: "Architecture & Services",
-          description: "Maintainable systems built around SOLID principles, dependency injection, and clear project structure.",
-          tags: ["SOLID", "Zenject", "Refactoring", "Code Review"],
+          title: "Architecture & Backend",
+          description: "Maintainable systems, service integrations, backend interaction, and clear project structure.",
+          tags: ["SOLID", "Zenject", "ASP.NET", "Client-Server", "SDK Integrations"],
         },
         {
           title: "SDKs & Monetization",
@@ -271,17 +286,74 @@ export const translations: Record<Language, Translation> = {
           tags: ["Firebase", "Game Analytics", "AppMetrica", "AdMob", "AppLovin"],
         },
         {
-          title: "AI-assisted Development",
+          title: "Tools & Quality",
           description:
-            "Using AI tools for codebase analysis, debugging, refactoring, routine code, and architecture validation.",
-          tags: ["Codex", "Claude Code", "ChatGPT", "Architecture Review"],
+            "Testing, debugging, refactoring, code review, source control, and responsible AI-assisted development.",
+          tags: ["Git", "Codex", "Claude Code", "ChatGPT", "Testing", "Code Review"],
+        },
+      ],
+    },
+    experience: {
+      eyebrow: "Experience",
+      title: "Commercial and freelance experience",
+      description:
+        "A track record across web products, Unity mobile games, VR/XR applications, and full-cycle delivery.",
+      items: [
+        {
+          role: "Freelance Developer",
+          company: "Self-employed",
+          period: "2026 - Present",
+          arrangement: "Remote",
+          highlights: [
+            "Develop websites, web applications, and administrative dashboards using TypeScript, JavaScript, HTML, and CSS; handle UI implementation, project structure, and delivery.",
+            "Work on independent and client projects, including Math-Veb, an educational platform with an admin panel, and AUTOCOREx, a website with an admin panel.",
+          ],
+        },
+        {
+          role: "Unity Developer",
+          company: "Mirko Solutions",
+          period: "Apr 2026 - Present",
+          arrangement: "Remote · Full-time Apr-Sep · Part-time since Oct",
+          highlights: [
+            "Work on outsourced Unity VR/XR and interactive applications, including an NDA-protected VR project.",
+            "Develop gameplay, VR interactions, UI, and client-server features.",
+          ],
+        },
+        {
+          role: "Unity Developer",
+          company: "CREATY",
+          period: "May 2024 - Apr 2026",
+          arrangement: "Lutsk",
+          highlights: [
+            "Developed two mid-core Unity projects from scratch through release, covering gameplay systems, UI, and Android/iOS build preparation.",
+            "Integrated monetization, analytics, and third-party services and collaborated with design and product teams.",
+          ],
+        },
+        {
+          role: "Unity Developer",
+          company: "Bugiko",
+          period: "Nov 2023 - Apr 2024",
+          arrangement: "Remote",
+          highlights: [
+            "Built a large-scale Unity prototype from scratch, selecting the architecture and technology stack while improving performance, scalability, and maintainability.",
+          ],
+        },
+        {
+          role: "Unity Developer",
+          company: "Freelance",
+          period: "Apr 2023 - Oct 2023",
+          arrangement: "Remote",
+          highlights: [
+            "Developed casual mobile games and interactive Unity applications, including gameplay, UI, animations, audio, testing, and direct client communication.",
+          ],
         },
       ],
     },
     projects: {
       eyebrow: "Projects",
-      title: "Selected work",
-      description: "Selected Unity games across PC Creator mobile tycoon projects and room-scale VR football gameplay.",
+      title: "Selected Unity work",
+      description:
+        "Released mobile games and an interactive room-scale VR prototype, complementing the web work listed in my recent experience.",
       card: {
         gameplayVideoTitle: "{title} gameplay video",
         previewAlt: "{title} preview",
@@ -330,29 +402,29 @@ export const translations: Record<Language, Translation> = {
     workflow: {
       eyebrow: "Workflow",
       title: "How I work",
-      description: "A repeatable process that keeps quality high from first idea to polished build.",
+      description: "A practical process for taking web, Unity, and interactive products from idea to stable delivery.",
       steps: [
         {
           step: "01",
           title: "Plan architecture and scope",
-          description: "Clarify gameplay goals, platform constraints, project structure, and the technical path before building.",
+          description: "Clarify product goals, platform constraints, project structure, and the technical path before building.",
         },
         {
           step: "02",
-          title: "Build Unity gameplay systems",
+          title: "Build the product",
           description:
-            "Implement gameplay, UI, services, saves, events, and game states with readable C# and maintainable boundaries.",
+            "Implement responsive UI, application or gameplay logic, services, and client-server features with readable, maintainable code.",
         },
         {
           step: "03",
           title: "Integrate SDKs and services",
           description:
-            "Connect analytics, ads, SDK/NDK packages, monetization, backend interaction, and client-server features.",
+            "Connect APIs, backend functionality, analytics, ads, SDK/NDK packages, and other third-party services as needed.",
         },
         {
           step: "04",
           title: "Test, optimize, and stabilize",
-          description: "Profile performance, fix edge cases, verify mobile or headset behavior, and prepare stable builds.",
+          description: "Fix edge cases, verify responsive, mobile, or headset behavior, optimize performance, and prepare stable releases.",
         },
         {
           step: "05",
@@ -364,9 +436,9 @@ export const translations: Record<Language, Translation> = {
     },
     contact: {
       eyebrow: "Contact",
-      title: "Let's build something playable, polished, and actually fun.",
+      title: "Let's build something useful, polished, and reliable.",
       description:
-        "Have a mobile game, VR/XR concept, or Unity project that needs a reliable developer? I'd love to hear about it.",
+        "Have a website, web application, admin dashboard, mobile game, VR/XR concept, or Unity project? I'd love to hear about it.",
       emailMe: "Email me",
       downloadCv: "Download CV",
       downloadCvAria: "Download Dementiy Besarab CV",
@@ -471,6 +543,7 @@ export const translations: Record<Language, Translation> = {
         { label: "Про мене", href: "#about" },
         { label: "Що я роблю", href: "#services" },
         { label: "Навички", href: "#skills" },
+        { label: "Досвід", href: "#experience" },
         { label: "Проєкти", href: "#projects" },
         { label: "Досягнення", href: "#achievements" },
         { label: "Процес", href: "#workflow" },
@@ -479,22 +552,22 @@ export const translations: Record<Language, Translation> = {
       contact: "Зв'язатися",
     },
     profile: {
-      role: "Unity Developer | C# | Мобільні ігри | VR/XR",
+      role: "Unity & Software Developer | C# | TypeScript | JavaScript | VR/XR",
       subtitle:
-        "Unity Developer із понад 3 роками комерційного та фриланс-досвіду у створенні мобільних ігор, VR/XR-проєктів та інтерактивних Unity-застосунків від прототипу до релізу.",
-      badges: ["Unity 2D/3D", "C#", "Android / iOS", "VR / XR", "AI-assisted розробка"],
+        "Software Developer із понад 4 роками комерційного та фриланс-досвіду в Unity, мобільних іграх, VR/XR, вебсайтах, адмінпанелях і вебзастосунках.",
+      badges: ["C#", "TypeScript / JavaScript", "Unity 2D/3D", "Вебзастосунки й адмінпанелі", "VR / XR"],
     },
     hero: {
       status: "Відкритий до пропозицій",
       availableFor: "Відкритий до:",
       funPortfolio3d: "3D Fun Portfolio",
       availabilityItems: [
-        "Full-time ролі Unity Developer",
-        "Part-time / контрактна робота з Unity",
-        "Розробка мобільних ігор",
-        "VR/XR прототипи",
+        "Ролі та контракти в software development",
+        "Вебсайти, вебзастосунки та адмінпанелі",
+        "Unity-розробка та мобільні ігри",
+        "VR/XR та інтерактивні застосунки",
         "Стабілізація проєктів і виправлення багів",
-        "Gameplay-системи, UI, SDK-інтеграції, оптимізація та підготовка білдів",
+        "UI, інтеграції сервісів, клієнт-серверні функції та повний цикл розробки",
       ],
       viewProjects: "Переглянути проєкти",
       contactMe: "Зв'язатися",
@@ -503,54 +576,54 @@ export const translations: Record<Language, Translation> = {
     },
     about: {
       eyebrow: "Про мене",
-      title: "Unity-розробка від прототипу до релізу",
+      title: "Unity та software development від ідеї до релізу",
       paragraphs: [
-        "Я Unity Developer із понад 3 роками комерційного та фриланс-досвіду у створенні мобільних ігор, VR/XR-проєктів та інтерактивних застосунків на Unity і C#.",
-        "Моя робота охоплює gameplay-системи, реалізацію UI, підготовку Android/iOS білдів, оптимізацію, SDK-інтеграції, аналітику, монетизацію, клієнт-серверні функції та стабільну production-доставку.",
-        "Я використовую AI-інструменти, зокрема Codex, Claude Code і ChatGPT, для аналізу, дебагу, рефакторингу та перевірки архітектури, зберігаючи відповідальність за технічні рішення й фінальну якість коду.",
+        "Я Unity та Software Developer із понад 4 роками комерційного й фриланс-досвіду в Unity, C#, мобільних іграх, VR/XR та інтерактивних застосунках.",
+        "Паралельно з part-time роботою в Unity я самостійно розробляю вебсайти, вебзастосунки й адміністративні панелі на TypeScript, JavaScript, HTML і CSS, відповідаючи за UI, структуру проєкту та delivery.",
+        "Фокусуюся на чистій архітектурі, підтримуваному коді, якості UI, тестуванні, дебагу та повному циклі доставки. AI-інструменти допомагають з аналізом і рефакторингом, а технічні рішення та фінальна якість залишаються моєю відповідальністю.",
       ],
       stats: [
-        { value: "3+", label: "Роки досвіду" },
-        { value: "Android / iOS", label: "Мобільні білди" },
-        { value: "VR / XR", label: "Інтерактивні проєкти" },
-        { value: "CREATY Games", label: "Остання студійна роль" },
+        { value: "4+", label: "Роки досвіду" },
+        { value: "C# / TS / JS", label: "Основні мови" },
+        { value: "Unity / VR/XR", label: "Інтерактивна розробка" },
+        { value: "Web Apps", label: "Сайти й адмінпанелі" },
       ],
     },
     services: {
       eyebrow: "Що я роблю",
       title: "Чим можу допомогти вашому проєкту",
       description:
-        "Сфокусована Unity-підтримка для прототипів, production-фіч, мобільних релізів, VR/XR-робіт і наявних проєктів, яким потрібна стабільність.",
+        "Повний цикл розробки для вебпродуктів, Unity-проєктів, мобільних релізів, VR/XR-досвіду та наявних кодових баз, яким потрібна стабільність.",
       items: [
         {
-          title: "Gameplay-системи",
+          title: "Вебсайти та вебзастосунки",
           description:
-            "Створюю та підтримую основні gameplay-механіки, ігрові стани, взаємодію гравця, системи прогресу та feature-логіку на Unity/C#.",
+            "Створюю адаптивні вебсайти й вебзастосунки на TypeScript, JavaScript, HTML і CSS: від структури та UI до фінальної доставки.",
         },
         {
-          title: "Розробка мобільних ігор",
+          title: "Адміністративні панелі",
           description:
-            "Працюю з Android/iOS Unity-проєктами, UI-флоу, продуктивністю, підготовкою білдів, тестуванням і стабільністю перед релізом.",
+            "Розробляю практичні admin-інтерфейси й робочі процеси зі зрозумілою інформаційною архітектурою, підтримуваним frontend-кодом і якісним адаптивним UI.",
         },
         {
-          title: "VR/XR прототипи",
+          title: "Unity та мобільна розробка",
           description:
-            "Створюю й полірую VR/XR-взаємодії, просторовий gameplay, Meta Quest прототипи та gameplay-досвід, перевірений у headset.",
+            "Розробляю gameplay-системи, UI-флоу, Android/iOS білди, оптимізацію, тестування, аналітику, монетизацію та production-фічі на Unity/C#.",
         },
         {
-          title: "UI, анімація та game feel",
+          title: "VR/XR та інтерактивні застосунки",
           description:
-            "Реалізую адаптивні UI, відполіровані переходи, DOTween-анімації, зрозумілий feedback і плавні player-facing флоу.",
+            "Створюю та полірую просторові взаємодії, VR-gameplay, UI і клієнт-серверні функції для інтерактивного досвіду, перевіреного у headset.",
         },
         {
-          title: "SDK, аналітика та монетизація",
+          title: "Архітектура та інтеграції",
           description:
-            "Інтегрую Firebase, аналітику, рекламу, SDK/NDK пакети, інструменти монетизації та клієнт-серверні функції.",
+            "Проєктую підтримувану структуру та інтегрую сервіси, SDK, backend-взаємодію, аналітику, рекламу й клієнт-серверну функціональність.",
         },
         {
           title: "Стабілізація проєктів і виправлення багів",
           description:
-            "Аналізую наявні Unity-проєкти, виправляю баги, приводжу крихкі системи до ладу, покращую структуру, оптимізую продуктивність і готую стабільні білди.",
+            "Аналізую наявні кодові бази, виправляю баги, рефакторю крихкі системи, покращую продуктивність і підтримуваність та готую стабільні релізи.",
         },
       ],
     },
@@ -558,17 +631,17 @@ export const translations: Record<Language, Translation> = {
       eyebrow: "Навички",
       title: "Сфокусований інструментарій для production",
       description:
-        "Згруповано за тим, що я реально доводжу до релізу: Unity-системи, UI, інтеграції, оптимізація та AI-assisted workflows.",
+        "Практичний інструментарій для вебпродуктів, Unity-систем, VR/XR, архітектури, інтеграцій і якісного delivery.",
       groups: [
         {
-          title: "Unity 2D/3D & C#",
-          description: "Комерційна Unity-розробка gameplay-систем, прототипів і production-фіч.",
-          tags: ["Unity", "C#", "2D/3D", "Git"],
+          title: "Мови та Web",
+          description: "Адаптивні вебсайти, вебзастосунки й адміністративні панелі з підтримуваним frontend-кодом.",
+          tags: ["C#", "TypeScript", "JavaScript", "HTML5", "CSS3", "Markdown"],
         },
         {
-          title: "Мобільні білди",
-          description: "Підготовка Android та iOS білдів, тестування, оптимізація і стабільність перед релізом.",
-          tags: ["Android", "iOS", "Оптимізація", "Тестування ігор"],
+          title: "Unity та мобільна розробка",
+          description: "Комерційна Unity-розробка gameplay-систем, production-фіч і мобільних релізів.",
+          tags: ["Unity 2D/3D", "C#", "Android", "iOS", "Оптимізація"],
         },
         {
           title: "VR/XR розробка",
@@ -581,10 +654,10 @@ export const translations: Record<Language, Translation> = {
           tags: ["UGUI", "DOTween", "Spine", "UI/UX"],
         },
         {
-          title: "Архітектура та сервіси",
+          title: "Архітектура та Backend",
           description:
-            "Підтримувані системи на базі SOLID-принципів, dependency injection і зрозумілої структури проєкту.",
-          tags: ["SOLID", "Zenject", "Рефакторинг", "Рев'ю коду"],
+            "Підтримувані системи, інтеграції сервісів, backend-взаємодія та зрозуміла структура проєкту.",
+          tags: ["SOLID", "Zenject", "ASP.NET", "Client-Server", "SDK Integrations"],
         },
         {
           title: "SDK та монетизація",
@@ -592,18 +665,74 @@ export const translations: Record<Language, Translation> = {
           tags: ["Firebase", "Game Analytics", "AppMetrica", "AdMob", "AppLovin"],
         },
         {
-          title: "AI-assisted розробка",
+          title: "Інструменти та якість",
           description:
-            "Використання AI-інструментів для аналізу кодової бази, дебагу, рефакторингу, routine-коду та перевірки архітектури.",
-          tags: ["Codex", "Claude Code", "ChatGPT", "Архітектурне рев'ю"],
+            "Тестування, дебаг, рефакторинг, code review, контроль версій і відповідальна AI-assisted розробка.",
+          tags: ["Git", "Codex", "Claude Code", "ChatGPT", "Тестування", "Code Review"],
+        },
+      ],
+    },
+    experience: {
+      eyebrow: "Досвід",
+      title: "Комерційний і фриланс-досвід",
+      description:
+        "Робота над вебпродуктами, мобільними іграми на Unity, VR/XR-застосунками та повним циклом доставки.",
+      items: [
+        {
+          role: "Freelance Developer",
+          company: "Self-employed",
+          period: "2026 - дотепер",
+          arrangement: "Віддалено",
+          highlights: [
+            "Розробляю вебсайти, вебзастосунки та адміністративні панелі на TypeScript, JavaScript, HTML і CSS; відповідаю за UI, структуру проєкту та delivery.",
+            "Працюю над власними й клієнтськими проєктами, зокрема Math-Veb - освітньою платформою з адмінпанеллю - та AUTOCOREx - сайтом з адмінпанеллю.",
+          ],
+        },
+        {
+          role: "Unity Developer",
+          company: "Mirko Solutions",
+          period: "Кві 2026 - дотепер",
+          arrangement: "Віддалено · Full-time кві-вер · Part-time із жовтня",
+          highlights: [
+            "Працюю над outsourced Unity VR/XR та інтерактивними застосунками, зокрема VR-проєктом під NDA.",
+            "Розробляю gameplay, VR-взаємодії, UI та клієнт-серверні функції.",
+          ],
+        },
+        {
+          role: "Unity Developer",
+          company: "CREATY",
+          period: "Тра 2024 - Кві 2026",
+          arrangement: "Луцьк",
+          highlights: [
+            "Розробив два mid-core Unity-проєкти з нуля до релізу, охопивши gameplay-системи, UI та підготовку Android/iOS білдів.",
+            "Інтегрував монетизацію, аналітику й сторонні сервіси та співпрацював із design і product-командами.",
+          ],
+        },
+        {
+          role: "Unity Developer",
+          company: "Bugiko",
+          period: "Лис 2023 - Кві 2024",
+          arrangement: "Віддалено",
+          highlights: [
+            "Створив великий Unity-прототип із нуля, обрав архітектуру й технологічний стек та покращив продуктивність, масштабованість і підтримуваність.",
+          ],
+        },
+        {
+          role: "Unity Developer",
+          company: "Freelance",
+          period: "Кві 2023 - Жов 2023",
+          arrangement: "Віддалено",
+          highlights: [
+            "Розробляв casual mobile games та інтерактивні Unity-застосунки: gameplay, UI, анімації, аудіо, тестування й пряма комунікація з клієнтами.",
+          ],
         },
       ],
     },
     projects: {
       eyebrow: "Проєкти",
-      title: "Вибрані роботи",
+      title: "Вибрані Unity-роботи",
       description:
-        "Вибрані Unity-проєкти: мобільні tycoon-ігри PC Creator та room-scale VR football gameplay.",
+        "Релізнуті мобільні ігри та інтерактивний room-scale VR-прототип, які доповнюють веброботи з розділу досвіду.",
       card: {
         gameplayVideoTitle: "Відео gameplay для {title}",
         previewAlt: "Прев'ю {title}",
@@ -652,31 +781,31 @@ export const translations: Record<Language, Translation> = {
     workflow: {
       eyebrow: "Процес",
       title: "Як я працюю",
-      description: "Повторюваний процес, який допомагає тримати якість високою від першої ідеї до polished build.",
+      description: "Практичний процес для створення веб-, Unity та інтерактивних продуктів від ідеї до стабільного релізу.",
       steps: [
         {
           step: "01",
           title: "Планую архітектуру та scope",
           description:
-            "Уточнюю gameplay-цілі, платформні обмеження, структуру проєкту та технічний шлях перед розробкою.",
+            "Уточнюю цілі продукту, платформні обмеження, структуру проєкту та технічний шлях перед розробкою.",
         },
         {
           step: "02",
-          title: "Будую Unity gameplay-системи",
+          title: "Розробляю продукт",
           description:
-            "Реалізую gameplay, UI, сервіси, saves, events і game states з читабельним C# та підтримуваними межами відповідальності.",
+            "Реалізую адаптивний UI, прикладну або gameplay-логіку, сервіси й клієнт-серверні функції з читабельним і підтримуваним кодом.",
         },
         {
           step: "03",
           title: "Інтегрую SDK та сервіси",
           description:
-            "Підключаю аналітику, рекламу, SDK/NDK пакети, монетизацію, backend-взаємодію та клієнт-серверні функції.",
+            "Підключаю API, backend-функціональність, аналітику, рекламу, SDK/NDK пакети та інші сторонні сервіси за потреби.",
         },
         {
           step: "04",
           title: "Тестую, оптимізую та стабілізую",
           description:
-            "Профілюю продуктивність, виправляю edge cases, перевіряю mobile або headset behavior і готую стабільні білди.",
+            "Виправляю edge cases, перевіряю responsive, mobile або headset behavior, оптимізую продуктивність і готую стабільні релізи.",
         },
         {
           step: "05",
@@ -688,9 +817,9 @@ export const translations: Record<Language, Translation> = {
     },
     contact: {
       eyebrow: "Контакти",
-      title: "Створімо щось іграбельне, відполіроване й справді захопливе.",
+      title: "Створімо щось корисне, якісне й надійне.",
       description:
-        "Маєте мобільну гру, VR/XR-концепт або Unity-проєкт, якому потрібен надійний розробник? Буду радий почути деталі.",
+        "Маєте вебсайт, вебзастосунок, адмінпанель, мобільну гру, VR/XR-концепт або Unity-проєкт? Буду радий почути деталі.",
       emailMe: "Написати email",
       downloadCv: "Завантажити CV",
       downloadCvAria: "Завантажити CV Dementiy Besarab",

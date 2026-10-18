@@ -4,6 +4,7 @@ import { Hero } from "@/components/hero"
 import { About } from "@/components/about"
 import { Services } from "@/components/services"
 import { Skills } from "@/components/skills"
+import { Experience } from "@/components/experience"
 import { ProjectsGrid } from "@/components/projects-grid"
 import { Achievements } from "@/components/achievements"
 import { Workflow } from "@/components/workflow"
@@ -21,6 +22,7 @@ export default function Page() {
         <About />
         <Services />
         <Skills />
+        <Experience />
         <ProjectsGrid />
         <Achievements />
         <Workflow />
