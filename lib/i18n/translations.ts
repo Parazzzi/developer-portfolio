@@ -620,6 +620,11 @@ export const translations: Record<Language, Translation> = {
             "Commercial Unity mobile simulator work connected to CREATY's PC Creator line: gameplay and UI systems, Android/iOS build preparation, Firebase analytics, monetization SDKs, SDK/NDK packages, and release stability.",
           tags: ["Unity", "C#", "Android/iOS", "Firebase", "Ads SDKs"],
         },
+        "the-artman": {
+          description:
+            "Story-driven cinema producer simulator set in a cyberpunk Hollywood of 2056. At Wayheart Entertainment I independently developed and shipped two major Unity updates, covering new features, debugging, and optimization, and took the project to its official release.",
+          tags: ["Unity", "C#", "Android/iOS", "Simulation", "Live updates"],
+        },
         "vr-football-penalty": {
           description:
             "Room-scale VR football penalty experience where shot height, direction, and angle are controlled by real body movement. The player steps forward, backward, left, and right around the ball to aim the kick naturally before taking the penalty.",
@@ -1231,6 +1236,11 @@ export const translations: Record<Language, Translation> = {
           description:
             "Комерційна Unity-робота над мобільним симулятором із лінійки PC Creator від CREATY: gameplay та UI-системи, підготовка Android/iOS білдів, Firebase-аналітика, SDK монетизації, SDK/NDK пакети та релізна стабільність.",
           tags: ["Unity", "C#", "Android/iOS", "Firebase", "Ads SDK"],
+        },
+        "the-artman": {
+          description:
+            "Сюжетний симулятор кінопродюсера в кіберпанковому Голлівуді 2056 року. У Wayheart Entertainment я самостійно розробив і випустив два великі Unity-оновлення: нові фічі, дебаг та оптимізацію, а також довів проєкт до офіційного релізу.",
+          tags: ["Unity", "C#", "Android/iOS", "Симуляція", "Live-оновлення"],
         },
         "vr-football-penalty": {
           description:

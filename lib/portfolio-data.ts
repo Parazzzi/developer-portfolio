@@ -85,6 +85,18 @@ export const projectItems = [
     },
   },
   {
+    id: "the-artman",
+    title: "The Artman",
+    youtubeEmbedUrl:
+      "https://www.youtube.com/embed/soU1MSZJS0k?autoplay=1&mute=1&loop=1&playlist=soU1MSZJS0k&controls=1&playsinline=1",
+    link: "https://play.google.com/store/apps/details?id=com.WayHeartGame.Artman",
+    primaryLinkLabel: "Play Market",
+    secondaryLink: {
+      label: "App Store",
+      url: "https://apps.apple.com/us/app/the-artman/id6450551283",
+    },
+  },
+  {
     id: "vr-football-penalty",
     title: "VR Football Penalty",
     video: "/vr-football-penalty.mp4",
