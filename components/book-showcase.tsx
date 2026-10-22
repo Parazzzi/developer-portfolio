@@ -339,83 +339,83 @@ export function BookShowcase() {
                 })}
               </ul>
               <p className="mt-1 text-center font-mono text-xs text-muted-foreground sm:hidden">{copy.preview.scrollHint}</p>
+
+              <div className="mx-6 mt-12 grid gap-6 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)]">
+                <div className="glass rounded-2xl border border-border p-6 sm:p-8">
+                  <h3 className="font-heading text-xl font-semibold tracking-tight sm:text-2xl">{copy.contents.heading}</h3>
+                  <ol className="mt-6 divide-y divide-border/70">
+                    {bookChapters.map((chapter, i) => {
+                      const chapterCopy = copy.contents.chapters[i]
+                      const previewPage = chapter.previewPage
+
+                      return (
+                        <li key={chapter.number} className="flex items-start gap-4 py-3.5">
+                          <span className="w-6 shrink-0 pt-0.5 font-mono text-xs text-primary tabular-nums">
+                            {String(chapter.number).padStart(2, "0")}
+                          </span>
+                          <div className="min-w-0 flex-1">
+                            <p className="text-sm font-semibold text-foreground">{chapterCopy.title}</p>
+                            <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{chapterCopy.summary}</p>
+                          </div>
+                          <div className="flex shrink-0 items-center gap-2 pt-0.5">
+                            <span className="hidden font-mono text-xs text-muted-foreground tabular-nums sm:inline">
+                              {formatMessage(copy.contents.pageLabel, { page: chapter.page })}
+                            </span>
+                            {previewPage !== null ? (
+                              <Button
+                                type="button"
+                                size="icon-sm"
+                                variant="outline"
+                                aria-haspopup="dialog"
+                                aria-label={formatMessage(copy.contents.previewChapterAria, { title: chapterCopy.title })}
+                                onClick={() => openPreviewAtPage(previewPage)}
+                                className="rounded-full border-border bg-transparent text-primary hover:bg-secondary"
+                              >
+                                <Eye className="size-3.5" />
+                              </Button>
+                            ) : (
+                              <span className="size-7" aria-hidden="true" />
+                            )}
+                          </div>
+                        </li>
+                      )
+                    })}
+                  </ol>
+
+                  <p className="mt-6 font-mono text-xs uppercase tracking-[0.2em] text-primary">
+                    {copy.contents.backMatterHeading}
+                  </p>
+                  <ul className="mt-3 flex flex-wrap gap-2">
+                    {copy.contents.backMatter.map((item) => (
+                      <li
+                        key={item}
+                        className="rounded-full border border-border bg-secondary/60 px-2.5 py-1 text-xs font-medium text-foreground/75"
+                      >
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div className="glass rounded-2xl border border-border p-6 sm:p-8">
+                  <h3 className="font-heading text-xl font-semibold tracking-tight sm:text-2xl">{copy.process.heading}</h3>
+                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{copy.process.intro}</p>
+                  <ol className="mt-6 space-y-5">
+                    {copy.process.steps.map((step, i) => (
+                      <li key={step.title} className="flex gap-4">
+                        <span className="font-heading text-xl font-semibold text-primary/70 text-glow tabular-nums">
+                          {String(i + 1).padStart(2, "0")}
+                        </span>
+                        <div>
+                          <p className="text-sm font-semibold text-foreground">{step.title}</p>
+                          <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{step.description}</p>
+                        </div>
+                      </li>
+                    ))}
+                  </ol>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-
-        <div className="mt-20 grid gap-6 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)]">
-          <div className="glass rounded-2xl border border-border p-6 sm:p-8">
-            <h3 className="font-heading text-xl font-semibold tracking-tight sm:text-2xl">{copy.contents.heading}</h3>
-            <ol className="mt-6 divide-y divide-border/70">
-              {bookChapters.map((chapter, i) => {
-                const chapterCopy = copy.contents.chapters[i]
-                const previewPage = chapter.previewPage
-
-                return (
-                  <li key={chapter.number} className="flex items-start gap-4 py-3.5">
-                    <span className="w-6 shrink-0 pt-0.5 font-mono text-xs text-primary tabular-nums">
-                      {String(chapter.number).padStart(2, "0")}
-                    </span>
-                    <div className="min-w-0 flex-1">
-                      <p className="text-sm font-semibold text-foreground">{chapterCopy.title}</p>
-                      <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{chapterCopy.summary}</p>
-                    </div>
-                    <div className="flex shrink-0 items-center gap-2 pt-0.5">
-                      <span className="hidden font-mono text-xs text-muted-foreground tabular-nums sm:inline">
-                        {formatMessage(copy.contents.pageLabel, { page: chapter.page })}
-                      </span>
-                      {previewPage !== null ? (
-                        <Button
-                          type="button"
-                          size="icon-sm"
-                          variant="outline"
-                          aria-haspopup="dialog"
-                          aria-label={formatMessage(copy.contents.previewChapterAria, { title: chapterCopy.title })}
-                          onClick={() => openPreviewAtPage(previewPage)}
-                          className="rounded-full border-border bg-transparent text-primary hover:bg-secondary"
-                        >
-                          <Eye className="size-3.5" />
-                        </Button>
-                      ) : (
-                        <span className="size-7" aria-hidden="true" />
-                      )}
-                    </div>
-                  </li>
-                )
-              })}
-            </ol>
-
-            <p className="mt-6 font-mono text-xs uppercase tracking-[0.2em] text-primary">
-              {copy.contents.backMatterHeading}
-            </p>
-            <ul className="mt-3 flex flex-wrap gap-2">
-              {copy.contents.backMatter.map((item) => (
-                <li
-                  key={item}
-                  className="rounded-full border border-border bg-secondary/60 px-2.5 py-1 text-xs font-medium text-foreground/75"
-                >
-                  {item}
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="glass rounded-2xl border border-border p-6 sm:p-8">
-            <h3 className="font-heading text-xl font-semibold tracking-tight sm:text-2xl">{copy.process.heading}</h3>
-            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{copy.process.intro}</p>
-            <ol className="mt-6 space-y-5">
-              {copy.process.steps.map((step, i) => (
-                <li key={step.title} className="flex gap-4">
-                  <span className="font-heading text-xl font-semibold text-primary/70 text-glow tabular-nums">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <div>
-                    <p className="text-sm font-semibold text-foreground">{step.title}</p>
-                    <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{step.description}</p>
-                  </div>
-                </li>
-              ))}
-            </ol>
           </div>
         </div>
 
