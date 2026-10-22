@@ -39,7 +39,7 @@ export function Header() {
 
         <nav
           className={cn(
-            "hidden items-center gap-1 rounded-full px-2 py-1.5 text-sm transition-all lg:flex",
+            "hidden items-center gap-0.5 rounded-full px-2 py-1.5 text-sm transition-all lg:flex xl:gap-1",
             scrolled ? "glass glow-ring" : "bg-card/40 backdrop-blur",
           )}
         >
@@ -47,7 +47,7 @@ export function Header() {
             <a
               key={item.href}
               href={item.href}
-              className="whitespace-nowrap rounded-full px-2 py-1.5 text-[13px] text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground xl:px-4 xl:text-sm"
+              className="whitespace-nowrap rounded-full px-1.5 py-1.5 text-[13px] text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground xl:px-4 xl:text-sm"
             >
               {item.label}
             </a>

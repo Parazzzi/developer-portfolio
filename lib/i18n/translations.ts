@@ -5,6 +5,7 @@ import type {
   ProjectContent,
   ProjectId,
 } from "@/lib/portfolio-data"
+import type { BookContent } from "@/lib/book-data"
 import type { GamesLabContent, GamesLabItemId } from "@/lib/games-lab-data"
 
 export const languages = ["en", "ua"] as const
@@ -87,6 +88,7 @@ type Translation = {
     downloadCvAria: string
   }
   petProject: PetProjectContent
+  book: BookContent
   about: {
     eyebrow: string
     title: string
@@ -170,6 +172,7 @@ export const translations: Record<Language, Translation> = {
     nav: {
       items: [
         { label: "Pet Project", href: "#pet-project" },
+        { label: "Book", href: "#book" },
         { label: "About", href: "#about" },
         { label: "What I Do", href: "#services" },
         { label: "Skills", href: "#skills" },
@@ -234,6 +237,196 @@ export const translations: Record<Language, Translation> = {
         },
       ],
       tags: ["Unity 6", "C#", "Netcode for GameObjects", "Lobby/Relay", "URP", "Input System", "Unity Test Framework"],
+    },
+    book: {
+      eyebrow: "Book / Author Project",
+      title: "AI in Game Dev - my upcoming book",
+      description:
+        "A practical guide I am writing for game developers who want to use AI tools in real Unity/C# work without giving up code quality, architecture, or production judgment.",
+      status: "Upcoming book",
+      statusNote: "Pre-release preview edition - not yet published",
+      subtitle: "Practical Tools, Workflows, and Real-World Use Cases for Modern Game Creators",
+      paragraphs: [
+        "AI can make a thoughtful developer faster - it does not make weak work strong by itself. The book is built around that idea: specific tasks, clear constraints, and a developer who stays in control.",
+        "It follows the whole development loop - scoping ideas, prototyping in Unity, reviewing generated C#, debugging with evidence, refactoring architecture, and shipping on VR and mobile - with prompts and checklists you can apply to a real project.",
+      ],
+      stats: [
+        { value: "13", label: "Chapters" },
+        { value: "142", label: "Pages in the preview edition" },
+        { value: "Unity / C#", label: "Core focus" },
+        { value: "Mobile / VR", label: "Platform workflows" },
+      ],
+      focusAreas: [
+        {
+          title: "AI tools for game developers",
+          description: "Where AI actually helps: ideas, prototypes, C# drafts, debugging, reviews, and documentation.",
+        },
+        {
+          title: "Workflows that save time",
+          description: "Repeatable loops built on evidence, small outputs, and human review at every gate.",
+        },
+        {
+          title: "Real-world use cases",
+          description: "From prototyping to production, including examples of AI output that looks right but breaks the build.",
+        },
+        {
+          title: "Practical examples",
+          description: "Unity scenes, C# snippets, VR and mobile constraints, prompt templates, and checklists.",
+        },
+      ],
+      coverAlt: "Cover of the book AI in Game Dev by Dementiy Besarab",
+      previewButton: "Look inside",
+      inquiryButton: "Ask about the book",
+      preview: {
+        heading: "Look inside the book",
+        description:
+          "Ten selected pages from the current preview edition. Open any page, then flip through with the arrows, keyboard, or a swipe.",
+        pageLabel: "p. {page}",
+        openPageAria: "Open preview of page {page}: {title}",
+        pageAlt: "Book page {page}: {title}",
+        previousPage: "Previous page",
+        nextPage: "Next page",
+        closePreview: "Close book preview",
+        counter: "Page {page} · {current} / {total}",
+        scrollHint: "Swipe to see more pages →",
+        pages: {
+          "author-note": {
+            title: "Author Note",
+            caption: "Why I wrote the book and the stance it takes: skeptical, but not anti-AI.",
+          },
+          contents: {
+            title: "Table of Contents",
+            caption: "Thirteen chapters plus a glossary, recommended tools, and further reading.",
+          },
+          introduction: {
+            title: "Ch. 1 - Introduction",
+            caption: "The AI-assisted development loop that the rest of the book builds on.",
+          },
+          "game-ideas": {
+            title: "Ch. 3 - AI Game Ideas",
+            caption: "A constraint canvas that turns vague AI brainstorming into a small prototype brief.",
+          },
+          prototyping: {
+            title: "Ch. 4 - Unity Prototyping",
+            caption: "A prototype slice map: prototype the question, not the product.",
+          },
+          csharp: {
+            title: "Ch. 5 - AI for C# Code",
+            caption: "Reviewing generated C# against the real project, and why ScriptableObjects are a good bounded task.",
+          },
+          debugging: {
+            title: "Ch. 6 - Debugging With AI",
+            caption: "An evidence-first debugging funnel: from symptom to reproduction, isolation, and fix.",
+          },
+          architecture: {
+            title: "Ch. 7 - Architecture Refactoring",
+            caption: "Splitting an overgrown manager into clear responsibilities without inventing a framework.",
+          },
+          "prompt-library": {
+            title: "Ch. 12 - Prompt Library",
+            caption: "Reusable prompts with goal, context, constraints, output format, and verification built in.",
+          },
+          "final-workflow": {
+            title: "Ch. 13 - Final Workflow",
+            caption: "The complete loop from a scoped idea to a reviewed build.",
+          },
+        },
+      },
+      contents: {
+        heading: "Table of contents",
+        pageLabel: "p. {page}",
+        previewChapterAria: "Preview a page from {title}",
+        chapters: [
+          {
+            title: "Introduction",
+            summary: "Who the book is for and how to use AI without losing your grip on the work.",
+          },
+          {
+            title: "AI Is Not Magic",
+            summary: "What AI does well, where it fails, and how to verify output before trusting it.",
+          },
+          {
+            title: "AI Game Ideas",
+            summary: "Turning brainstorms into scoped, prototype-friendly concepts.",
+          },
+          {
+            title: "Unity Prototyping",
+            summary: "Using AI for the first pass: greybox, movement, temporary UI, and placeholder data.",
+          },
+          {
+            title: "AI For C# Code",
+            summary: "Lifecycle, serialization, ScriptableObjects, async code, and performance review.",
+          },
+          {
+            title: "Debugging With AI",
+            summary: "Evidence packets, stack traces, and applying one fix at a time.",
+          },
+          {
+            title: "Architecture Refactoring",
+            summary: "Reviewing architecture and refactoring overgrown scripts safely.",
+          },
+          {
+            title: "VR And Mobile Workflows",
+            summary: "Platform constraints, device test matrices, and bad AI assumptions.",
+          },
+          {
+            title: "Art, Audio, And Narrative",
+            summary: "Creative direction, asset tracking, licensing checks, and style consistency.",
+          },
+          {
+            title: "Production Workflow",
+            summary: "Feature briefs, reviewable AI output, and documentation as part of the loop.",
+          },
+          {
+            title: "Risks, Ethics, and Copyright",
+            summary: "Risk gates for code, assets, privacy, disclosure, and publishing.",
+          },
+          {
+            title: "Prompt Library",
+            summary: "Reusable prompts for ideas, scenes, C#, debugging, refactoring, VR, and mobile.",
+          },
+          {
+            title: "Final Workflow",
+            summary: "An 11-step loop from game idea to reviewed build.",
+          },
+        ],
+        backMatterHeading: "Back matter",
+        backMatter: ["Conclusion", "Glossary", "Recommended Tools", "References & Further Reading", "About the Author"],
+      },
+      process: {
+        heading: "About the writing process",
+        intro:
+          "I wrote the book the way I build games: small iterations, honest reviews, and nothing shipped without being checked.",
+        steps: [
+          {
+            title: "Grounded in real Unity work",
+            description:
+              "The topics come from day-to-day Unity/C# development - prototyping, debugging, refactoring, and mobile and VR releases - not from AI hype.",
+          },
+          {
+            title: "AI as an assistant, not the author",
+            description:
+              "I used AI for research support, alternative viewpoints, analysis, and editorial review. Structure, examples, wording, and final decisions are mine.",
+          },
+          {
+            title: "Examples reviewed like production code",
+            description:
+              "C# samples and prompts were checked against Unity lifecycle, serialization, and platform pitfalls, and time-sensitive policy notes are flagged for a source check before release.",
+          },
+          {
+            title: "Dedicated editorial passes",
+            description:
+              "Separate passes for consistency, repetition, fact-checking, figure clarity, and page layout, plus a human-voice pass to keep it sounding like one developer talking to another.",
+          },
+        ],
+      },
+      cta: {
+        eyebrow: "Interested in the book?",
+        title: "Get in touch about early access, feedback, or collaboration",
+        description:
+          "If you want to read the preview, give feedback, or talk about AI workflows for your Unity team, send me a message - I would be glad to hear from you.",
+        emailButton: "Email me about the book",
+      },
     },
     about: {
       eyebrow: "About",
@@ -589,6 +782,7 @@ export const translations: Record<Language, Translation> = {
     nav: {
       items: [
         { label: "Пет-проєкт", href: "#pet-project" },
+        { label: "Книга", href: "#book" },
         { label: "Про мене", href: "#about" },
         { label: "Що я роблю", href: "#services" },
         { label: "Навички", href: "#skills" },
@@ -653,6 +847,196 @@ export const translations: Record<Language, Translation> = {
         },
       ],
       tags: ["Unity 6", "C#", "Netcode for GameObjects", "Lobby/Relay", "URP", "Input System", "Unity Test Framework"],
+    },
+    book: {
+      eyebrow: "Книга / Авторський проєкт",
+      title: "AI in Game Dev - моя майбутня книга",
+      description:
+        "Практичний посібник, який я пишу для розробників ігор, що хочуть використовувати AI-інструменти в реальній Unity/C# роботі, не втрачаючи якості коду, архітектури та production-рішень.",
+      status: "Майбутня книга",
+      statusNote: "Попереднє preview-видання - ще не опублікована",
+      subtitle: "Practical Tools, Workflows, and Real-World Use Cases for Modern Game Creators",
+      paragraphs: [
+        "AI може зробити вдумливого розробника швидшим, але сам по собі не робить слабку роботу сильною. Книга побудована навколо цієї ідеї: конкретні задачі, чіткі обмеження та розробник, який тримає контроль.",
+        "Вона проходить увесь цикл розробки - від скоупінгу ідей, прототипування в Unity та рев'ю згенерованого C# до дебагу на основі доказів, рефакторингу архітектури та релізів на VR і мобільних - з промптами й чеклистами, які можна застосувати до реального проєкту.",
+      ],
+      stats: [
+        { value: "13", label: "Розділів" },
+        { value: "142", label: "Сторінки в preview-виданні" },
+        { value: "Unity / C#", label: "Основний фокус" },
+        { value: "Mobile / VR", label: "Платформні workflow" },
+      ],
+      focusAreas: [
+        {
+          title: "AI-інструменти для розробників ігор",
+          description: "Де AI справді допомагає: ідеї, прототипи, чернетки C#, дебаг, рев'ю та документація.",
+        },
+        {
+          title: "Workflow, що економлять час",
+          description: "Повторювані цикли на основі доказів, невеликих результатів і людського рев'ю на кожному етапі.",
+        },
+        {
+          title: "Реальні кейси",
+          description: "Від прототипу до продакшну, включно з прикладами AI-відповідей, які виглядають правильно, але ламають білд.",
+        },
+        {
+          title: "Практичні приклади",
+          description: "Unity-сцени, C#-фрагменти, обмеження VR і мобільних платформ, шаблони промптів і чеклисти.",
+        },
+      ],
+      coverAlt: "Обкладинка книги AI in Game Dev, автор Dementiy Besarab",
+      previewButton: "Зазирнути всередину",
+      inquiryButton: "Запитати про книгу",
+      preview: {
+        heading: "Зазирніть усередину книги",
+        description:
+          "Десять вибраних сторінок із поточного preview-видання (англійською). Відкрийте будь-яку сторінку й гортайте стрілками, клавіатурою або свайпом.",
+        pageLabel: "с. {page}",
+        openPageAria: "Відкрити сторінку {page}: {title}",
+        pageAlt: "Сторінка книги {page}: {title}",
+        previousPage: "Попередня сторінка",
+        nextPage: "Наступна сторінка",
+        closePreview: "Закрити перегляд книги",
+        counter: "Сторінка {page} · {current} / {total}",
+        scrollHint: "Гортайте, щоб побачити більше →",
+        pages: {
+          "author-note": {
+            title: "Слово автора",
+            caption: "Чому я написав цю книгу і яку позицію вона займає: скептично, але не проти AI.",
+          },
+          contents: {
+            title: "Зміст",
+            caption: "Тринадцять розділів, глосарій, рекомендовані інструменти та додаткові джерела.",
+          },
+          introduction: {
+            title: "Розд. 1 - Вступ",
+            caption: "Цикл AI-assisted розробки, на якому побудована решта книги.",
+          },
+          "game-ideas": {
+            title: "Розд. 3 - Ідеї ігор з AI",
+            caption: "Canvas обмежень, що перетворює розмитий AI-брейншторм на невеликий бриф прототипу.",
+          },
+          prototyping: {
+            title: "Розд. 4 - Прототипування в Unity",
+            caption: "Карта зрізу прототипу: прототипуйте питання, а не продукт.",
+          },
+          csharp: {
+            title: "Розд. 5 - AI для C#-коду",
+            caption: "Рев'ю згенерованого C# у контексті реального проєкту і чому ScriptableObjects - вдала обмежена задача.",
+          },
+          debugging: {
+            title: "Розд. 6 - Дебаг з AI",
+            caption: "Воронка дебагу на основі доказів: від симптому до відтворення, ізоляції та виправлення.",
+          },
+          architecture: {
+            title: "Розд. 7 - Рефакторинг архітектури",
+            caption: "Розділення переповненого менеджера на чіткі відповідальності без вигадування фреймворку.",
+          },
+          "prompt-library": {
+            title: "Розд. 12 - Бібліотека промптів",
+            caption: "Повторно використовувані промпти з метою, контекстом, обмеженнями, форматом відповіді та перевіркою.",
+          },
+          "final-workflow": {
+            title: "Розд. 13 - Фінальний workflow",
+            caption: "Повний цикл від заскоупленої ідеї до перевіреного білду.",
+          },
+        },
+      },
+      contents: {
+        heading: "Зміст",
+        pageLabel: "с. {page}",
+        previewChapterAria: "Переглянути сторінку з розділу {title}",
+        chapters: [
+          {
+            title: "Вступ",
+            summary: "Для кого ця книга і як використовувати AI, не втрачаючи контролю над роботою.",
+          },
+          {
+            title: "AI - це не магія",
+            summary: "Що AI робить добре, де помиляється і як перевіряти результат, перш ніж йому довіряти.",
+          },
+          {
+            title: "Ідеї ігор з AI",
+            summary: "Як перетворити брейншторм на заскоуплені концепти, зручні для прототипування.",
+          },
+          {
+            title: "Прототипування в Unity",
+            summary: "AI для першого проходу: greybox, рух, тимчасовий UI та placeholder-дані.",
+          },
+          {
+            title: "AI для C#-коду",
+            summary: "Життєвий цикл, серіалізація, ScriptableObjects, async-код і рев'ю продуктивності.",
+          },
+          {
+            title: "Дебаг з AI",
+            summary: "Пакети доказів, stack trace та одне виправлення за раз.",
+          },
+          {
+            title: "Рефакторинг архітектури",
+            summary: "Рев'ю архітектури та безпечний рефакторинг переповнених скриптів.",
+          },
+          {
+            title: "VR і мобільні workflow",
+            summary: "Платформні обмеження, матриці тестування на пристроях і хибні припущення AI.",
+          },
+          {
+            title: "Арт, аудіо та наратив",
+            summary: "Креативний напрям, облік ассетів, перевірка ліцензій і консистентність стилю.",
+          },
+          {
+            title: "Production workflow",
+            summary: "Брифи фіч, AI-результати, які легко рев'юїти, і документація як частина циклу.",
+          },
+          {
+            title: "Ризики, етика та авторське право",
+            summary: "Контрольні точки ризиків для коду, ассетів, приватності, розкриття AI та публікації.",
+          },
+          {
+            title: "Бібліотека промптів",
+            summary: "Готові промпти для ідей, сцен, C#, дебагу, рефакторингу, VR і мобільних.",
+          },
+          {
+            title: "Фінальний workflow",
+            summary: "Цикл з 11 кроків від ідеї гри до перевіреного білду.",
+          },
+        ],
+        backMatterHeading: "Додатки",
+        backMatter: ["Висновок", "Глосарій", "Рекомендовані інструменти", "Джерела та література", "Про автора"],
+      },
+      process: {
+        heading: "Про процес написання",
+        intro:
+          "Я писав книгу так само, як роблю ігри: невеликими ітераціями, з чесним рев'ю і нічого не випускаючи без перевірки.",
+        steps: [
+          {
+            title: "На основі реальної Unity-роботи",
+            description:
+              "Теми взяті з щоденної Unity/C# розробки - прототипування, дебагу, рефакторингу, мобільних і VR-релізів, - а не з AI-хайпу.",
+          },
+          {
+            title: "AI як асистент, а не автор",
+            description:
+              "Я використовував AI для допомоги з дослідженням, альтернативних поглядів, аналізу та редакторського рев'ю. Структура, приклади, формулювання та фінальні рішення - мої.",
+          },
+          {
+            title: "Приклади перевірені як production-код",
+            description:
+              "C#-приклади та промпти перевірені на типові проблеми життєвого циклу Unity, серіалізації та платформ, а чутливі до часу нотатки про політики позначені для перевірки джерел перед релізом.",
+          },
+          {
+            title: "Окремі редакторські проходи",
+            description:
+              "Окремі проходи на консистентність, повтори, фактчекінг, читабельність ілюстрацій і верстку, а також human-voice прохід, щоб текст звучав як розмова одного розробника з іншим.",
+          },
+        ],
+      },
+      cta: {
+        eyebrow: "Цікавить книга?",
+        title: "Напишіть мені щодо раннього доступу, фідбеку чи співпраці",
+        description:
+          "Якщо хочете прочитати preview, поділитися фідбеком або обговорити AI-workflow для вашої Unity-команди - напишіть мені, буду радий.",
+        emailButton: "Написати про книгу",
+      },
     },
     about: {
       eyebrow: "Про мене",
