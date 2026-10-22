@@ -11,6 +11,27 @@ export const profile = {
   },
 }
 
+export const petProject = {
+  id: "scrap-orbit",
+  title: "Scrap Orbit",
+  youtubeEmbedUrl:
+    "https://www.youtube.com/embed/f6nZXiuRRT8?autoplay=1&mute=1&loop=1&playlist=f6nZXiuRRT8&controls=1&playsinline=1",
+  link: "https://parazzzi.itch.io/scrap-orbit",
+}
+
+export type PetProjectContent = {
+  eyebrow: string
+  title: string
+  description: string
+  status: string
+  playButton: string
+  highlights: {
+    title: string
+    description: string
+  }[]
+  tags: string[]
+}
+
 export type ProjectStatic = {
   id: string
   title: string

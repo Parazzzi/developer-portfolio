@@ -10,9 +10,9 @@ const geistMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
-  title: 'Dementiy Besarab - Unity & Software Developer',
+  title: 'Dementiy Besarab - Unity Developer',
   description:
-    'Unity and software developer with 4+ years of experience in C#, TypeScript, JavaScript, mobile games, VR/XR, web applications, and admin dashboards.',
+    'Unity Developer building mobile games, VR/XR and interactive applications in C#: gameplay systems, online co-op multiplayer, SDK integrations and optimization.',
   generator: 'v0.app',
   icons: {
     icon: [
