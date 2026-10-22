@@ -289,6 +289,8 @@ export const translations: Record<Language, Translation> = {
         closePreview: "Close book preview",
         counter: "Page {page} · {current} / {total}",
         scrollHint: "Swipe to see more pages →",
+        showPages: "View pages",
+        hidePages: "Hide pages",
         pages: {
           "author-note": {
             title: "Author Note",
@@ -899,6 +901,8 @@ export const translations: Record<Language, Translation> = {
         closePreview: "Закрити перегляд книги",
         counter: "Сторінка {page} · {current} / {total}",
         scrollHint: "Гортайте, щоб побачити більше →",
+        showPages: "Переглянути сторінки",
+        hidePages: "Згорнути сторінки",
         pages: {
           "author-note": {
             title: "Слово автора",

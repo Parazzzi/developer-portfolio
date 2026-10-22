@@ -10,7 +10,7 @@ import {
   type TouchEvent,
 } from "react"
 import Image from "next/image"
-import { ArrowDown, ChevronLeft, ChevronRight, Eye, Mail, Send, X } from "lucide-react"
+import { ArrowDown, ChevronDown, ChevronLeft, ChevronRight, Eye, EyeOff, Mail, Send, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { LinkedinIcon } from "@/components/brand-icons"
 import { SectionHeading } from "@/components/section-heading"
@@ -33,6 +33,7 @@ export function BookShowcase() {
   const copy = t.book
   const [activeIndex, setActiveIndex] = useState<number | null>(null)
   const [isModalClosing, setIsModalClosing] = useState(false)
+  const [isPreviewExpanded, setIsPreviewExpanded] = useState(false)
   const closeButtonRef = useRef<HTMLButtonElement | null>(null)
   const dialogRef = useRef<HTMLDivElement | null>(null)
   const previousFocusRef = useRef<HTMLElement | null>(null)
@@ -242,7 +243,7 @@ export function BookShowcase() {
 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <Button
-                render={<a href="#book-preview" />}
+                render={<a href="#book-preview" onClick={() => setIsPreviewExpanded(true)} />}
                 nativeButton={false}
                 size="lg"
                 className="rounded-full px-6 font-medium"
@@ -270,50 +271,76 @@ export function BookShowcase() {
             <p className="mt-3 text-sm leading-relaxed text-muted-foreground sm:text-base">
               {copy.preview.description}
             </p>
+            <Button
+              type="button"
+              size="lg"
+              variant="outline"
+              aria-expanded={isPreviewExpanded}
+              aria-controls="book-preview-pages"
+              onClick={() => setIsPreviewExpanded((expanded) => !expanded)}
+              className="mt-6 rounded-full border-border bg-card/40 px-6 font-medium backdrop-blur hover:bg-secondary"
+            >
+              {isPreviewExpanded ? <EyeOff className="size-4" /> : <Eye className="size-4" />}
+              {isPreviewExpanded ? copy.preview.hidePages : copy.preview.showPages}
+              <ChevronDown
+                className={cn("size-4 transition-transform duration-300", isPreviewExpanded && "rotate-180")}
+              />
+            </Button>
           </div>
 
-          <ul className="-mx-6 mt-10 flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-px-6 px-6 pt-2 pb-5 [scrollbar-width:thin]">
-            {bookPreviewPages.map((previewPage, index) => {
-              const pageCopy = copy.preview.pages[previewPage.id]
+          <div
+            id="book-preview-pages"
+            inert={!isPreviewExpanded}
+            className={cn(
+              "grid transition-[grid-template-rows,opacity] duration-500 ease-out",
+              isPreviewExpanded ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0",
+            )}
+          >
+            <div className="-mx-6 min-h-0 overflow-hidden">
+              <ul className="mt-8 flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-px-6 px-6 pt-2 pb-5 [scrollbar-width:thin]">
+                {bookPreviewPages.map((previewPage, index) => {
+                  const pageCopy = copy.preview.pages[previewPage.id]
 
-              return (
-                <li key={previewPage.id} className="w-[10.5rem] shrink-0 snap-start sm:w-[12.5rem]">
-                  <button
-                    type="button"
-                    onClick={() => openPreview(index)}
-                    aria-haspopup="dialog"
-                    aria-label={formatMessage(copy.preview.openPageAria, {
-                      title: pageCopy.title,
-                      page: previewPage.page,
-                    })}
-                    className="group block w-full rounded-2xl border border-border glass p-2 text-left transition-all duration-300 hover:-translate-y-1.5 hover:glow-ring focus-visible:glow-ring focus-visible:outline-none"
-                  >
-                    <span className="relative block overflow-hidden rounded-xl bg-white">
-                      <Image
-                        src={bookPreviewImage(previewPage.page, "thumb")}
-                        alt=""
-                        width={thumbWidth}
-                        height={thumbHeight}
-                        sizes="(max-width: 640px) 168px, 200px"
-                        loading="lazy"
-                        className="h-auto w-full transition-transform duration-500 group-hover:scale-[1.03]"
-                      />
-                      <span className="absolute inset-0 flex items-center justify-center bg-background/0 opacity-0 transition-all duration-300 group-hover:bg-background/40 group-hover:opacity-100">
-                        <Eye className="size-6 text-foreground" />
-                      </span>
-                    </span>
-                    <span className="mt-2.5 block px-1 pb-1">
-                      <span className="font-mono text-[0.68rem] text-primary">
-                        {formatMessage(copy.preview.pageLabel, { page: previewPage.page })}
-                      </span>
-                      <span className="mt-0.5 block truncate text-sm font-medium text-foreground">{pageCopy.title}</span>
-                    </span>
-                  </button>
-                </li>
-              )
-            })}
-          </ul>
-          <p className="mt-1 text-center font-mono text-xs text-muted-foreground sm:hidden">{copy.preview.scrollHint}</p>
+                  return (
+                    <li key={previewPage.id} className="w-[10.5rem] shrink-0 snap-start sm:w-[12.5rem]">
+                      <button
+                        type="button"
+                        onClick={() => openPreview(index)}
+                        aria-haspopup="dialog"
+                        aria-label={formatMessage(copy.preview.openPageAria, {
+                          title: pageCopy.title,
+                          page: previewPage.page,
+                        })}
+                        className="group block w-full rounded-2xl border border-border glass p-2 text-left transition-all duration-300 hover:-translate-y-1.5 hover:glow-ring focus-visible:glow-ring focus-visible:outline-none"
+                      >
+                        <span className="relative block overflow-hidden rounded-xl bg-white">
+                          <Image
+                            src={bookPreviewImage(previewPage.page, "thumb")}
+                            alt=""
+                            width={thumbWidth}
+                            height={thumbHeight}
+                            sizes="(max-width: 640px) 168px, 200px"
+                            loading="lazy"
+                            className="h-auto w-full transition-transform duration-500 group-hover:scale-[1.03]"
+                          />
+                          <span className="absolute inset-0 flex items-center justify-center bg-background/0 opacity-0 transition-all duration-300 group-hover:bg-background/40 group-hover:opacity-100">
+                            <Eye className="size-6 text-foreground" />
+                          </span>
+                        </span>
+                        <span className="mt-2.5 block px-1 pb-1">
+                          <span className="font-mono text-[0.68rem] text-primary">
+                            {formatMessage(copy.preview.pageLabel, { page: previewPage.page })}
+                          </span>
+                          <span className="mt-0.5 block truncate text-sm font-medium text-foreground">{pageCopy.title}</span>
+                        </span>
+                      </button>
+                    </li>
+                  )
+                })}
+              </ul>
+              <p className="mt-1 text-center font-mono text-xs text-muted-foreground sm:hidden">{copy.preview.scrollHint}</p>
+            </div>
+          </div>
         </div>
 
         <div className="mt-20 grid gap-6 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)]">

@@ -75,6 +75,8 @@ export type BookContent = {
     closePreview: string
     counter: string
     scrollHint: string
+    showPages: string
+    hidePages: string
     pages: Record<BookPreviewPageId, { title: string; caption: string }>
   }
   contents: {
