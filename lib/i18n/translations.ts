@@ -240,11 +240,11 @@ export const translations: Record<Language, Translation> = {
     },
     book: {
       eyebrow: "Book / Author Project",
-      title: "AI in Game Dev - my upcoming book",
+      title: "AI in Game Dev - my book for game developers",
       description:
-        "A practical guide I am writing for game developers who want to use AI tools in real Unity/C# work without giving up code quality, architecture, or production judgment.",
-      status: "Upcoming book",
-      statusNote: "Pre-release preview edition - not yet published",
+        "A practical guide I wrote for game developers who want to use AI tools in real Unity/C# work without giving up code quality, architecture, or production judgment.",
+      status: "Manuscript complete",
+      statusNote: "Coming soon to Amazon",
       subtitle: "Practical Tools, Workflows, and Real-World Use Cases for Modern Game Creators",
       paragraphs: [
         "AI can make a thoughtful developer faster - it does not make weak work strong by itself. The book is built around that idea: specific tasks, clear constraints, and a developer who stays in control.",
@@ -252,7 +252,7 @@ export const translations: Record<Language, Translation> = {
       ],
       stats: [
         { value: "13", label: "Chapters" },
-        { value: "142", label: "Pages in the preview edition" },
+        { value: "142", label: "Pages" },
         { value: "Unity / C#", label: "Core focus" },
         { value: "Mobile / VR", label: "Platform workflows" },
       ],
@@ -280,7 +280,7 @@ export const translations: Record<Language, Translation> = {
       preview: {
         heading: "Look inside the book",
         description:
-          "Ten selected pages from the current preview edition. Open any page, then flip through with the arrows, keyboard, or a swipe.",
+          "Ten selected pages from the book. Open any page, then flip through with the arrows, keyboard, or a swipe.",
         pageLabel: "p. {page}",
         openPageAria: "Open preview of page {page}: {title}",
         pageAlt: "Book page {page}: {title}",
@@ -852,11 +852,11 @@ export const translations: Record<Language, Translation> = {
     },
     book: {
       eyebrow: "Книга / Авторський проєкт",
-      title: "AI in Game Dev - моя майбутня книга",
+      title: "AI in Game Dev - моя книга для розробників ігор",
       description:
-        "Практичний посібник, який я пишу для розробників ігор, що хочуть використовувати AI-інструменти в реальній Unity/C# роботі, не втрачаючи якості коду, архітектури та production-рішень.",
-      status: "Майбутня книга",
-      statusNote: "Попереднє preview-видання - ще не опублікована",
+        "Практичний посібник, який я написав для розробників ігор, що хочуть використовувати AI-інструменти в реальній Unity/C# роботі, не втрачаючи якості коду, архітектури та production-рішень.",
+      status: "Книгу завершено",
+      statusNote: "Незабаром на Amazon",
       subtitle: "Practical Tools, Workflows, and Real-World Use Cases for Modern Game Creators",
       paragraphs: [
         "AI може зробити вдумливого розробника швидшим, але сам по собі не робить слабку роботу сильною. Книга побудована навколо цієї ідеї: конкретні задачі, чіткі обмеження та розробник, який тримає контроль.",
@@ -864,7 +864,7 @@ export const translations: Record<Language, Translation> = {
       ],
       stats: [
         { value: "13", label: "Розділів" },
-        { value: "142", label: "Сторінки в preview-виданні" },
+        { value: "142", label: "Сторінки" },
         { value: "Unity / C#", label: "Основний фокус" },
         { value: "Mobile / VR", label: "Платформні workflow" },
       ],
@@ -892,7 +892,7 @@ export const translations: Record<Language, Translation> = {
       preview: {
         heading: "Зазирніть усередину книги",
         description:
-          "Десять вибраних сторінок із поточного preview-видання (англійською). Відкрийте будь-яку сторінку й гортайте стрілками, клавіатурою або свайпом.",
+          "Десять вибраних сторінок із книги (англійською). Відкрийте будь-яку сторінку й гортайте стрілками, клавіатурою або свайпом.",
         pageLabel: "с. {page}",
         openPageAria: "Відкрити сторінку {page}: {title}",
         pageAlt: "Сторінка книги {page}: {title}",
