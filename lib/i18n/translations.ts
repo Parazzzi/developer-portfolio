@@ -474,7 +474,7 @@ export const translations: Record<Language, Translation> = {
         {
           title: "SDKs & integrations",
           description:
-            "Integrate client-server/backend services, Firebase, AppMetrica, GameAnalytics, AdMob, Unity Ads, AppLovin, and SDK/NDK packages.",
+            "Integrate client-server/backend services, Firebase, AppMetrica, GameAnalytics, AppsFlyer, Adjust, Tenjin, AdMob, Unity Ads, AppLovin, and SDK/NDK packages.",
         },
         {
           title: "Optimization and bug fixing",
@@ -512,7 +512,7 @@ export const translations: Record<Language, Translation> = {
         {
           title: "Analytics & Ads",
           description: "Analytics, ads, SDK/NDK packages, and client-server/backend service integrations.",
-          tags: ["Firebase", "AppMetrica", "GameAnalytics", "AdMob", "Unity Ads", "AppLovin"],
+          tags: ["Firebase", "AppMetrica", "GameAnalytics", "AppsFlyer", "Adjust", "Tenjin", "AdMob", "Unity Ads", "AppLovin"],
         },
         {
           title: "Tools & Quality",
@@ -1091,7 +1091,7 @@ export const translations: Record<Language, Translation> = {
         {
           title: "SDK та інтеграції",
           description:
-            "Інтегрую клієнт-серверні/backend-сервіси, Firebase, AppMetrica, GameAnalytics, AdMob, Unity Ads, AppLovin та SDK/NDK пакети.",
+            "Інтегрую клієнт-серверні/backend-сервіси, Firebase, AppMetrica, GameAnalytics, AppsFlyer, Adjust, Tenjin, AdMob, Unity Ads, AppLovin та SDK/NDK пакети.",
         },
         {
           title: "Оптимізація та виправлення багів",
@@ -1129,7 +1129,7 @@ export const translations: Record<Language, Translation> = {
         {
           title: "Аналітика та реклама",
           description: "Аналітика, реклама, SDK/NDK пакети та інтеграції клієнт-серверних/backend-сервісів.",
-          tags: ["Firebase", "AppMetrica", "GameAnalytics", "AdMob", "Unity Ads", "AppLovin"],
+          tags: ["Firebase", "AppMetrica", "GameAnalytics", "AppsFlyer", "Adjust", "Tenjin", "AdMob", "Unity Ads", "AppLovin"],
         },
         {
           title: "Інструменти та якість",
