@@ -4,6 +4,7 @@ import { ArrowDown, ArrowUpRight, Check, Download, Mail } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { profile } from "@/lib/portfolio-data"
 import { useLanguage } from "@/lib/i18n/language-context"
+import { trackEvent } from "@/lib/visit-tracking"
 
 export function Hero() {
   const { t } = useLanguage()
@@ -71,7 +72,14 @@ export function Hero() {
             {t.hero.contactMe}
           </Button>
           <Button
-            render={<a href={profile.links.cv} download aria-label={t.hero.downloadCvAria} />}
+            render={
+              <a
+                href={profile.links.cv}
+                download
+                aria-label={t.hero.downloadCvAria}
+                onClick={() => trackEvent("cv")}
+              />
+            }
             nativeButton={false}
             size="lg"
             variant="outline"

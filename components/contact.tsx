@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button"
 import { LinkedinIcon } from "@/components/brand-icons"
 import { profile } from "@/lib/portfolio-data"
 import { useLanguage } from "@/lib/i18n/language-context"
+import { trackEvent } from "@/lib/visit-tracking"
 
 export function Contact() {
   const { t } = useLanguage()
@@ -53,7 +54,14 @@ export function Contact() {
               Telegram
             </Button>
             <Button
-              render={<a href={profile.links.cv} download aria-label={t.contact.downloadCvAria} />}
+              render={
+                <a
+                  href={profile.links.cv}
+                  download
+                  aria-label={t.contact.downloadCvAria}
+                  onClick={() => trackEvent("cv")}
+                />
+              }
               nativeButton={false}
               size="lg"
               variant="outline"
