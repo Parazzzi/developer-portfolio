@@ -1,12 +1,10 @@
 "use client"
 
 import { useEffect } from "react"
-import { trackVisit } from "@/lib/visit-tracking"
+import { startVisitTracking } from "@/lib/visit-tracking"
 
 export function VisitTracker() {
-  useEffect(() => {
-    trackVisit()
-  }, [])
+  useEffect(() => startVisitTracking(), [])
 
   return null
 }

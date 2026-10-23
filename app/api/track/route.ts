@@ -2,10 +2,28 @@ import type { TrackEventType } from "@/lib/visit-tracking"
 
 const eventTitles: Record<TrackEventType, string> = {
   visit: "👀 Новий візит",
+  // The summary is written into the visit message, so it keeps its title.
+  summary: "👀 Новий візит",
   cv: "📄 Завантажили CV",
 }
 
+const sectionNames: Record<string, string> = {
+  hero: "Головна",
+  "pet-project": "Scrap Orbit",
+  book: "Книга",
+  about: "Про мене",
+  services: "Послуги",
+  skills: "Навички",
+  experience: "Досвід",
+  projects: "Проєкти",
+  achievements: "Досягнення",
+  workflow: "Процес роботи",
+  contact: "Контакти",
+}
+
 const refPattern = /^[\p{L}\p{N}_.-]{1,64}$/u
+const sectionIdPattern = /^[\w-]{1,40}$/
+const botPattern = /\bbot\b|bot\/|crawler|spider|HeadlessChrome|Lighthouse/i
 
 const operatingSystems: [RegExp, string][] = [
   [/iPhone|iPad/, "iOS"],
@@ -28,10 +46,18 @@ type TrackPayload = {
   type?: unknown
   ref?: unknown
   referrer?: unknown
+  messageId?: unknown
+  activeSeconds?: unknown
+  sections?: unknown
+  clicks?: unknown
 }
 
 function isTrackEventType(value: unknown): value is TrackEventType {
   return typeof value === "string" && Object.hasOwn(eventTitles, value)
+}
+
+function isPositiveNumber(value: unknown): value is number {
+  return typeof value === "number" && Number.isFinite(value) && value > 0
 }
 
 function countryFlag(countryCode: string) {
@@ -76,6 +102,39 @@ function describeDevice(userAgent: string) {
   return `${icon} ${names.join(" · ") || "Невідомий пристрій"}`
 }
 
+function formatDuration(totalSeconds: number) {
+  const minutes = Math.floor(totalSeconds / 60)
+  const seconds = totalSeconds % 60
+
+  return minutes ? `${minutes} хв ${seconds} с` : `${seconds} с`
+}
+
+// Reads a { name: number } object sent by the browser, dropping anything malformed.
+function readCounts(value: unknown, isValidKey: (key: string) => boolean) {
+  if (!value || typeof value !== "object") return []
+
+  return Object.entries(value)
+    .filter((entry): entry is [string, number] => isValidKey(entry[0]) && isPositiveNumber(entry[1]))
+    .slice(0, 30)
+    .map(([key, count]) => [key, Math.round(count)] as const)
+}
+
+function describeSummary(payload: TrackPayload) {
+  const activeSeconds = isPositiveNumber(payload.activeSeconds) ? Math.round(payload.activeSeconds) : 0
+  const sections = readCounts(payload.sections, (id) => sectionIdPattern.test(id))
+    .filter(([, seconds]) => seconds >= 2)
+    .map(([id, seconds]) => `${Object.hasOwn(sectionNames, id) ? sectionNames[id] : id} ${formatDuration(seconds)}`)
+  const clicks = readCounts(payload.clicks, (label) => label.length > 0 && label.length <= 80).map(
+    ([label, count]) => (count > 1 ? `${label} ×${count}` : label),
+  )
+
+  const lines = [`⏱ ${formatDuration(activeSeconds)} на сайті`]
+  if (sections.length) lines.push(`👁 ${sections.join(" → ")}`)
+  if (clicks.length) lines.push(`🖱 ${clicks.join(", ")}`)
+
+  return lines.join("\n")
+}
+
 function formatMessage(type: TrackEventType, payload: TrackPayload, headers: Headers) {
   const lines = [eventTitles[type]]
 
@@ -89,10 +148,13 @@ function formatMessage(type: TrackEventType, payload: TrackPayload, headers: Hea
     describeDevice(headers.get("user-agent") ?? ""),
   )
 
+  if (type === "summary") lines.push(describeSummary(payload))
+
   return lines.join("\n")
 }
 
-async function sendToTelegram(text: string) {
+// Sends a new message, or edits an existing one when its id is given. Returns the message id.
+async function sendToTelegram(text: string, editMessageId?: number) {
   const token = process.env.TELEGRAM_BOT_TOKEN
   const chatId = process.env.TELEGRAM_CHAT_ID
 
@@ -101,18 +163,27 @@ async function sendToTelegram(text: string) {
     return
   }
 
-  const response = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+  const method = editMessageId ? "editMessageText" : "sendMessage"
+  const response = await fetch(`https://api.telegram.org/bot${token}/${method}`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ chat_id: chatId, text, disable_web_page_preview: true }),
+    body: JSON.stringify({ chat_id: chatId, message_id: editMessageId, text, disable_web_page_preview: true }),
   })
+  const data = await response.json().catch(() => null)
 
   if (!response.ok) {
-    console.error(`[track] Telegram responded with ${response.status}: ${await response.text()}`)
+    console.error(`[track] Telegram ${method} failed with ${response.status}: ${data?.description}`)
   }
+
+  return data?.result?.message_id as number | undefined
 }
 
 export async function POST(request: Request) {
+  // Crawlers and headless browsers (e.g. deployment screenshots) are not visitors.
+  if (botPattern.test(request.headers.get("user-agent") ?? "")) {
+    return new Response(null, { status: 204 })
+  }
+
   let payload: TrackPayload
 
   try {
@@ -125,7 +196,15 @@ export async function POST(request: Request) {
     return new Response(null, { status: 400 })
   }
 
-  await sendToTelegram(formatMessage(payload.type, payload, request.headers))
+  const text = formatMessage(payload.type, payload, request.headers)
 
-  return new Response(null, { status: 204 })
+  if (payload.type === "summary") {
+    if (isPositiveNumber(payload.messageId) && Number.isInteger(payload.messageId)) {
+      await sendToTelegram(text, payload.messageId)
+    }
+
+    return new Response(null, { status: 204 })
+  }
+
+  return Response.json({ messageId: await sendToTelegram(text) })
 }
