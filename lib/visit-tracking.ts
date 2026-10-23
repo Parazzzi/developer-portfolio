@@ -5,7 +5,9 @@ export type TrackEventType = "visit" | "cv" | "summary"
 // Open the site once with ?notrack to stop notifications from this browser, ?notrack=0 to undo.
 const optOutKey = "portfolio-notrack"
 const visitKey = "portfolio-visit"
-const summaryIntervalMs = 30_000
+const summaryIntervalMs = 15_000
+// Fast scrolling or clicking still makes at most one summary request per this window.
+const summaryThrottleMs = 5_000
 
 const linkNames: Record<string, string> = {
   [profile.links.linkedin]: "LinkedIn",
@@ -27,6 +29,8 @@ let visit: Visit = { activeMs: 0, sections: {}, clicks: {} }
 let activeSince: number | null = null
 let currentSection: string | null = null
 let lastSummary = ""
+let lastSummaryAt = -Infinity
+let summaryTimer: number | undefined
 
 function isOptedOut() {
   try {
@@ -101,6 +105,8 @@ function settleTime() {
 }
 
 function sendSummary() {
+  window.clearTimeout(summaryTimer)
+  summaryTimer = undefined
   settleTime()
   saveVisit()
   if (!visit.messageId) return
@@ -116,7 +122,16 @@ function sendSummary() {
   if (serialized === lastSummary) return
 
   lastSummary = serialized
+  lastSummaryAt = performance.now()
   beacon(summary)
+}
+
+// Sends the summary as soon as something changes, since quitting the browser (⌘Q) can skip the final one.
+function scheduleSummary() {
+  if (summaryTimer !== undefined) return
+
+  const wait = Math.max(0, lastSummaryAt + summaryThrottleMs - performance.now())
+  summaryTimer = window.setTimeout(sendSummary, wait)
 }
 
 function describeClick(target: Element) {
@@ -136,7 +151,10 @@ function describeClick(target: Element) {
 }
 
 function recordClick(label: string | null) {
-  if (label) visit.clicks[label] = (visit.clicks[label] ?? 0) + 1
+  if (!label) return
+
+  visit.clicks[label] = (visit.clicks[label] ?? 0) + 1
+  scheduleSummary()
 }
 
 export function startVisitTracking() {
@@ -194,11 +212,13 @@ export function startVisitTracking() {
         if (entry.isIntersecting) currentSection = id
         else if (currentSection === id) currentSection = null
       }
+      // Moving to another section is when the previous one's time is final.
+      scheduleSummary()
     },
     { rootMargin: "-50% 0px -50% 0px" },
   )
 
-  // Keeps the message close to current even if the summary sent while closing is lost (e.g. quitting the browser).
+  // Also keeps the time in the current section fresh while the visitor stays on it.
   // While the page is hidden nothing changes, so sendSummary skips the request.
   const summaryInterval = window.setInterval(sendSummary, summaryIntervalMs)
 
@@ -213,6 +233,8 @@ export function startVisitTracking() {
     activeSince = null
     currentSection = null
     window.clearInterval(summaryInterval)
+    window.clearTimeout(summaryTimer)
+    summaryTimer = undefined
     observer.disconnect()
     document.removeEventListener("visibilitychange", handleVisibilityChange)
     document.removeEventListener("click", handleClick, true)
