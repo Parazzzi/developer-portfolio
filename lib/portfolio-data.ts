@@ -15,7 +15,7 @@ export const petProject = {
   id: "scrap-orbit",
   title: "Scrap Orbit",
   youtubeEmbedUrl:
-    "https://www.youtube.com/embed/f6nZXiuRRT8?autoplay=1&mute=1&loop=1&playlist=f6nZXiuRRT8&controls=1&playsinline=1",
+    "https://www.youtube.com/embed/6fFfK9g6VD8?autoplay=1&mute=1&loop=1&playlist=6fFfK9g6VD8&controls=1&playsinline=1",
   link: "https://parazzzi.itch.io/scrap-orbit",
 }
 
