@@ -5,6 +5,7 @@ export type TrackEventType = "visit" | "cv" | "summary"
 // Open the site once with ?notrack to stop notifications from this browser, ?notrack=0 to undo.
 const optOutKey = "portfolio-notrack"
 const visitKey = "portfolio-visit"
+const summaryIntervalMs = 30_000
 
 const linkNames: Record<string, string> = {
   [profile.links.linkedin]: "LinkedIn",
@@ -62,17 +63,27 @@ function isTrackingDisabled() {
   return navigator.webdriver || isOptedOut()
 }
 
+function serialize(body: Record<string, unknown>) {
+  return JSON.stringify({
+    ...body,
+    ref: new URLSearchParams(window.location.search).get("ref"),
+    referrer: document.referrer.startsWith(window.location.origin) ? "" : document.referrer,
+  })
+}
+
 function post(body: Record<string, unknown>) {
   return fetch("/api/track", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      ...body,
-      ref: new URLSearchParams(window.location.search).get("ref"),
-      referrer: document.referrer.startsWith(window.location.origin) ? "" : document.referrer,
-    }),
+    body: serialize(body),
     keepalive: true,
   })
+}
+
+// Safari often drops a keepalive fetch started while the tab is closing, but delivers beacons.
+// A string beacon goes out as text/plain; the API parses the body as JSON regardless.
+function beacon(body: Record<string, unknown>) {
+  if (!navigator.sendBeacon("/api/track", serialize(body))) post(body).catch(() => {})
 }
 
 export function trackEvent(type: TrackEventType) {
@@ -105,7 +116,7 @@ function sendSummary() {
   if (serialized === lastSummary) return
 
   lastSummary = serialized
-  post(summary).catch(() => {})
+  beacon(summary)
 }
 
 function describeClick(target: Element) {
@@ -187,6 +198,10 @@ export function startVisitTracking() {
     { rootMargin: "-50% 0px -50% 0px" },
   )
 
+  // Keeps the message close to current even if the summary sent while closing is lost (e.g. quitting the browser).
+  // While the page is hidden nothing changes, so sendSummary skips the request.
+  const summaryInterval = window.setInterval(sendSummary, summaryIntervalMs)
+
   document.querySelectorAll("main > section").forEach((section) => observer.observe(section))
   document.addEventListener("visibilitychange", handleVisibilityChange)
   document.addEventListener("click", handleClick, true)
@@ -197,6 +212,7 @@ export function startVisitTracking() {
     settleTime()
     activeSince = null
     currentSection = null
+    window.clearInterval(summaryInterval)
     observer.disconnect()
     document.removeEventListener("visibilitychange", handleVisibilityChange)
     document.removeEventListener("click", handleClick, true)
