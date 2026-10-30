@@ -187,7 +187,7 @@ export const translations: Record<Language, Translation> = {
     profile: {
       role: "Unity Developer | C# | Gameplay Systems | Multiplayer | VR/XR",
       subtitle:
-        "Unity Developer building mobile games, VR/XR and interactive applications in C#. Delivered two mid-core projects from scratch through release, with experience in gameplay, UI, SDK integrations, optimization, and online co-op.",
+        "Unity Developer building mobile games, VR/XR and interactive applications in C#. Delivered three mid-core projects from scratch through release, with experience in gameplay, UI, SDK integrations, optimization, and online co-op.",
       badges: ["Unity 6 / C#", "Gameplay Systems", "Multiplayer / Co-op", "Android / iOS", "VR / XR"],
     },
     hero: {
@@ -435,11 +435,11 @@ export const translations: Record<Language, Translation> = {
       title: "Unity development from idea to release",
       paragraphs: [
         "I am a Unity Developer building mobile games, VR/XR and interactive applications in C#.",
-        "At CREATY I delivered two mid-core projects from scratch through release. Today I develop gameplay, VR interactions, UI, and client-server integrations for outsourced Unity apps, and I independently shipped two major updates for The Artman App.",
+        "At CREATY I delivered three mid-core projects from scratch through release. Today I develop gameplay, VR interactions, UI, and client-server integrations for outsourced Unity apps, and I independently shipped two major updates for The Artman App.",
         "In my pet project Scrap Orbit I build online co-op with Netcode for GameObjects, shared testable gameplay rules, and automated tests. I focus on clean architecture, maintainable code, optimization, and stable releases.",
       ],
       stats: [
-        { value: "2", label: "Mid-core releases from scratch" },
+        { value: "3", label: "Mid-core releases from scratch" },
         { value: "Unity 6 / C#", label: "Core stack" },
         { value: "Online Co-op", label: "Netcode for GameObjects" },
         { value: "Mobile / VR", label: "Android, iOS, VR/XR" },
@@ -557,7 +557,7 @@ export const translations: Record<Language, Translation> = {
           period: "May 2024 - Apr 2026",
           arrangement: "Lutsk · On-site · Full-time",
           highlights: [
-            "Developed two mid-core Unity projects from scratch, contributing from early development to release.",
+            "Developed three mid-core Unity projects from scratch, contributing from early development to release.",
             "Prepared Android/iOS builds and integrated third-party services including AdMob, Unity Ads, and Firebase Analytics.",
             "Collaborated with game designers and analysts on gameplay mechanics, balancing, and feature implementation.",
             "Worked closely with UI/UX designers to implement and polish in-game interfaces.",
@@ -804,7 +804,7 @@ export const translations: Record<Language, Translation> = {
     profile: {
       role: "Unity Developer | C# | Gameplay Systems | Multiplayer | VR/XR",
       subtitle:
-        "Unity Developer, який створює мобільні ігри, VR/XR та інтерактивні застосунки на C#. Довів два mid-core проєкти з нуля до релізу; маю досвід у gameplay, UI, SDK-інтеграціях, оптимізації та online co-op.",
+        "Unity Developer, який створює мобільні ігри, VR/XR та інтерактивні застосунки на C#. Довів три mid-core проєкти з нуля до релізу; маю досвід у gameplay, UI, SDK-інтеграціях, оптимізації та online co-op.",
       badges: ["Unity 6 / C#", "Gameplay-системи", "Multiplayer / Co-op", "Android / iOS", "VR / XR"],
     },
     hero: {
@@ -1052,11 +1052,11 @@ export const translations: Record<Language, Translation> = {
       title: "Unity-розробка від ідеї до релізу",
       paragraphs: [
         "Я Unity Developer, який створює мобільні ігри, VR/XR та інтерактивні застосунки на C#.",
-        "У CREATY я довів два mid-core проєкти з нуля до релізу. Зараз розробляю gameplay, VR-взаємодії, UI та клієнт-серверні інтеграції для outsourced Unity-застосунків, а також самостійно випустив два великі оновлення для The Artman App.",
+        "У CREATY я довів три mid-core проєкти з нуля до релізу. Зараз розробляю gameplay, VR-взаємодії, UI та клієнт-серверні інтеграції для outsourced Unity-застосунків, а також самостійно випустив два великі оновлення для The Artman App.",
         "У своєму пет-проєкті Scrap Orbit я будую online co-op на Netcode for GameObjects, спільні тестовані gameplay-правила та автоматизовані тести. Фокусуюся на чистій архітектурі, підтримуваному коді, оптимізації та стабільних релізах.",
       ],
       stats: [
-        { value: "2", label: "Mid-core релізи з нуля" },
+        { value: "3", label: "Mid-core релізи з нуля" },
         { value: "Unity 6 / C#", label: "Основний стек" },
         { value: "Online Co-op", label: "Netcode for GameObjects" },
         { value: "Mobile / VR", label: "Android, iOS, VR/XR" },
@@ -1174,7 +1174,7 @@ export const translations: Record<Language, Translation> = {
           period: "Тра 2024 - Кві 2026",
           arrangement: "Луцьк · В офісі · Full-time",
           highlights: [
-            "Розробив два mid-core Unity-проєкти з нуля, беручи участь від ранньої стадії розробки до релізу.",
+            "Розробив три mid-core Unity-проєкти з нуля, беручи участь від ранньої стадії розробки до релізу.",
             "Готував Android/iOS білди та інтегрував сторонні сервіси, зокрема AdMob, Unity Ads і Firebase Analytics.",
             "Співпрацював із геймдизайнерами та аналітиками над gameplay-механіками, балансом і реалізацією фіч.",
             "Тісно працював з UI/UX-дизайнерами над реалізацією та поліруванням in-game інтерфейсів.",
