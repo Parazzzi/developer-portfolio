@@ -21,18 +21,18 @@ export function Achievements() {
           description={t.achievements.description}
         />
 
-        <div className="mx-auto mt-14 grid w-full max-w-sm gap-6">
+        <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {achievements.map((achievement) => (
             <article
               key={achievement.title}
               className="group flex flex-col overflow-hidden rounded-2xl border border-border glass transition-all duration-300 hover:-translate-y-1.5 hover:glow-ring"
             >
-              <div className="relative aspect-video overflow-hidden bg-secondary/50">
+              <div className="relative aspect-[4/3] overflow-hidden bg-secondary/50">
                 <Image
                   src={achievement.image}
                   alt={achievement.imageAlt}
                   fill
-                  sizes="(max-width: 640px) 100vw, 384px"
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 384px"
                   className="object-contain p-2 transition-transform duration-500 group-hover:scale-105"
                   loading="lazy"
                 />

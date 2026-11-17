@@ -125,6 +125,16 @@ export const achievementItems = [
     image: "/game-designer-certificate.png",
     meta: "SHEPIT Courses / 2025",
   },
+  {
+    id: "ai-beginner-to-expert-certificate",
+    image: "/ai-beginner-to-expert-certificate.png",
+    meta: "Prometheus × Netpeak Group / 2026",
+  },
+  {
+    id: "python-data-structures-certificate",
+    image: "/python-data-structures-certificate.png",
+    meta: "Prometheus / 2026",
+  },
 ] as const satisfies readonly AchievementStatic[]
 
 export type AchievementId = (typeof achievementItems)[number]["id"]

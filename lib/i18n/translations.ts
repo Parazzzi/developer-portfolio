@@ -495,6 +495,11 @@ export const translations: Record<Language, Translation> = {
           tags: ["Unity 6", "C#", "2D/3D", "Physics", "Spine", "DOTween"],
         },
         {
+          title: "Languages & Backend",
+          description: "Programming languages and backend development, including Python APIs with FastAPI.",
+          tags: ["C#", "Python", "FastAPI"],
+        },
+        {
           title: "Architecture",
           description: "Modular, maintainable systems with shared solo/co-op gameplay rules and clear project structure.",
           tags: ["SOLID", "Zenject", "Interfaces", "State Machines", "ScriptableObjects"],
@@ -636,7 +641,7 @@ export const translations: Record<Language, Translation> = {
       eyebrow: "Achievements",
       title: "Achievements",
       description:
-        "Professional learning milestones connected to game design, production thinking, and practical Unity project work.",
+        "Professional learning milestones in game design, AI, and Python that support my practical Unity project work.",
       items: {
         "game-designer-certificate": {
           title: "Game Designer Certificate",
@@ -644,6 +649,20 @@ export const translations: Record<Language, Translation> = {
             "Completed a practical game design course covering game documentation, interface design, market analysis, and basic gameplay balance.",
           imageAlt: "Game Designer certificate awarded to Besarab Dementiy",
           tags: ["Game Design", "Documentation", "UI Design", "Balance"],
+        },
+        "ai-beginner-to-expert-certificate": {
+          title: "From Beginner to AI Expert",
+          description:
+            "Completed the \"From Beginner to AI Expert\" course by Prometheus and Netpeak Group - a complement to my work on the AI in Game Dev book.",
+          imageAlt: "From Beginner to AI Expert certificate awarded to Dementiy",
+          tags: ["AI", "AI Tools", "Netpeak Group"],
+        },
+        "python-data-structures-certificate": {
+          title: "Python: Data Structures",
+          description:
+            "Completed the Prometheus course on Python data structures: reading and writing files, storing data in dictionaries, and multi-step tasks with sorting and tuples.",
+          imageAlt: "Python: Data Structures certificate awarded to Dementiy",
+          tags: ["Python", "Data Structures", "Dictionaries", "File I/O"],
         },
       },
     },
@@ -1112,6 +1131,11 @@ export const translations: Record<Language, Translation> = {
           tags: ["Unity 6", "C#", "2D/3D", "Фізика", "Spine", "DOTween"],
         },
         {
+          title: "Мови та backend",
+          description: "Мови програмування та backend-розробка, зокрема Python API на FastAPI.",
+          tags: ["C#", "Python", "FastAPI"],
+        },
+        {
           title: "Архітектура",
           description: "Модульні підтримувані системи зі спільними solo/co-op gameplay-правилами та зрозумілою структурою.",
           tags: ["SOLID", "Zenject", "Interfaces", "State Machines", "ScriptableObjects"],
@@ -1253,7 +1277,7 @@ export const translations: Record<Language, Translation> = {
       eyebrow: "Досягнення",
       title: "Досягнення",
       description:
-        "Професійні навчальні milestones, пов'язані з game design, production-мисленням і практичною Unity-розробкою.",
+        "Професійні навчальні milestones у game design, ШІ та Python, що підсилюють мою практичну Unity-розробку.",
       items: {
         "game-designer-certificate": {
           title: "Сертифікат Game Designer",
@@ -1261,6 +1285,20 @@ export const translations: Record<Language, Translation> = {
             "Завершив практичний курс із game design, що охоплював ігрову документацію, дизайн інтерфейсів, аналіз ринку та базовий gameplay balance.",
           imageAlt: "Сертифікат Game Designer, виданий Besarab Dementiy",
           tags: ["Геймдизайн", "Документація", "UI-дизайн", "Баланс"],
+        },
+        "ai-beginner-to-expert-certificate": {
+          title: "Від початківця до експерта в ШІ",
+          description:
+            "Завершив курс «Від початківця до експерта в ШІ» від Prometheus і Netpeak Group - доповнення до моєї роботи над книгою AI in Game Dev.",
+          imageAlt: "Сертифікат «Від початківця до експерта в ШІ», виданий Dementiy",
+          tags: ["ШІ", "AI-інструменти", "Netpeak Group"],
+        },
+        "python-data-structures-certificate": {
+          title: "Python: Структури даних",
+          description:
+            "Завершив курс Prometheus зі структур даних у Python: читання й запис файлів, зберігання даних у словниках і багатоетапні задачі із сортуванням та кортежами.",
+          imageAlt: "Сертифікат «Python: Структури даних», виданий Dementiy",
+          tags: ["Python", "Структури даних", "Словники", "Робота з файлами"],
         },
       },
     },

@@ -15,7 +15,7 @@ export function Skills() {
           description={t.skills.description}
         />
 
-        <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 sm:max-lg:[&>*:last-child:nth-child(odd)]:col-span-2 lg:[&>*:last-child:nth-child(3n+1)]:col-start-2">
           {t.skills.groups.map((group, i) => (
             <article
               key={group.title}
