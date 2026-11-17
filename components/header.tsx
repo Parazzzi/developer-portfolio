@@ -30,7 +30,7 @@ export function Header() {
           href="#"
           className={cn(
             "flex items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold tracking-tight transition-colors",
-            scrolled && "glass glow-ring",
+            scrolled && "glass glass-blur glow-ring",
           )}
         >
           <span className="inline-block h-2.5 w-2.5 rounded-full bg-primary text-glow shadow-[0_0_12px_var(--glow)]" />
@@ -40,7 +40,7 @@ export function Header() {
         <nav
           className={cn(
             "hidden items-center gap-0.5 rounded-full px-2 py-1.5 text-sm transition-all lg:flex xl:gap-1",
-            scrolled ? "glass glow-ring" : "bg-card/40 backdrop-blur",
+            scrolled ? "glass glass-blur glow-ring" : "bg-card/40 backdrop-blur",
           )}
         >
           {t.nav.items.map((item) => (

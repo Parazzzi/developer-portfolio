@@ -3,6 +3,7 @@
 import { ArrowUpRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { SectionHeading } from "@/components/section-heading"
+import { YouTubeEmbed } from "@/components/youtube-embed"
 import { petProject } from "@/lib/portfolio-data"
 import { useLanguage } from "@/lib/i18n/language-context"
 import { formatMessage } from "@/lib/i18n/translations"
@@ -21,12 +22,9 @@ export function PetProject() {
 
         <article className="glass glow-ring mt-14 overflow-hidden rounded-2xl border border-border">
           <div className="relative aspect-video overflow-hidden bg-secondary">
-            <iframe
-              className="h-full w-full"
+            <YouTubeEmbed
               src={petProject.youtubeEmbedUrl}
               title={formatMessage(t.projects.card.gameplayVideoTitle, { title: petProject.title })}
-              allow="autoplay; encrypted-media; picture-in-picture"
-              allowFullScreen
             />
           </div>
 

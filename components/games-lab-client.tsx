@@ -184,7 +184,7 @@ export function GamesLabClient({ items }: Props) {
             aria-labelledby="games-lab-modal-title"
             onKeyDown={handleDialogKeyDown}
             className={cn(
-              "games-lab-modal-panel glass flex max-h-[90vh] w-full flex-col overflow-hidden rounded-3xl border border-border shadow-2xl",
+              "games-lab-modal-panel glass glass-blur flex max-h-[90vh] w-full flex-col overflow-hidden rounded-3xl border border-border shadow-2xl",
               selectedGame.orientation === "horizontal" ? "max-w-6xl" : "max-w-5xl",
             )}
           >

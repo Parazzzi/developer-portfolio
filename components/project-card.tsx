@@ -4,6 +4,7 @@ import { useRef } from "react"
 import Image from "next/image"
 import { ArrowUpRight, Play } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { YouTubeEmbed } from "@/components/youtube-embed"
 import type { Project } from "@/lib/portfolio-data"
 import { useLanguage } from "@/lib/i18n/language-context"
 import { formatMessage } from "@/lib/i18n/translations"
@@ -34,12 +35,9 @@ export function ProjectCard({ project }: { project: Project }) {
       {/* video preview area */}
       <div className="relative aspect-video overflow-hidden bg-secondary">
         {project.youtubeEmbedUrl ? (
-          <iframe
-            className="h-full w-full"
+          <YouTubeEmbed
             src={project.youtubeEmbedUrl}
             title={formatMessage(t.projects.card.gameplayVideoTitle, { title: project.title })}
-            allow="autoplay; encrypted-media; picture-in-picture"
-            allowFullScreen
           />
         ) : project.video ? (
           <video

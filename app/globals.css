@@ -100,8 +100,12 @@
 }
 
 @layer utilities {
+  /* No backdrop blur here: dozens of in-flow cards blurring the animated background made
+     scrolling and nav jumps stutter. Only overlays (header, modals) use .glass-blur. */
   .glass {
     background: color-mix(in oklch, var(--card) 70%, transparent);
+  }
+  .glass-blur {
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
   }

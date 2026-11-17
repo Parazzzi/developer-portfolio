@@ -474,7 +474,7 @@ export function BookShowcase() {
             aria-modal="true"
             aria-labelledby="book-preview-title"
             onKeyDown={handleDialogKeyDown}
-            className="games-lab-modal-panel glass flex max-h-[94vh] w-full max-w-3xl flex-col overflow-hidden rounded-3xl border border-border shadow-2xl"
+            className="games-lab-modal-panel glass glass-blur flex max-h-[94vh] w-full max-w-3xl flex-col overflow-hidden rounded-3xl border border-border shadow-2xl"
           >
             <div className="flex shrink-0 items-start justify-between gap-4 border-b border-border/80 px-5 py-4 sm:px-6">
               <div className="min-w-0">
