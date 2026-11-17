@@ -32,6 +32,41 @@ export type PetProjectContent = {
   tags: string[]
 }
 
+export const eduProjects = [
+  {
+    id: "math-helper",
+    title: "Math-Helper",
+    youtubeEmbedUrl:
+      "https://www.youtube.com/embed/bQMY2H25mU0?autoplay=1&mute=1&loop=1&playlist=bQMY2H25mU0&controls=1&playsinline=1",
+  },
+  {
+    id: "math-veb",
+    title: "Math-Veb",
+    youtubeEmbedUrl:
+      "https://www.youtube.com/embed/O7OY5JkkEpU?autoplay=1&mute=1&loop=1&playlist=O7OY5JkkEpU&controls=1&playsinline=1",
+  },
+] as const
+
+export type EduProjectId = (typeof eduProjects)[number]["id"]
+
+export type EduProjectContent = {
+  platform: string
+  description: string
+  highlights: {
+    title: string
+    description: string
+  }[]
+  tags: string[]
+}
+
+export type EduProjectsContent = {
+  eyebrow: string
+  title: string
+  description: string
+  videoTitle: string
+  items: Record<EduProjectId, EduProjectContent>
+}
+
 export type ProjectStatic = {
   id: string
   title: string

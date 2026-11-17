@@ -1,6 +1,7 @@
 import type {
   AchievementContent,
   AchievementId,
+  EduProjectsContent,
   PetProjectContent,
   ProjectContent,
   ProjectId,
@@ -88,6 +89,7 @@ type Translation = {
     downloadCvAria: string
   }
   petProject: PetProjectContent
+  eduProjects: EduProjectsContent
   book: BookContent
   about: {
     eyebrow: string
@@ -171,8 +173,8 @@ export const translations: Record<Language, Translation> = {
     },
     nav: {
       items: [
-        { label: "Pet Project", href: "#pet-project" },
         { label: "Book", href: "#book" },
+        { label: "Pet Project", href: "#pet-project" },
         { label: "About", href: "#about" },
         { label: "What I Do", href: "#services" },
         { label: "Skills", href: "#skills" },
@@ -237,6 +239,71 @@ export const translations: Record<Language, Translation> = {
         },
       ],
       tags: ["Unity 6", "C#", "Netcode for GameObjects", "Lobby/Relay", "URP", "Input System", "Unity Test Framework"],
+    },
+    eduProjects: {
+      eyebrow: "Education Projects",
+      title: "Tools I built for teaching math",
+      description:
+        "Two projects outside game dev that I built and use in teaching: a desktop assistant for running my own lessons and a web platform that gives students quality math lessons during remote learning.",
+      videoTitle: "{title} demo video",
+      items: {
+        "math-helper": {
+          platform: "macOS app",
+          description:
+            "I built it for myself to make running lessons easier: timetable and bell schedule, curricula, lesson materials and textbooks, a class journal with analytics, and an AI assistant for lesson prep - all in one native app.",
+          highlights: [
+            {
+              title: "Lessons & journal",
+              description:
+                "Timetable, curriculum import from DOCX, PDF materials, attendance and grades, journal import from XLS/CSV, and read-only sync with the nz.ua school journal.",
+            },
+            {
+              title: "AI assistant",
+              description:
+                "Streaming Gemini answers with LaTeX formulas rendered by KaTeX; only an anonymized lesson context is sent - student names and grades never leave the Mac.",
+            },
+            {
+              title: "Local-first architecture",
+              description:
+                "SwiftData, Application Support files, and Keychain; no backend or third-party Swift packages, custom DOCX/XLS/XLSX readers and writers, and 86 XCTest tests.",
+            },
+          ],
+          tags: ["Swift", "SwiftUI", "SwiftData", "AppKit", "PDFKit", "WebKit", "Gemini API", "KaTeX", "XCTest"],
+        },
+        "math-veb": {
+          platform: "Web platform",
+          description:
+            "I built it for children, so they get a quality math education during remote learning: students take interactive lessons for their class online, and the teacher manages classes, access, and results in an admin panel.",
+          highlights: [
+            {
+              title: "Interactive lessons",
+              description:
+                "A lesson player with 20 mechanics - equation balance, number line, fractions, coordinate plane, geometry tools, and more - plus a custom math engine that checks answer equivalence.",
+            },
+            {
+              title: "Admin panel & API",
+              description:
+                "A React teacher panel and a Node.js API running as a Vercel serverless function; lessons and the class journal live in the teacher's Google Drive and Sheets - no separate database.",
+            },
+            {
+              title: "Secure grading",
+              description:
+                "Answer keys never reach the student's browser - the server grades every submission; scrypt-hashed passwords, HMAC-signed sessions, CSRF protection, and CSP headers.",
+            },
+          ],
+          tags: [
+            "TypeScript",
+            "React 19",
+            "Node.js",
+            "esbuild",
+            "Vercel",
+            "Google Drive & Sheets API",
+            "KaTeX",
+            "Zod",
+            "Playwright",
+          ],
+        },
+      },
     },
     book: {
       eyebrow: "Book / Author Project",
@@ -807,8 +874,8 @@ export const translations: Record<Language, Translation> = {
     },
     nav: {
       items: [
-        { label: "Пет-проєкт", href: "#pet-project" },
         { label: "Книга", href: "#book" },
+        { label: "Пет-проєкт", href: "#pet-project" },
         { label: "Про мене", href: "#about" },
         { label: "Що я роблю", href: "#services" },
         { label: "Навички", href: "#skills" },
@@ -873,6 +940,71 @@ export const translations: Record<Language, Translation> = {
         },
       ],
       tags: ["Unity 6", "C#", "Netcode for GameObjects", "Lobby/Relay", "URP", "Input System", "Unity Test Framework"],
+    },
+    eduProjects: {
+      eyebrow: "Освітні проєкти",
+      title: "Мої інструменти для навчання математики",
+      description:
+        "Два проєкти поза геймдевом, які я створив і використовую в навчанні: настільний помічник для проведення моїх уроків і вебплатформа, що дає учням якісні уроки математики під час дистанційного навчання.",
+      videoTitle: "Демо-відео {title}",
+      items: {
+        "math-helper": {
+          platform: "Застосунок для macOS",
+          description:
+            "Розробив для себе, щоб було зручно проводити уроки: розклад і дзвінки, навчальні програми, матеріали й підручники, журнал класу з аналітикою та AI-помічник для підготовки - все в одному нативному застосунку.",
+          highlights: [
+            {
+              title: "Уроки та журнал",
+              description:
+                "Розклад, імпорт навчальних програм з DOCX, PDF-матеріали, відвідуваність і оцінки, імпорт журналу з XLS/CSV та звірка з електронним журналом nz.ua (лише читання).",
+            },
+            {
+              title: "AI-помічник",
+              description:
+                "Потокові відповіді Gemini з формулами LaTeX через KaTeX; у запит іде лише знеособлений контекст уроку - імена учнів і оцінки не залишають Mac.",
+            },
+            {
+              title: "Локальна архітектура",
+              description:
+                "SwiftData, файли в Application Support і Keychain; без бекенду та сторонніх Swift-пакетів, власні читачі й генератори DOCX/XLS/XLSX, 86 тестів XCTest.",
+            },
+          ],
+          tags: ["Swift", "SwiftUI", "SwiftData", "AppKit", "PDFKit", "WebKit", "Gemini API", "KaTeX", "XCTest"],
+        },
+        "math-veb": {
+          platform: "Вебплатформа",
+          description:
+            "Розробив для дітей, щоб мали якісну освіту під час дистанційного навчання: учні проходять інтерактивні уроки свого класу онлайн, а вчитель керує класами, доступом і результатами в адмінпанелі.",
+          highlights: [
+            {
+              title: "Інтерактивні уроки",
+              description:
+                "Програвач уроків із 20 механіками - ваги рівняння, числова пряма, дроби, координатна площина, геометричні інструменти тощо - і власний математичний модуль, що перевіряє рівносильність відповідей.",
+            },
+            {
+              title: "Адмінпанель і API",
+              description:
+                "Панель вчителя на React і API на Node.js у serverless-функції Vercel; уроки та журнал класу зберігаються в Google Диску й Таблицях вчителя - без окремої бази даних.",
+            },
+            {
+              title: "Безпечне оцінювання",
+              description:
+                "Правильні відповіді ніколи не потрапляють у браузер учня - оцінює сервер; паролі зберігаються як хеш scrypt, сесії підписані HMAC, є захист CSRF і заголовки CSP.",
+            },
+          ],
+          tags: [
+            "TypeScript",
+            "React 19",
+            "Node.js",
+            "esbuild",
+            "Vercel",
+            "Google Drive і Sheets API",
+            "KaTeX",
+            "Zod",
+            "Playwright",
+          ],
+        },
+      },
     },
     book: {
       eyebrow: "Книга / Авторський проєкт",

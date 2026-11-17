@@ -9,8 +9,9 @@ const eventTitles: Record<TrackEventType, string> = {
 
 const sectionNames: Record<string, string> = {
   hero: "Головна",
-  "pet-project": "Scrap Orbit",
   book: "Книга",
+  "pet-project": "Scrap Orbit",
+  "edu-projects": "Math-Helper і Math-Veb",
   about: "Про мене",
   services: "Послуги",
   skills: "Навички",
